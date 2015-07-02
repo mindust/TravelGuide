@@ -1,0 +1,37 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;TravelGuideGitHub&gt;">
+    <CLASSES>
+      <root url="file://$USER_HOME$/goProStudy/src/github.com" />
+      <root url="file://$USER_HOME$/goProStudy/src/gopkg.in" />
+      <root url="file://$USER_HOME$/goProStudy/src/launchpad.net" />
+      <root url="file://$USER_HOME$/goProStudy/src/golang.org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="file://$USER_HOME$/goProStudy/src/golang.org/x/net/html/charset/testdata" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/jteeuwen/go-bindata/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/go-sql-driver/mysql/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/mxk/go-sqlite/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/olebedev/staticbin/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/golang.org/x/net/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/codegangsta/inject/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/launchpad.net/~niemeyer/goyaml/beta/.bzr" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/coopernurse/gorp/.git" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/olebedev/config/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/mattn/go-colorable/_example" />
+      <root url="file://$USER_HOME$/goProStudy/src/golang.org/x/net/html/testdata" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/mattn/go-colorable/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/gopkg.in/bluesuncorp/validator.v5/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/codegangsta/martini-contrib/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/olebedev/go-duktape/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/robertkrimen/otto/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/manucorporat/sse/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/jteeuwen/go-bindata/testdata" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/gin-gonic/gin/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/codegangsta/martini/.git" />
+      <root url="file://$USER_HOME$/goProStudy/src/github.com/go-martini/martini/.git" />
+    </excluded>
+  </library>
+</component>

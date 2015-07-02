@@ -1,22 +1,50 @@
-@font-face {
-	font-family:"Albert";font-style:normal;font-weight:normal;src:url('../../../../../common/fonts/Albert/AlbertRegular.eot');src:url('../../../../../common/fonts/Albert/AlbertRegular.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertRegular.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertRegular.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertRegular.svg#AlbertRegular') format('svg');
+/*@font-face {*/
+	/*font-family:"Albert";font-style:normal;font-weight:normal;*/
+/*}*/
+
+/*@font-face {*/
+	/*font-family:"Albert";font-style:normal;font-weight:300;src:url('../../../../../common/fonts/Albert/AlbertLight.eot');src:url('../../../../../common/fonts/Albert/AlbertLight.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertLight.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertLight.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertLight.svg#AlbertLight') format('svg');*/
+/*}*/
+
+/*@font-face {*/
+	/*font-family:"Albert";font-style:normal;font-weight:bold;src:url('../../../../../common/fonts/Albert/AlbertBold.eot');src:url('../../../../../common/fonts/Albert/AlbertBold.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertBold.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertBold.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertBold.svg#AlbertBold') format('svg');*/
+/*}*/
+
+/*@font-face {*/
+	/*font-family:"Albert";font-style:normal;font-weight:800;src:url('../../../../../common/fonts/Albert/AlbertExtra.eot');src:url('../../../../../common/fonts/Albert/AlbertExtra.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertExtra.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertExtra.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertExtra.svg#AlbertExtra') format('svg');*/
+/*}*/
+
+/*@font-face {*/
+	/*font-family:"Market";font-style:normal;font-weight:normal;src:url('../../../../../common/fonts/Market/Market.eot');src:url('../../../../../common/fonts/Market/Market.eot?#iefix') format('eot'),url('../../../../../common/fonts/Market/Market.woff') format('woff'),url('../../../../../common/fonts/Market/Market.ttf') format('truetype'),url('../../../../../common/fonts/fonts/Market/Market.svg') format('svg');*/
+/*}*/
+
+[class^="icon-"]:before,[class*=" icon-"]:before,.icon:before,.notification .close-btn:before,.co-branding-close-link:before,.notification.notification__action .info .info-text:before,.co-branding-message:before,.search-form--docked .icon-reset:before,.header-navigation-wishlist .header-navigation-title:before,.header-navigation-cart .header-navigation-title:before,.header-navigation-help .header-navigation-title:before,.header-navigation-user .header-navigation-title:before,.header-navigation-search .header-navigation-title:before,.header-navigation-wishlist .header-navigation-title:before {
+	display: inline-block;
+	text-align: center;
+	text-decoration: inherit;
+	text-transform: none !important;
+	font-weight: normal !important;
+	font-style: normal !important;
+	font-variant: normal !important;
+	line-height: 1em;
+	speak: none;
+	-moz-font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	position: relative;
+	top: 1px;
 }
 
 @font-face {
-	font-family:"Albert";font-style:normal;font-weight:300;src:url('../../../../../common/fonts/Albert/AlbertLight.eot');src:url('../../../../../common/fonts/Albert/AlbertLight.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertLight.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertLight.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertLight.svg#AlbertLight') format('svg');
+	font-family: "GetYourGuide";
+	font-style: normal;
+	font-weight: normal;
+	src: url('/common/fonts/Icons/GetYourGuide.eot');
+	src: url('/common/fonts/Icons/GetYourGuide.eot?#iefix') format('embedded-opentype'),url('/common/fonts/Icons/GetYourGuide.woff') format('woff'),url('/common/fonts/Icons/GetYourGuide.ttf') format('truetype'),url('/common/fonts/Icons/GetYourGuide.svg#AlbertRegular') format('svg');
 }
 
-@font-face {
-	font-family:"Albert";font-style:normal;font-weight:bold;src:url('../../../../../common/fonts/Albert/AlbertBold.eot');src:url('../../../../../common/fonts/Albert/AlbertBold.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertBold.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertBold.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertBold.svg#AlbertBold') format('svg');
-}
-
-@font-face {
-	font-family:"Albert";font-style:normal;font-weight:800;src:url('../../../../../common/fonts/Albert/AlbertExtra.eot');src:url('../../../../../common/fonts/Albert/AlbertExtra.eot?#iefix') format('embedded-opentype'),url('../../../../../common/fonts/Albert/AlbertExtra.woff') format('woff'),url('../../../../../common/fonts/Albert/AlbertExtra.ttf') format('truetype'),url('../../../../../common/fonts/Albert/AlbertExtra.svg#AlbertExtra') format('svg');
-}
-
-@font-face {
-	font-family:"Market";font-style:normal;font-weight:normal;src:url('../../../../../common/fonts/Market/Market.eot');src:url('../../../../../common/fonts/Market/Market.eot?#iefix') format('eot'),url('../../../../../common/fonts/Market/Market.woff') format('woff'),url('../../../../../common/fonts/Market/Market.ttf') format('truetype'),url('../../../../../common/fonts/fonts/Market/Market.svg') format('svg');
-}/*! normalize.css v2.1.3 | MIT License | git.io/normalize */article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
+/*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary {
 	display: block;
 }
 

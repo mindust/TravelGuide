@@ -20,6 +20,20 @@ type Post struct {
 	Body    string `form:"Body" binding:"required"`
 }
 
+//type Ph_spot struct {
+//	ID      string
+//	COUNTRY string
+//	PROVINCE   string
+//	CITY    string
+//	COUNTY   string
+//	NAME    string
+//	LEVEL   string
+//	LABEL    string
+//	PRICE   string
+//	STATUS    int64
+//}
+
+
 func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
 	//custom validation
 	if len(bp.Title) == 0 {
@@ -33,19 +47,19 @@ func main() {
 	dbmap := initDb()
 	defer dbmap.Db.Close()
 
-	// setup some of the database
-
-	// delete any existing rows
-	err := dbmap.TruncateTables()
-	checkErr(err, "TruncateTables failed")
-
-	// create two posts
-	p1 := newPost("Post 1", "Lorem ipsum lorem ipsum")
-	p2 := newPost("Post 2", "This is my second post")
-
-	// insert rows
-	err = dbmap.Insert(&p1, &p2)
-	checkErr(err, "Insert failed")
+//	// setup some of the database
+//
+//	// delete any existing rows
+//	err := dbmap.TruncateTables()
+//	checkErr(err, "TruncateTables failed")
+//
+////	 create two posts
+//	p1 := newPost("Post 1", "Lorem ipsum lorem ipsum")
+//	p2 := newPost("Post 2", "This is my second post")
+//
+////	 insert rows
+//	err = dbmap.Insert(&p1, &p2)
+//	checkErr(err, "Insert failed")
 
 	// lets start martini and the real code
 	m := martini.Classic()
@@ -88,7 +102,9 @@ func main() {
 			r.HTML(404, "error", newmap)
 		} else {
 			newmap := map[string]interface{}{"metatitle": post.Title + " more custom", "post": post}
-			r.HTML(200, "post", newmap)
+			r.HTML(200, "post", newmap, render.HTMLOptions{
+
+			})
 		}
 	})
 
@@ -103,22 +119,37 @@ func main() {
 		checkErr(err, "Insert failed")
 
 		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
-		r.HTML(200, "post", newmap)
-	})
-	//jump to admin/viewspots page
-	m.Get("/admin/viewSpots", func(r render.Render) {
-		r.HTML(200, "viewSpots", "这是老何的测试数据", render.HTMLOptions{
-			Layout: "viewSpots",
+		r.HTML(200, "post", newmap, render.HTMLOptions{
+
 		})
 	})
-	//back to index page from admin/viewspots page
-//	m.Get("/index", func(r render.Render) {
-//		// var posts []Post
-//		// _, err = dbmap.Select(&posts, "select * from posts order by post_id")
-//		// checkErr(err, "Select failed")
-//		// newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
-//		r.HTML(200, "layout", "")
-//	})
+//	jump to admin/viewspots page
+	m.Get("/admin/viewSpots", func(r render.Render) {
+//		r.HTML(200, "viewSpots", "这是老何的测试数据-viewspots", render.HTMLOptions{
+//			Layout: "viewSpots",
+//		})
+
+		//fetch all rows
+		var posts []Post
+		_, err = dbmap.Select(&posts, "select * from posts order by post_id")
+		checkErr(err, "Select failed")
+
+		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
+
+		r.HTML(200, "posts", newmap, render.HTMLOptions{
+
+		})
+
+	})
+
+
+	//jump to login page
+	m.Get("/user/login/",func(r render.Render){
+		r.HTML(200, "login","",render.HTMLOptions{
+
+		})
+	})
+
 
 	m.Run()
 
@@ -163,3 +194,5 @@ func checkErr(err error, msg string) {
 		log.Fatalln(msg, err)
 	}
 }
+
+

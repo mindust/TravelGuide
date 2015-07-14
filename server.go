@@ -20,18 +20,18 @@ type Post struct {
 	Body    string `form:"Body" binding:"required"`
 }
 
-//type Ph_spot struct {
-//	ID      string
-//	COUNTRY string
-//	PROVINCE   string
-//	CITY    string
-//	COUNTY   string
-//	NAME    string
-//	LEVEL   string
-//	LABEL    string
-//	PRICE   string
-//	STATUS    int64
-//}
+type Ph_spot struct {
+	Id      int64 `db:"post_id"`
+	COUNTRY string `form:"COUNTRY" binding:"required"`
+	PROVINCE   string `form:"PROVINCE" binding:"required"`
+	CITY    string `form:"CITY" binding:"required"`
+	COUNTY   string `form:"COUNTY" binding:"required"`
+	NAME    string `form:"NAME" binding:"required"`
+	LEVEL   string `form:"LEVEL" binding:"required"`
+	LABEL    string `form:"LABEL" binding:"required"`
+	PRICE   string `form:"PRICE" binding:"required"`
+	STATUS    int64 `form:"STATUS" binding:"required"`
+}
 
 
 func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
@@ -41,25 +41,19 @@ func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
 	}
 }
 
-func main() {
+func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
+	//custom validation
+	if len(bp.NAME) == 0 {
+		errors.Fields["title"] = "Name cannot be empty"
+	}
+}
 
+
+func main() {
 	// initialize the DbMap
 	dbmap := initDb()
 	defer dbmap.Db.Close()
-
-//	// setup some of the database
-//
-//	// delete any existing rows
-//	err := dbmap.TruncateTables()
-//	checkErr(err, "TruncateTables failed")
-//
-////	 create two posts
-//	p1 := newPost("Post 1", "Lorem ipsum lorem ipsum")
-//	p2 := newPost("Post 2", "This is my second post")
-//
-////	 insert rows
-//	err = dbmap.Insert(&p1, &p2)
-//	checkErr(err, "Insert failed")
+	// setup some of the database
 
 	// lets start martini and the real code
 	m := martini.Classic()
@@ -82,26 +76,25 @@ func main() {
 
 	m.Get("/", func(r render.Render) {
 		//fetch all rows
-		var posts []Post
-		_, err = dbmap.Select(&posts, "select * from posts order by post_id")
-		checkErr(err, "Select failed")
-
-		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
-
-		r.HTML(200, "posts", newmap)
+//		var posts []Post
+//		_, err:= dbmap.Select(&posts, "select * from posts order by post_id")
+//		checkErr(err, "Select failed")
+//		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
+//		r.HTML(200, "posts", newmap)
+		r.HTML(200, "layout", "Kanghui")
 	})
 
 	m.Get("/:id", func(args martini.Params, r render.Render) {
-		var post Post
+		var post Ph_spot
 
-		err = dbmap.SelectOne(&post, "select * from posts where post_id=?", args["id"])
+		err:= dbmap.SelectOne(&post, "select * from posts where post_id=?", args["id"])
 
 		//simple error check
 		if err != nil {
 			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
 			r.HTML(404, "error", newmap)
 		} else {
-			newmap := map[string]interface{}{"metatitle": post.Title + " more custom", "post": post}
+			newmap := map[string]interface{}{"metatitle": post.NAME + " more custom", "post": post}
 			r.HTML(200, "post", newmap, render.HTMLOptions{
 
 			})
@@ -109,13 +102,13 @@ func main() {
 	})
 
 	//shows how to create with binding params
-	m.Post("/", binding.Bind(Post{}), func(post Post, r render.Render) {
+	m.Post("/", binding.Bind(Ph_spot{}), func(post Ph_spot, r render.Render) {
 
-		p1 := newPost(post.Title, post.Body)
+		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.LABEL, post.PRICE)
 
 		log.Println(p1)
 
-		err = dbmap.Insert(&p1)
+		err:= dbmap.Insert(&p1)
 		checkErr(err, "Insert failed")
 
 		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
@@ -123,6 +116,21 @@ func main() {
 
 		})
 	})
+//	//delete the spot
+//	m.Post("/Deletespot", binding.Bind(Post{}), func(post Post, r render.Render) {
+//
+//		p1 := newPost(post.Title, post.Body)
+//
+//		log.Println(p1)
+//
+//		err:= dbmap.Insert(&p1)
+//		checkErr(err, "Insert failed")
+//
+//		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
+//		r.HTML(200, "post", newmap, render.HTMLOptions{
+//
+//		})
+//	})
 //	jump to admin/viewspots page
 	m.Get("/admin/viewSpots", func(r render.Render) {
 //		r.HTML(200, "viewSpots", "这是老何的测试数据-viewspots", render.HTMLOptions{
@@ -130,8 +138,8 @@ func main() {
 //		})
 
 		//fetch all rows
-		var posts []Post
-		_, err = dbmap.Select(&posts, "select * from posts order by post_id")
+		var posts []Ph_spot
+		_, err:= dbmap.Select(&posts, "select * from posts order by post_id")
 		checkErr(err, "Select failed")
 
 		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
@@ -155,12 +163,26 @@ func main() {
 
 }
 
-func newPost(title, body string) Post {
-	return Post{
+//func newPost(title, body string) Ph_spot {
+//	return Ph_spot{
+//		//Created: time.Now().UnixNano(),
+//		Created: time.Now().Unix(),
+//		Title:   title,
+//		Body:    body,
+//	}
+//}
+
+func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string) Ph_spot {
+	return Ph_spot{
 		//Created: time.Now().UnixNano(),
-		Created: time.Now().Unix(),
-		Title:   title,
-		Body:    body,
+		COUNTRY:  COUNTRY,
+		PROVINCE:   PROVINCE,
+		CITY:    CITY,
+		COUNTY:COUNTY,
+		NAME:NAME,
+		LEVEL:LEVEL,
+		LABEL:LABEL,
+		PRICE:PRICE,
 	}
 }
 
@@ -179,7 +201,8 @@ func initDb() *gorp.DbMap {
 
 	// add a table, setting the table name to 'posts' and
 	// specifying that the Id property is an auto incrementing PK
-	dbmap.AddTableWithName(Post{}, "posts").SetKeys(true, "Id")
+//	dbmap.AddTableWithName(Post{}, "posts").SetKeys(true, "Id")
+	dbmap.AddTableWithName(Ph_spot{}, "ph_view_spots").SetKeys(true, "Id")
 
 	// create the table. in a production system you'd generally
 	// use a migration tool, or create the tables via scripts

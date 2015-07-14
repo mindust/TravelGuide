@@ -30,7 +30,7 @@ type Ph_spot struct {
 	LEVEL   string `form:"LEVEL" binding:"required"`
 	LABEL    string `form:"LABEL" binding:"required"`
 	PRICE   string `form:"PRICE" binding:"required"`
-	STATUS    int64 `form:"STATUS" binding:"required"`
+	STATUS    int64 `form:"STATUS"`
 }
 
 
@@ -104,7 +104,7 @@ func main() {
 	//shows how to create with binding params
 	m.Post("/", binding.Bind(Ph_spot{}), func(post Ph_spot, r render.Render) {
 
-		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.LABEL, post.PRICE)
+		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.LABEL, post.PRICE,post.STATUS)
 
 		log.Println(p1)
 
@@ -172,7 +172,7 @@ func main() {
 //	}
 //}
 
-func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string) Ph_spot {
+func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string ,Status int64) Ph_spot {
 	return Ph_spot{
 		//Created: time.Now().UnixNano(),
 		COUNTRY:  COUNTRY,
@@ -183,6 +183,7 @@ func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string) Ph_s
 		LEVEL:LEVEL,
 		LABEL:LABEL,
 		PRICE:PRICE,
+		STATUS:Status,
 	}
 }
 

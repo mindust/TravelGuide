@@ -1,8 +1,8 @@
 <header><a href="/">Home</a></header>
 	{{range .posts}}
-	<h3><a href="/{{ .Id }}">{{ .Name }}</a></h3>
+	<h3><a href="/{{ .Id }}">{{ .NAME }}</a></h3>
 	<!--<small>{{.Created | formatTime}}</small>-->
-	<div>{{ .Country }}</div>
+	<div>{{ .COUNTRY }}</div>
 	{{end}}
 
     <h2>Create a Post</h2>

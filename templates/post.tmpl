@@ -1,8 +1,8 @@
 
       <header><a href="/admin/viewSpots">Back</a></header>
 
-      <h1>{{ .post.Title }}</h1>
-      <div>{{ .post.Body | unescaped }}</div>
+      <h1>{{ .post.NAME }}</h1>
+      <div>{{ .post.COUNTRY | unescaped }}</div>
 
       <h2>Delete a Post</h2>
       <form action="/Deletespot" method="POST">

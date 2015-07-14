@@ -87,7 +87,7 @@ func main() {
 	m.Get("/:id", func(args martini.Params, r render.Render) {
 		var post Ph_spot
 
-		err:= dbmap.SelectOne(&post, "select * from posts where post_id=?", args["id"])
+		err:= dbmap.SelectOne(&post, "select * from ph_view_spots where post_id=?", args["id"])
 
 		//simple error check
 		if err != nil {
@@ -139,7 +139,7 @@ func main() {
 
 		//fetch all rows
 		var posts []Ph_spot
-		_, err:= dbmap.Select(&posts, "select * from posts order by post_id")
+		_, err:= dbmap.Select(&posts, "select * from ph_view_spots order by post_id")
 		checkErr(err, "Select failed")
 
 		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}

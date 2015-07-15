@@ -22,17 +22,29 @@ type Post struct {
 
 type Ph_spot struct {
 	Id      int64 `db:"post_id"`
-	COUNTRY string `form:"COUNTRY" binding:"required"`
-	PROVINCE   string `form:"PROVINCE" binding:"required"`
-	CITY    string `form:"CITY" binding:"required"`
-	COUNTY   string `form:"COUNTY" binding:"required"`
-	NAME    string `form:"NAME" binding:"required"`
-	LEVEL   string `form:"LEVEL" binding:"required"`
-	LABEL    string `form:"LABEL" binding:"required"`
-	PRICE   string `form:"PRICE" binding:"required"`
-	STATUS    int64 `form:"STATUS"`
+	COUNTRY string
+	PROVINCE   string
+	CITY    string
+	COUNTY   string
+	NAME    string
+	LEVEL   string
+	LABEL    string
+	PRICE   string
+	STATUS    int64
 }
 
+//type Ph_spot struct {
+//	Id      int64 `db:"post_id"`
+//	COUNTRY string `form:"COUNTRY" binding:"required"`
+//	PROVINCE   string `form:"PROVINCE" binding:"required"`
+//	CITY    string `form:"CITY" binding:"required"`
+//	COUNTY   string `form:"COUNTY" binding:"required"`
+//	NAME    string `form:"NAME" binding:"required"`
+//	LEVEL   string `form:"LEVEL" binding:"required"`
+//	LABEL    string `form:"LABEL" binding:"required"`
+//	PRICE   string `form:"PRICE" binding:"required"`
+//	STATUS    int64 `form:"STATUS"`
+//}
 
 func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
 	//custom validation

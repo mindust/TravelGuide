@@ -11,7 +11,9 @@ import (
 	"log"
 	"net/http"
 	"time"
-//	"strconv"
+	"fmt"
+	"os"
+	"io"
 )
 
 type Post struct {
@@ -59,6 +61,17 @@ type Ph_spot struct {
 	STATUS    int `form:"STATUS"`
 }
 
+type Image struct {
+	Version    string `form:"version"`
+	Email      string `form:"user_email"`
+	PrivateKey string `form:"user_private_key"`
+	Host       string `form:"file_host"`
+	Album      string `form:"file_album"`
+	Name       string `form:"file_name"`
+	Mime       string `form:"file_mime"`
+	unexported string `form:"-"` // skip binding of unexported fields
+}
+
 func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
 	//custom validation
 	if len(bp.Title) == 0 {
@@ -86,6 +99,7 @@ func main() {
 	m.Use(render.Renderer(render.Options{
 		Directory: "templates",
 		Layout:    "layout",
+		Charset:   "UTF-8",
 		Funcs: []template.FuncMap{
 			{
 				"formatTime": func(args ...interface{}) string {
@@ -107,7 +121,6 @@ func main() {
 		//log.Printf(phViewSpots)
 		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
 		r.HTML(200, "posts", newmap)
-//		r.HTML(200, "layout", "Kanghui")
 	})
 
 	m.Get("/:id", func(args martini.Params, r render.Render) {
@@ -183,6 +196,48 @@ func main() {
 			Layout: "admin_layout",
 		})
 	})
+
+
+	m.Get("/admin/upload",func(r render.Render){
+		r.HTML(200, "upload","",render.HTMLOptions{
+			Layout: "admin_layout",
+		})
+	})
+
+	m.Post("/upload", binding.Bind(Image{}), func(image Image, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
+		err := r.ParseMultipartForm(100000)
+		if err != nil {
+			return http.StatusInternalServerError, err.Error()
+		}
+
+		files := r.MultipartForm.File["file_album"]
+		for i, _ := range files {
+			log.Println("getting handle to file")
+			file, err := files[i].Open()
+			defer file.Close()
+			if err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+
+			log.Println("creating destination file")
+			dst, err := os.Create("./uploads/" + files[i].Filename)
+			defer dst.Close()
+			if err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+
+			log.Println("copying the uploaded file to the destination file")
+			if _, err := io.Copy(dst, file); err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+		}
+
+		fmt.Printf("file_name: " + image.Name + "\n")          // now works
+		fmt.Printf("version: " + image.Version + "\n")          // now works
+		fmt.Printf("Album: " + image.Album + "\n")          // now works
+		fmt.Printf("Mime: " + image.Mime + "\n")          // now works
+		return 200, "ok"
+	})
 	m.Run()
 }
 
@@ -236,8 +291,8 @@ func initDb() *gorp.DbMap {
 
 	// create the table. in a production system you'd generally
 	// use a migration tool, or create the tables via scripts
-	err = dbmap.CreateTablesIfNotExists()
-	checkErr(err, "Create tables failed")
+	//err = dbmap.CreateTablesIfNotExists()
+	//checkErr(err, "Create tables failed")
 
 	return dbmap
 }

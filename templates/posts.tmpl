@@ -1,20 +1,56 @@
 <header><a href="/">Home</a></header>
-	{{range .posts}}
-	<h3><a href="/{{ .ID }}">{{ .ID }} {{ .NAME }}</a></h3>
-	<div>{{ .COUNTRY }}</div>
-	{{end}}
+<br>
+
+	<!--{{range .posts}}-->
+	<!--<h3><a href="/{{ .ID }}">{{ .ID }} {{ .NAME }}</a></h3>-->
+	<!--<div>{{ .COUNTRY }}</div>-->
+	<!--{{end}}-->
 
 
-    <h2>Create a Post</h2>
-    <form action="/" method="POST">
-      <input type="text" name="COUNTRY" placeholder="COUNTRY" /><br>
-        <input type="text" name="PROVINCE" placeholder="PROVINCE" /><br>
-        <input type="text" name="CITY" placeholder="CITY" /><br>
-        <input type="text" name="COUNTY" placeholder="COUNTY" /><br>
-        <input type="text" name="NAME" placeholder="NAME" /><br>
-        <input type="text" name="LEVEL" placeholder="LEVEL" /><br>
-        <textarea name="LABEL"></textarea><br>
-        <input type="text" name="PRICE" placeholder="PRICE" /><br>
-        <input type="text" name="STATUS" placeholder="STATUS" /><br>
-      <input type="submit" value="submit"/>
-    </form>
+
+<table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
+    <thead bgcolor="#ffffcc">
+    <tr>
+        <th>Number</th><th>Name</th><th>Country</th><th>Province</th><th>City</th><th>County</th><th>Level</th><th>Label</th><th>Price</th><th>Status</th>
+    </tr>
+    </thead>
+    {{range .posts}}
+    <tr>
+
+        <td><div align="center">{{ .ID }}</div> </td>
+        <td><div align="center"><a href="/{{ .ID }}">{{ .NAME }} </a></div></td>
+        <td><div align="center">{{ .COUNTRY }}</div></td>
+        <td><div align="center">{{ .PROVINCE }}</div></td>
+        <td><div align="center">{{ .CITY }}</div></td>
+        <td><div align="center">{{ .COUNTY }}</div></td>
+        <td><div align="center">{{ .LEVEL }}</div></td>
+        <td><div align="center">{{ .LABEL }}</div></td>
+        <td><div align="center">{{ .PRICE }}</div></td>
+        <td><div align="center">{{ .STATUS }}</div></td>
+
+    </tr>
+    {{end}}
+</table>
+
+<h2>Create a Post</h2>
+<form >
+    <input type="button" value="Active" onclick="Active()"/>
+    <input type="button" value="Disable" onclick="Disable()"/>
+    <input type="button" value="Delete" onclick="Delete()"/>
+    <input type="button" value="Create" onclick="Create()"/>
+</form>
+
+<script>
+function Active(){
+    window.location.replace("/active")
+}
+function Disable(){
+    window.location.replace("/disable")
+}
+function Delete(){
+    window.location.replace("/delete")
+}
+function Create(){
+    window.location.replace("/admin/create/")
+}
+</script>

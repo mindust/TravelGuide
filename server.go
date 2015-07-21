@@ -11,7 +11,7 @@ import (
 	"log"
 	"net/http"
 	"time"
-	"strconv"
+//	"strconv"
 )
 
 type Post struct {
@@ -21,31 +21,43 @@ type Post struct {
 	Body    string `form:"Body" binding:"required"`
 }
 
-type Ph_spot struct {
-	ID      string `db:"ID"`
-	COUNTRY string `form:"COUNTRY"`
-	PROVINCE   string `form:"PROVINCE"`
-	CITY    string `form:"CITY"`
-	COUNTY   string `form:"COUNTY"`
-	NAME    string `form:"NAME"`
-	LEVEL   string `form:"LEVEL"`
-	LABEL    string `form:"LABEL"`
-	PRICE   string `form:"PRICE"`
-	STATUS    int `form:"STATUS"`
+//type Ph_spot struct {
+//	ID      string `db:"ID"`
+//	COUNTRY string `form:"COUNTRY"`
+//	PROVINCE   string `form:"PROVINCE"`
+//	CITY    string `form:"CITY"`
+//	COUNTY   string `form:"COUNTY"`
+//	NAME    string `form:"NAME"`
+//	LEVEL   string `form:"LEVEL"`
+//	LABEL    string `form:"LABEL"`
+//	PRICE   string `form:"PRICE"`
+//	STATUS    int `form:"STATUS"`
+//}
+
+type Ph_users struct {
+	ID      int `db:"ID"`
+	USER_NAME string `form:"COUNTRY" binding:"required"`
+	PASSWORD   string `form:"PROVINCE" binding:"required"`
+	DESCRIPTION    string `form:"CITY" binding:"required"`
+	QQ_NO   string `form:"COUNTY" binding:"required"`
+	MOBILE    string `form:"NAME" binding:"required"`
+	EMAIL   string `form:"LEVEL" binding:"required"`
+	LEVEL    string `form:"LABEL" binding:"required"`
+	LOGO_PATH   string `form:"PRICE" binding:"required"`
 }
 
-//type Ph_spot struct {
-//	Id      int64 `db:"post_id"`
-//	COUNTRY string `form:"COUNTRY" binding:"required"`
-//	PROVINCE   string `form:"PROVINCE" binding:"required"`
-//	CITY    string `form:"CITY" binding:"required"`
-//	COUNTY   string `form:"COUNTY" binding:"required"`
-//	NAME    string `form:"NAME" binding:"required"`
-//	LEVEL   string `form:"LEVEL" binding:"required"`
-//	LABEL    string `form:"LABEL" binding:"required"`
-//	PRICE   string `form:"PRICE" binding:"required"`
-//	STATUS    int64 `form:"STATUS"`
-//}
+type Ph_spot struct {
+	ID      int `db:"ID"`
+	COUNTRY string `form:"COUNTRY" binding:"required"`
+	PROVINCE   string `form:"PROVINCE" binding:"required"`
+	CITY    string `form:"CITY" binding:"required"`
+	COUNTY   string `form:"COUNTY" binding:"required"`
+	NAME    string `form:"NAME" binding:"required"`
+	LEVEL   string `form:"LEVEL" binding:"required"`
+	LABEL    string `form:"LABEL" binding:"required"`
+	PRICE   string `form:"PRICE" binding:"required"`
+	STATUS    int `form:"STATUS"`
+}
 
 func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
 	//custom validation
@@ -116,16 +128,15 @@ func main() {
 	})
 
 	//shows how to create with binding params
-	m.Post("/", binding.Bind(Ph_spot{}), func(post Ph_spot, r render.Render) {
+	m.Post("/admin/viewSpots", binding.Bind(Ph_spot{}), func(post Ph_spot, r render.Render) {
 
 		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.LABEL, post.PRICE,post.STATUS)
-
-		log.Println(p1.ID)
-		log.Println(p1.COUNTRY)
-		log.Println(p1.PROVINCE)
-		log.Println(p1.CITY)
-		log.Println(p1.NAME)
-
+//		log.Println(p1.ID)
+//		log.Println(p1.COUNTRY)
+//		log.Println(p1.PROVINCE)
+//		log.Println(p1.CITY)
+//		log.Println(p1.NAME)
+		log.Println(p1)
 		err:= dbmap.Insert(&p1)
 		checkErr(err, "Insert failed")
 
@@ -134,6 +145,7 @@ func main() {
 
 		})
 	})
+
 //	//delete the spot
 //	m.Post("/Deletespot", binding.Bind(Post{}), func(post Post, r render.Render) {
 //
@@ -151,10 +163,6 @@ func main() {
 //	})
 //	jump to admin/viewspots page
 	m.Get("/admin/viewSpots", func(r render.Render) {
-//		r.HTML(200, "viewSpots", "这是老何的测试数据-viewspots", render.HTMLOptions{
-//			Layout: "viewSpots",
-//		})
-
 		//fetch all rows
 		var posts []Ph_spot
 		_, err:= dbmap.Select(&posts, "select * from ph_view_spots")
@@ -172,27 +180,20 @@ func main() {
 	//jump to login page
 	m.Get("/user/login/",func(r render.Render){
 		r.HTML(200, "login","",render.HTMLOptions{
-
 		})
 	})
-
-
+	m.Get("/admin/create/",func(r render.Render){
+		r.HTML(200, "createpost","",render.HTMLOptions{
+		})
+	})
 	m.Run()
 
 }
 
-//func newPost(title, body string) Ph_spot {
-//	return Ph_spot{
-//		//Created: time.Now().UnixNano(),
-//		Created: time.Now().Unix(),
-//		Title:   title,
-//		Body:    body,
-//	}
-//}
 
 func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string ,Status int) Ph_spot {
 	return Ph_spot{
-		ID: strconv.FormatInt(time.Now().UnixNano(), 2),
+//		ID: strconv.FormatInt(time.Now().UnixNano(), 2),
 		COUNTRY:  COUNTRY,
 		PROVINCE:   PROVINCE,
 		CITY:    CITY,
@@ -204,6 +205,20 @@ func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string ,Stat
 		STATUS:Status,
 	}
 }
+
+//func loginpost(USER_NAME, PASSWORD, DESCRTPTION, QQ_NO,MOBILE,EMAIL,LEVEL,LOGO_PATH string) Ph_spot {
+//	return Ph_spot{
+//		//		ID: strconv.FormatInt(time.Now().UnixNano(), 2),
+//		USER_NAME:  USER_NAME,
+//		PASSWORD:   PASSWORD,
+//		DESCRTPTION:    DESCRTPTION,
+//		QQ_NO:QQ_NO,
+//		MOBILE:MOBILE,
+//		EMAIL:EMAIL,
+//		LEVEL:LEVEL,
+//		LOGO_PATH:LOGO_PATH,
+//	}
+//}
 
 func initDb() *gorp.DbMap {
 	// connect to db using standard Go database/sql API

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh" class="no-js capped-width">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+	<meta charset="utf-8"/>
+	<title>闲游 康辉旅游专家 预订旅游活动、景点和旅游项目| KangHuiGuide</title>
+	<link rel="stylesheet" href="/css/site.css" />
+	<link rel="stylesheet" href="/css/home.css">
+	<link rel="icon" href="/image/favicon.ico" />
+	<link rel="image_src" href="/image/gyg_logo_fb.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/image/apple-touch-icon-72x72-precomposed.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/image/apple-touch-icon-144x144-precomposed.png" />
+	<link rel="canonical" href="index.html" />
+	<meta content="zh-CN" http-equiv="Content-Language">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta name="description" content="查找、对比然后预订世界各地的观光旅、景点游、远足、旅游活动及有趣活动。从当地服务商直接预订，可省钱哦。" />
+	<meta name="apple-mobile-web-app-title" content="GetYourGuide">
+</head>
+<body>
+<div id="fb-root"></div>
+<div class="viewport viewport-offset--closed" id="top">
+	<div class="notifications-container--top notification-container--closed">
+		<script id="tpl_notifications" type="text/html"><div class="notification"><div><p class="<%= status %>"><span><%= message %></span></p></div><a class="close-btn <%= status %>" href="#">关闭</a></div></script>
+	</div>
+	<div>
+		<noscript><p class="notification--static notification--error">您已禁用 Javascript。请解除禁用，以便使用 GetYourGuide。</p></noscript>
+	</div>
+	<div class="spinner" style="display:none">
+		<div class="spinner-container">
+			<div class="spinner-message">
+				<div class="spinner-animation"></div>
+				<p class="spinner-text">加载中...</p>
+			</div>
+		</div>
+	</div>
+	<header class="page-header" role="banner">
+		<div class="container">
+			<span class="header-logo"><img src="/image/logokh.png" width="50" height="50" onerror="if(!window.fallback_logo)this.src=this.src.replace('.svg', '.png');window.fallback_logo=true" alt="KanghuiGuide"></span>
+			<nav>
+				<ul class="header-navigation">
+					<li id="cart">
+						<a class="header-navigation-submenu cart-menu link icon icon-basket" href="shopping_cart.html" rel="nofollow"><span class="shopping-cart-amount">&nbsp;</span><span class="shopping-cart-text">购物车</span></a>
+					</li>
+					<li id="help" class="header-navigation-submenu help-menu">
+						<a href="articles" class="header-navigation-submenu-title link icon icon-help"
+						   aria-haspopup="true">帮助</a>
+						<ul class="header-navigation-submenu-items">
+							<li class="header-navigation-submenu-item">
+								<a class="icon icon-users" href="contact.html">联系我们</a>
+							</li>
+							<li class="header-navigation-submenu-item">
+								<a class="icon icon-info-circled" href="articles">FAQ（常见问题解答）</a>
+							</li>
+							<li class="header-navigation-submenu-item">
+								<a class="icon icon-phone"
+								   href="tel:+493054445944">+49 (0)30 544 459 44</a>
+							</li>
+						</ul>
+					</li>
+					<li id="admin" class="login-state-unknown">
+						<a class="header-navigation-submenu login-menu link icon icon-user"
+						   href="/user/login/">登录</a>
+					</li>
+
+					<li id="admin" class="login-state-unknown">
+						<a class="header-navigation-submenu login-menu link icon icon-user"
+						   href="/admin/viewSpots/">维护景点</a>
+					</li>
+
+				</ul>
+				<script id="tpl_user_logged_in" type="text/html"><a class="header-navigation-submenu-title link icon icon-user" href="login.html"><%= first_name%></a><ul class="header-navigation-submenu-items"><li class="header-navigation-submenu-item"><a href="index.html">预订</a></li><li class="header-navigation-submenu-item"><a href="index.html">心愿单</a></li><li class="header-navigation-submenu-item"><a href="index.html">设置</a></li><li class="header-navigation-submenu-item"><a href="https://www.getyourguide.com/zh/logout/?next=http%3A%2F%2Fwww.getyourguide.com%2Fzh%2F%3F" class="logout-link">注销</a></li></ul></script>
+			</nav>
+		</div>
+	</header>
+	<main role="main">
+		<section class="container instagram-promo">
+		{{yield}}
+		</section>
+	</main>
+	<section class="newsletter status-beginning" id="newsletter-signup">
+		<form action="#" method="post">
+			<div class="newsletter-content newsletter-content-text">
+				<h4 class="status-start">查看所有最新优惠！</h4>
+				<p class="status-start">在 GetYourGuide 发掘有趣的旅游攻略，城市指南和每星期的最佳优惠。</p>
+				<h4 class="status-end">谢谢！</h4>
+				<p class="status-end">订阅成功。我们已将您加到通信录，您将会收到我们的通信。</p>
+				<h4 class="status-error">发生未知错误！</h4>
+				<p class="status-error">请重新加载页面或稍后再试。敬请见谅。</p>
+			</div>
+			<div class="newsletter-content newsletter-content-input">
+				<input type="email" name="newsletter-email" id="newsletter-email" class="js-emailInput"
+					   placeholder="输入电邮地址"/>
+				<button type="submit" class="btn btn-primary js-submitButton"
+						data-loading="正在保全..."
+						data-action="订阅">订阅</button>
+				<span class="hide js-errorMessage">请填写有效电邮地址。</span>
+			</div>
+		</form>
+	</section>
+	<footer class="app-footer app-footer-full">
+		<ul class="footer-content footer-content-top">
+			<li class="footer-content-item footer-content-item-higher"><label for="language-selector">语言</label><div class="selector"><select id="language-selector"><option selected>中文</option><option value="http://www.getyourguide.dk/">Dansk</option><option value="http://www.getyourguide.de/">Deutsch</option><option value="http://www.getyourguide.at/">Deutsch (Österreich)</option><option value="http://www.getyourguide.ch/">Deutsch (Schweiz)</option><option value="http://www.getyourguide.com/">English</option><option value="http://www.getyourguide.co.uk/">English (United Kingdom)</option><option value="http://www.getyourguide.es/">Español</option><option value="http://www.getyourguide.fr/">Français</option><option value="http://www.getyourguide.it/">Italiano</option><option value="http://www.getyourguide.pl/">Język polski</option><option value="http://www.getyourguide.nl/">Nederlands</option><option value="http://www.getyourguide.no/">Norsk</option><option value="http://www.getyourguide.pt/">Português</option><option value="http://www.getyourguide.com.br/">Português do Brasil</option><option value="http://www.getyourguide.fi/">Suomen kieli</option><option value="http://www.getyourguide.se/">Svenska</option><option value="http://www.getyourguide.com.tr/">Türkçe</option></select></div><label for="currency-selector">货币</label><div class="selector"><select id="currency-selector"><option value="3" data-name="美元"data-symbol="$" selected>US$&nbsp;美元</option><option value="1" data-name="欧元"data-symbol="€">€&nbsp;欧元</option><option value="5" data-name="澳元"data-symbol="$">A$&nbsp;澳元</option><option value="4" data-name="巴西雷亚尔"data-symbol="$">BR$&nbsp;巴西雷亚尔</option><option value="2" data-name="英镑"data-symbol="£">£&nbsp;英镑</option><option value="6" data-name="加拿大元"data-symbol="$">C$&nbsp;加拿大元</option><option value="9" data-name="丹麦克朗"data-symbol="DKK">DKK&nbsp;丹麦克朗</option><option value="14" data-name="新西兰元"data-symbol="$">NZ$&nbsp;新西兰元</option><option value="18" data-name="挪威克朗"data-symbol="NOK">NOK&nbsp;挪威克朗</option><option value="25" data-name="波兰兹罗提"data-symbol="zł">zł&nbsp;波兰兹罗提</option><option value="31" data-name="新加坡元"data-symbol="$">S$&nbsp;新加坡元</option><option value="27" data-name="瑞典克朗"data-symbol="SEK">SEK&nbsp;瑞典克朗</option><option value="21" data-name="瑞士法郎"data-symbol="CHF">CHF&nbsp;瑞士法郎</option><option value="23" data-name="土耳其里拉"data-symbol="TL">TL&nbsp;土耳其里拉</option></select></div></li><li class="footer-content-item footer-content-item-text"><ul id="info-company" class="info-details"><li class="content-title"><a href="#info-company"data-action="collapse">公司简介</a></li><li><a href="about/index.html">关于我们</a></li><li><a href="http://careers.getyourguide.com/">人才招聘</a></li><li><a href="http://blog.getyourguide.com/">博客</a></li><li><a href="press/index.html">新闻发布</a></li></ul></li><li class="footer-content-item footer-content-item-text"><ul id="info-support" class="info-details"><li class="content-title"><a href="#info-support"data-action="collapse">支援中心</a></li><li><a href="contact.html">联系我们</a></li><li><a href="http://help.getyourguide.com/customer/en/portal/articles">FAQ（常见问题解答）</a></li><li><a href="impressum.html">法律声明</a></li><li><a href="privacy_policy.html">隐私政策</a></li><li><a href="terms_of_use.html">使用条款</a></li></ul></li><li class="footer-content-item footer-content-item-text"><ul id="info-work" class="info-details"><li class="content-title"><a href="#info-work"data-action="collapse">加入我们</a></li><li><a href="https://supplier.getyourguide.com/en/" target="_blank">服务商管理</a></li><li><a href="https://partner.getyourguide.com/en/" target="_blank">加盟我们</a></li></ul></li><li class="footer-content-item footer-content-item-text"><ul id="info-download" class="info-details on"><li class="content-title"><a href="#info-download"data-action="collapse">移动电话</a></li><li class="icon-apps icon-apps-first icon-apps-android"><a title="从谷歌电子市场下载" target="_blank"href="http://app.adjust.io/sqd560?fallback=https://play.google.com/store/apps/details?id=com.getyourguide.android&amp;hl=zh"><img alt="从谷歌电子市场下载"src='http://cdn1.getyourguide.com/static/d0e287f66346919a5dc7cc6aa10ac3491635a306/customer/desktop//static/images/footer/apps/zh_android.png'/></a></li>
+			<li class="icon-apps icon-apps-ios"><a title="从应用商店下载" target="_blank" href="http://app.adjust.io/msdr1m?fallback=https://itunes.apple.com/zh/app/getyourguide/id705079381?mt=8&amp;uo=4"><img alt="从应用商店下载"src='http://cdn1.getyourguide.com/static/d0e287f66346919a5dc7cc6aa10ac3491635a306/customer/desktop//static/images/footer/apps/zh_ios.png'/></a></li></ul></li></ul><ul class="footer-content footer-content-middle"><li class="language"><a data-action="change-language" href="http://www.getyourguide.dk/" lang="da"class="language-link language-link-da-DK" title="Book oplevelser, seværdigheder og ture | GetYourGuide">Book oplevelser, seværdigheder og ture | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.de/" lang="de"class="language-link language-link-de-DE" title="Aktivitäten, Touren & Sehenswürdigkeiten online buchen | GetYourGuide">Aktivitäten, Touren & Sehenswürdigkeiten online buchen | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.at/" lang="de"class="language-link language-link-de-AT" title="Aktivitäten, Touren & Sehenswürdigkeiten online buchen | GetYourGuide">Aktivitäten, Touren & Sehenswürdigkeiten online buchen | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.ch/" lang="de"class="language-link language-link-de-CH" title="Aktivitäten, Touren & Sehenswürdigkeiten online buchen | GetYourGuide">Aktivitäten, Touren & Sehenswürdigkeiten online buchen | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.com/" lang="en"class="language-link language-link-en-US" title="Book Things To Do, Attractions, and Tours | GetYourGuide">Book Things To Do, Attractions, and Tours | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.co.uk/" lang="en"class="language-link language-link-en-GB" title="Book Things To Do, Attractions, and Tours | GetYourGuide">Book Things To Do, Attractions, and Tours | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.es/" lang="es"class="language-link language-link-es-ES" title="Reserva tours, atracciones y actividades online | GetYourGuide">Reserva tours, atracciones y actividades online | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.fr/" lang="fr"class="language-link language-link-fr-FR" title="Réservez des visites, des attractions touristiques et des activités en ligne | GetYourGuide">Réservez des visites, des attractions touristiques et des activités en ligne | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.it/" lang="it"class="language-link language-link-it-IT" title="Prenota tour, escursioni e attività online | GetYourGuide">Prenota tour, escursioni e attività online | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.pl/" lang="pl"class="language-link language-link-pl-PL" title="Rezerwuj atrakcje i wycieczki | GetYourGuide">Rezerwuj atrakcje i wycieczki | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.nl/" lang="nl"class="language-link language-link-nl-NL" title="Boek wereldwijd tours & activiteiten | GetYourGuide">Boek wereldwijd tours & activiteiten | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.no/" lang="no"class="language-link language-link-no-NO" title="Bestill aktiviteter, attraksjoner og turer | GetYourGuide">Bestill aktiviteter, attraksjoner og turer | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.pt/" lang="pt"class="language-link language-link-pt-PT" title="Reservas on-line de excursões, atrações e outras atividades turísticas | GetYourGuide">Reservas on-line de excursões, atrações e outras atividades turísticas | GetYourGuide</a></li>
+		<li class="language"><a data-action="change-language" href="http://www.getyourguide.com.br/" lang="pt"class="language-link language-link-pt-BR" title="Reservas on-line de excursões, atrações e outras atividades turísticas | GetYourGuide">Reservas on-line de excursões, atrações e outras atividades turísticas | GetYourGuide</a></li>
+		<li class="language"><a data-action="change-language" href="http://www.getyourguide.fi/" lang="fi"class="language-link language-link-fi-FI" title="Varaa aktiviteetteja, kiintoisia kohteita ja retkiä | GetYourGuide">Varaa aktiviteetteja, kiintoisia kohteita ja retkiä | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.se/" lang="sv"class="language-link language-link-sv-SE" title="Boka aktiviteter, sevärdheter och turer | GetYourGuide">Boka aktiviteter, sevärdheter och turer | GetYourGuide</a></li><li class="language"><a data-action="change-language" href="http://www.getyourguide.com.tr/" lang="tr"class="language-link language-link-tr-TR" title="Aktiviteler, Gezilecek Yerler ve Turlar için Rezervasyon Yaptırın | GetYourGuide">Aktiviteler, Gezilecek Yerler ve Turlar için Rezervasyon Yaptırın | GetYourGuide</a></li></ul><ul class="footer-content footer-content-bottom"><li class="footer-content-item branding-line"><span class="splitter">© <span class="copyright-years">2008–2015</span> GetYourGuide. </span><nobr>建立 于苏黎世和柏林.</nobr></li><li class="footer-content-item branding-copy">stay curious</li><li class="footer-content-item branding-social"><ul><li><a class="icon-facebook" href="http://www.facebook.com/GetYourGuide"target="_blank">Facebook</a></li><li><a class="icon-instagram" href="http://instagram.com/getyourguide/"target="_blank">Instagram</a></li><li><a class="icon-twitter" href="http://www.twitter.com/GetYourGuide" target="_blank">Twitter</a></li><li><a class="icon-gplus" href="https://plus.google.com/103735262504614966727/posts"target="_blank">Google+</a></li><li><a class="icon-pinterest" href="http://pinterest.com/getyourguide/?change_language=en"target="_blank">Pinterest</a></li><li><a class="icon-linkedin" href="http://www.linkedin.com/company/getyourguide-ag" target="_blank">Linkedin</a></li></ul></li></ul></footer>
+</div>
+
+</body>
+
+</html>

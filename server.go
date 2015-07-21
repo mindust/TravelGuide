@@ -122,7 +122,7 @@ func main() {
 		} else {
 			newmap := map[string]interface{}{"metatitle": post.NAME + " more custom", "post": post}
 			r.HTML(200, "post", newmap, render.HTMLOptions{
-
+				Layout: "admin_layout",
 			})
 		}
 	})
@@ -142,7 +142,7 @@ func main() {
 
 		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
 		r.HTML(200, "post", newmap, render.HTMLOptions{
-
+			Layout: "admin_layout",
 		})
 	})
 
@@ -167,27 +167,23 @@ func main() {
 		var posts []Ph_spot
 		_, err:= dbmap.Select(&posts, "select * from ph_view_spots")
 		checkErr(err, "Select failed")
-
 		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
-
 		r.HTML(200, "posts", newmap, render.HTMLOptions{
-
+			Layout: "admin_layout",
 		})
-
 	})
-
-
 	//jump to login page
 	m.Get("/user/login/",func(r render.Render){
 		r.HTML(200, "login","",render.HTMLOptions{
+			Layout: "admin_layout",
 		})
 	})
 	m.Get("/admin/create/",func(r render.Render){
 		r.HTML(200, "createpost","",render.HTMLOptions{
+			Layout: "admin_layout",
 		})
 	})
 	m.Run()
-
 }
 
 

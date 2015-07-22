@@ -23,19 +23,6 @@ type Post struct {
 	Body    string `form:"Body" binding:"required"`
 }
 
-//type Ph_spot struct {
-//	ID      string `db:"ID"`
-//	COUNTRY string `form:"COUNTRY"`
-//	PROVINCE   string `form:"PROVINCE"`
-//	CITY    string `form:"CITY"`
-//	COUNTY   string `form:"COUNTY"`
-//	NAME    string `form:"NAME"`
-//	LEVEL   string `form:"LEVEL"`
-//	LABEL    string `form:"LABEL"`
-//	PRICE   string `form:"PRICE"`
-//	STATUS    int `form:"STATUS"`
-//}
-
 type Ph_users struct {
 	ID      int `db:"ID"`
 	USER_NAME string `form:"COUNTRY" binding:"required"`
@@ -56,7 +43,11 @@ type Ph_spot struct {
 	COUNTY   string `form:"COUNTY" binding:"required"`
 	NAME    string `form:"NAME" binding:"required"`
 	LEVEL   string `form:"LEVEL" binding:"required"`
-	LABEL    string `form:"LABEL" binding:"required"`
+	GRADE  string  `form:"GRADE" binding:"required"`
+    LABEL    string `form:"LABEL" binding:"required"`
+	HIGHLIGHTS1    string `form:"HIGHLIGHTS1" binding:"required"`
+	HIGHLIGHTS2    string `form:"HIGHLIGHTS2" binding:"required"`
+	HIGHLIGHTS3    string `form:"HIGHLIGHTS3" binding:"required"`
 	PRICE   string `form:"PRICE" binding:"required"`
 	STATUS    int `form:"STATUS"`
 }
@@ -159,21 +150,6 @@ func main() {
 		})
 	})
 
-//	//delete the spot
-//	m.Post("/Deletespot", binding.Bind(Post{}), func(post Post, r render.Render) {
-//
-//		p1 := newPost(post.Title, post.Body)
-//
-//		log.Println(p1)
-//
-//		err:= dbmap.Insert(&p1)
-//		checkErr(err, "Insert failed")
-//
-//		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
-//		r.HTML(200, "post", newmap, render.HTMLOptions{
-//
-//		})
-//	})
 //	jump to admin/viewspots page
 	m.Get("/admin/viewSpots", func(r render.Render) {
 		//fetch all rows
@@ -256,20 +232,6 @@ func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string ,Stat
 		STATUS:Status,
 	}
 }
-
-//func loginpost(USER_NAME, PASSWORD, DESCRTPTION, QQ_NO,MOBILE,EMAIL,LEVEL,LOGO_PATH string) Ph_spot {
-//	return Ph_spot{
-//		//		ID: strconv.FormatInt(time.Now().UnixNano(), 2),
-//		USER_NAME:  USER_NAME,
-//		PASSWORD:   PASSWORD,
-//		DESCRTPTION:    DESCRTPTION,
-//		QQ_NO:QQ_NO,
-//		MOBILE:MOBILE,
-//		EMAIL:EMAIL,
-//		LEVEL:LEVEL,
-//		LOGO_PATH:LOGO_PATH,
-//	}
-//}
 
 func initDb() *gorp.DbMap {
 	// connect to db using standard Go database/sql API

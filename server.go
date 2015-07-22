@@ -45,11 +45,11 @@ type Ph_spot struct {
 	LEVEL   string `form:"LEVEL" binding:"required"`
 	GRADE  string  `form:"GRADE" binding:"required"`
     LABEL    string `form:"LABEL" binding:"required"`
-	HIGHLIGHTS1    string `form:"HIGHLIGHTS1" binding:"required"`
-	HIGHLIGHTS2    string `form:"HIGHLIGHTS2" binding:"required"`
-	HIGHLIGHTS3    string `form:"HIGHLIGHTS3" binding:"required"`
+	HIGHLIGHTS1    string `form:"HIGHLIGHTS1"`
+	HIGHLIGHTS2    string `form:"HIGHLIGHTS2"`
+	HIGHLIGHTS3    string `form:"HIGHLIGHTS3"`
 	PRICE   string `form:"PRICE" binding:"required"`
-	STATUS    int `form:"STATUS"`
+	STATUS    string `form:"STATUS"`
 }
 
 type Image struct {
@@ -134,7 +134,7 @@ func main() {
 	//shows how to create with binding params
 	m.Post("/admin/viewSpots", binding.Bind(Ph_spot{}), func(post Ph_spot, r render.Render) {
 
-		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.LABEL, post.PRICE,post.STATUS)
+		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.GRADE, post.HIGHLIGHTS1, post.HIGHLIGHTS2, post.HIGHLIGHTS3,post.LABEL, post.PRICE,post.STATUS)
 //		log.Println(p1.ID)
 //		log.Println(p1.COUNTRY)
 //		log.Println(p1.PROVINCE)
@@ -218,7 +218,7 @@ func main() {
 }
 
 
-func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string ,Status int) Ph_spot {
+func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,GRADE,HIGHLIGHTS1,HIGHLIGHTS2,HIGHLIGHTS3,LABEL,PRICE,STATUS string ) Ph_spot {
 	return Ph_spot{
 //		ID: strconv.FormatInt(time.Now().UnixNano(), 2),
 		COUNTRY:  COUNTRY,
@@ -227,9 +227,13 @@ func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE string ,Stat
 		COUNTY:COUNTY,
 		NAME:NAME,
 		LEVEL:LEVEL,
+		GRADE:GRADE,
+		HIGHLIGHTS1:HIGHLIGHTS1,
+		HIGHLIGHTS2:HIGHLIGHTS2,
+		HIGHLIGHTS3:HIGHLIGHTS3,
 		LABEL:LABEL,
 		PRICE:PRICE,
-		STATUS:Status,
+		STATUS:STATUS,
 	}
 }
 

@@ -16,6 +16,13 @@ import (
 	"io"
 )
 
+type Post struct {
+	Id      int64 `db:"post_id"`
+	Created int64
+	Title   string `form:"Title"`
+	Body    string `form:"Body" binding:"required"`
+}
+
 type Ph_users struct {
 	ID      int `db:"ID"`
 	USER_NAME string `form:"COUNTRY" binding:"required"`

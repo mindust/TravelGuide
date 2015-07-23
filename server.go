@@ -7,13 +7,14 @@ import (
 	"github.com/codegangsta/martini-contrib/render"
 	"github.com/coopernurse/gorp"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/satori/go.uuid"
 	"html/template"
 	"log"
 	"net/http"
 	"time"
-	"fmt"
 	"os"
 	"io"
+	"strings"
 )
 
 type Ph_users struct {
@@ -29,31 +30,29 @@ type Ph_users struct {
 }
 
 type Ph_spot struct {
-	ID      int `db:"ID"`
+	ID      string
 	COUNTRY string `form:"COUNTRY" binding:"required"`
 	PROVINCE   string `form:"PROVINCE" binding:"required"`
 	CITY    string `form:"CITY" binding:"required"`
 	COUNTY   string `form:"COUNTY" binding:"required"`
 	NAME    string `form:"NAME" binding:"required"`
 	LEVEL   string `form:"LEVEL" binding:"required"`
-	GRADE  string  `form:"GRADE" binding:"required"`
+	//GRADE  string  `form:"GRADE" binding:"required"`
     LABEL    string `form:"LABEL" binding:"required"`
-	HIGHLIGHTS1    string `form:"HIGHLIGHTS1"`
-	HIGHLIGHTS2    string `form:"HIGHLIGHTS2"`
-	HIGHLIGHTS3    string `form:"HIGHLIGHTS3"`
+	//HIGHLIGHTS1    string `form:"HIGHLIGHTS1"`
+	//HIGHLIGHTS2    string `form:"HIGHLIGHTS2"`
+	//HIGHLIGHTS3    string `form:"HIGHLIGHTS3"`
 	PRICE   string `form:"PRICE" binding:"required"`
 	STATUS    string `form:"STATUS"`
 }
 
-type Image struct {
-	Version    string `form:"version"`
-	Email      string `form:"user_email"`
-	PrivateKey string `form:"user_private_key"`
-	Host       string `form:"file_host"`
-	Album      string `form:"file_album"`
-	Name       string `form:"file_name"`
-	Mime       string `form:"file_mime"`
-	unexported string `form:"-"` // skip binding of unexported fields
+type Ph_spot_with_image struct {
+	ID				string
+	NAME			string
+	VIEW_SPOT_ID	string
+	SOURCE_NAME		string
+	FORMAT			string
+	PATH			string
 }
 
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
@@ -117,14 +116,10 @@ func main() {
 	})
 
 	//shows how to create with binding params
-	m.Post("/admin/viewSpots", binding.Bind(Ph_spot{}), func(post Ph_spot, r render.Render) {
-
-		p1 := newPost(post.COUNTRY, post.PROVINCE,  post.CITY,  post.COUNTY, post.NAME, post.LEVEL, post.GRADE, post.HIGHLIGHTS1, post.HIGHLIGHTS2, post.HIGHLIGHTS3,post.LABEL, post.PRICE,post.STATUS)
-//		log.Println(p1.ID)
-//		log.Println(p1.COUNTRY)
-//		log.Println(p1.PROVINCE)
-//		log.Println(p1.CITY)
-//		log.Println(p1.NAME)
+	m.Post("/admin/viewSpots", binding.Bind(Ph_spot{}), func(spot Ph_spot, r render.Render) {
+		u1 := uuid.NewV4().String()
+		p1 := newPost(u1, spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL,  spot.LABEL, spot.PRICE, spot.STATUS)
+		//p1 := newPost(u1, spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.GRADE, spot.HIGHLIGHTS1, spot.HIGHLIGHTS2, spot.HIGHLIGHTS3, spot.LABEL, spot.PRICE, spot.STATUS)
 		log.Println(p1)
 		err:= dbmap.Insert(&p1)
 		checkErr(err, "Insert failed")
@@ -158,92 +153,102 @@ func main() {
 		})
 	})
 
-
 	m.Get("/admin/upload",func(r render.Render){
 		r.HTML(200, "upload","",render.HTMLOptions{
 			Layout: "admin_layout",
 		})
 	})
 
-	m.Post("/upload", binding.Bind(Image{}), func(image Image, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
+	m.Post("/upload", binding.Bind(Ph_spot{}), func(spot Ph_spot, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
 		err := r.ParseMultipartForm(100000)
 		if err != nil {
 			return http.StatusInternalServerError, err.Error()
 		}
 
-		files := r.MultipartForm.File["file_album"]
+		p1 := newPost(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.LABEL, spot.PRICE, spot.STATUS)
+		log.Println(p1)
+		err = dbmap.Insert(&p1)
+		checkErr(err, "Insert Spot failed")
+
+		files := r.MultipartForm.File["IMAGE"]
+		//newSpotImages := []Ph_spot_with_image
 		for i, _ := range files {
-			log.Println("getting handle to file")
 			file, err := files[i].Open()
 			defer file.Close()
 			if err != nil {
 				return http.StatusInternalServerError, err.Error()
 			}
 
-			log.Println("creating destination file")
-			dst, err := os.Create("./uploads/" + files[i].Filename)
-			defer dst.Close()
+			//获取扩展名
+			sourceImageNameArr := strings.SplitAfter(files[i].Filename, ".")
+			sourceImageNameExt := sourceImageNameArr[len(sourceImageNameArr)-1]
+			u1 := uuid.NewV4().String()
+			dstSource, err := os.Create("./uploads/source/" + u1+"_s."+sourceImageNameExt)
+			dstAlbum, err := os.Create("./uploads/album/" + u1+"_a."+sourceImageNameExt)
+			defer dstSource.Close()
+			defer dstAlbum.Close()
 			if err != nil {
 				return http.StatusInternalServerError, err.Error()
 			}
 
-			log.Println("copying the uploaded file to the destination file")
-			if _, err := io.Copy(dst, file); err != nil {
+			if _, err := io.Copy(dstSource, file); err != nil {
 				return http.StatusInternalServerError, err.Error()
 			}
+			if _, err := io.Copy(dstAlbum, file); err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+
+			image1 := newSpotImage(uuid.NewV4().String(), u1, p1.ID, files[i].Filename, sourceImageNameExt,"uploads")
+			log.Println(image1)
+			//保存图片信息到图片数据库
+			err = dbmap.Insert(&image1)
+			checkErr(err, "Insert iamge failed")
 		}
 
-		fmt.Printf("file_name: " + image.Name + "\n")          // now works
-		fmt.Printf("version: " + image.Version + "\n")          // now works
-		fmt.Printf("Album: " + image.Album + "\n")          // now works
-		fmt.Printf("Mime: " + image.Mime + "\n")          // now works
+
 		return 200, "ok"
 	})
 	m.Run()
 }
 
 
-func newPost(COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,GRADE,HIGHLIGHTS1,HIGHLIGHTS2,HIGHLIGHTS3,LABEL,PRICE,STATUS string ) Ph_spot {
+func newPost(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,STATUS string ) Ph_spot {
 	return Ph_spot{
-//		ID: strconv.FormatInt(time.Now().UnixNano(), 2),
+		ID: UUID,
 		COUNTRY:  COUNTRY,
 		PROVINCE:   PROVINCE,
 		CITY:    CITY,
 		COUNTY:COUNTY,
 		NAME:NAME,
 		LEVEL:LEVEL,
-		GRADE:GRADE,
-		HIGHLIGHTS1:HIGHLIGHTS1,
-		HIGHLIGHTS2:HIGHLIGHTS2,
-		HIGHLIGHTS3:HIGHLIGHTS3,
+		//GRADE:GRADE,
+		//HIGHLIGHTS1:HIGHLIGHTS1,
+		//HIGHLIGHTS2:HIGHLIGHTS2,
+		//HIGHLIGHTS3:HIGHLIGHTS3,
 		LABEL:LABEL,
 		PRICE:PRICE,
 		STATUS:STATUS,
 	}
 }
 
-func initDb() *gorp.DbMap {
-	// connect to db using standard Go database/sql API
-	// use whatever database/sql driver you wish
+func newSpotImage(UUID, NAME, VIEW_SPOT_ID, SOURCE_NAME, FORMAT, PATH string) Ph_spot_with_image{
+	return Ph_spot_with_image{
+		ID: UUID,
+		NAME: NAME,
+		VIEW_SPOT_ID: VIEW_SPOT_ID,
+		SOURCE_NAME: SOURCE_NAME,
+		FORMAT: FORMAT,
+		PATH: PATH,
+	}
+}
 
-	//db, err := sql.Open("sqlite3", "/tmp/post_db.bin")
-	//db, err := sql.Open("mysql", "USERNAME:PASSWORD@unix(/var/run/mysqld/mysqld.sock)/sample")
+func initDb() *gorp.DbMap {
 	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/kanghui")
 	checkErr(err, "sql.Open failed")
 
-	// construct a gorp DbMap
-	// dbmap := &gorp.DbMap{Db: db, Dialect: gorp.SqliteDialect{}}
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
-
-	// add a table, setting the table name to 'posts' and
-	// specifying that the Id property is an auto incrementing PK
-//	dbmap.AddTableWithName(Post{}, "posts").SetKeys(true, "Id")
 	dbmap.AddTableWithName(Ph_spot{}, "ph_view_spots")
-
-	// create the table. in a production system you'd generally
-	// use a migration tool, or create the tables via scripts
-	//err = dbmap.CreateTablesIfNotExists()
-	//checkErr(err, "Create tables failed")
+	dbmap.AddTableWithName(Ph_spot_with_image{}, "ph_view_spot_images")
 
 	return dbmap
 }

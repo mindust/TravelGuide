@@ -16,13 +16,6 @@ import (
 	"io"
 )
 
-type Post struct {
-	Id      int64 `db:"post_id"`
-	Created int64
-	Title   string `form:"Title"`
-	Body    string `form:"Body" binding:"required"`
-}
-
 type Ph_users struct {
 	ID      int `db:"ID"`
 	USER_NAME string `form:"COUNTRY" binding:"required"`
@@ -61,13 +54,6 @@ type Image struct {
 	Name       string `form:"file_name"`
 	Mime       string `form:"file_mime"`
 	unexported string `form:"-"` // skip binding of unexported fields
-}
-
-func (bp Post) Validate(errors *binding.Errors, req *http.Request) {
-	//custom validation
-	if len(bp.Title) == 0 {
-		errors.Fields["title"] = "Title cannot be empty"
-	}
 }
 
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {

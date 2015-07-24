@@ -15,6 +15,7 @@
       <root url="file://$PROJECT_DIR$/../Development/src/github.com/go-martini/martini/.git" />
       <root url="file://$PROJECT_DIR$/../Development/src/github.com/codegangsta/martini/.git" />
       <root url="file://$PROJECT_DIR$/../Development/src/github.com/codegangsta/martini-contrib/.git" />
+      <root url="file://$PROJECT_DIR$/../Development/src/github.com/satori/go.uuid/.git" />
     </excluded>
   </library>
 </component>

@@ -88,64 +88,94 @@ func main() {
 		},
 	}))
 
+	/**
+	首页
+	 */
 	m.Get("/", func(r render.Render) {
 		//fetch all rows
-		var posts []Ph_spot
-		_, err:= dbmap.Select(&posts, "select * from PH_VIEW_SPOTS order by ID")
-		checkErr(err, "Select failed")
-		//log.Printf(phViewSpots)
-		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
-		r.HTML(200, "posts", newmap)
+//		var posts []Ph_spot
+//		_, err:= dbmap.Select(&posts, "select * from PH_VIEW_SPOTS order by ID")
+//		checkErr(err, "Select failed")
+//		//log.Printf(phViewSpots)
+//		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
+		r.HTML(200, "posts", "")
 	})
 
-	m.Get("/:id", func(args martini.Params, r render.Render) {
-		var post Ph_spot
+	m.Get("/spot/:id", func(r render.Render) {
+		r.HTML(200, "posts", "")
+	})
 
-		err:= dbmap.SelectOne(&post, "select * from ph_view_spots where id=?", args["id"])
 
+	/**
+	景点列表显示
+	 */
+	m.Get("/admin/viewSpots", func(r render.Render) {
+		//fetch all rows
+		var viewSpotList []Ph_spot
+		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots")
+		checkErr(err, "Select failed")
+		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": viewSpotList}
+		r.HTML(200, "view_spot_list", newmap, render.HTMLOptions{
+			Layout: "admin_layout",
+		})
+	})
 
-		//simple error check
+	/**
+	景点详情显示
+ 	*/
+	m.Get("/admin/viewSpots/:id", func(args martini.Params, r render.Render) {
+		var spotDetail Ph_spot
+		err:= dbmap.SelectOne(&spotDetail, "select * from ph_view_spots where id=?", args["id"])
 		if err != nil {
 			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
 			r.HTML(404, "error", newmap)
 		} else {
-			newmap := map[string]interface{}{"metatitle": post.NAME + " more custom", "post": post}
-			r.HTML(200, "modify", newmap, render.HTMLOptions{
+			newmap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "post": spotDetail}
+			r.HTML(200, "view_spot_detail", newmap, render.HTMLOptions{
 				Layout: "admin_layout",
 			})
 		}
 	})
 
-//	jump to admin/viewspots page
-	m.Get("/admin/viewSpots", func(r render.Render) {
-		//fetch all rows
-		var posts []Ph_spot
-		_, err:= dbmap.Select(&posts, "select * from ph_view_spots")
-		checkErr(err, "Select failed")
-		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
-		r.HTML(200, "posts", newmap, render.HTMLOptions{
-			Layout: "admin_layout",
-		})
+	/**
+	景点修改内容获取
+	 */
+	m.Get("/admin/spots/:id/update", func(args martini.Params, r render.Render) {
+		var spotDetail Ph_spot
+		err:= dbmap.SelectOne(&spotDetail, "select * from ph_view_spots where id=?", args["id"])
+		//simple error check
+		if err != nil {
+			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
+			r.HTML(404, "error", newmap)
+		} else {
+			newmap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "post": spotDetail}
+			r.HTML(200, "view_spot_update", newmap, render.HTMLOptions{
+				Layout: "admin_layout",
+			})
+		}
 	})
-	//jump to login page
-	m.Get("/user/login/",func(r render.Render){
-		r.HTML(200, "login","",render.HTMLOptions{
-			Layout: "admin_layout",
-		})
-	})
-	m.Get("/admin/create/",func(r render.Render){
-		r.HTML(200, "createpost","",render.HTMLOptions{
-			Layout: "admin_layout",
-		})
-	})
-//
-//	m.Get("/admin/upload",func(r render.Render){
-//		r.HTML(200, "upload","",render.HTMLOptions{
-//			Layout: "admin_layout",
-//		})
-//	})
 
-	m.Post("/upload", binding.Bind(Ph_spot{}), func(spot Ph_spot, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
+	/**
+	景点修改
+	 */
+	m.Post("/admin/spots/:id/update", func(args martini.Params, r render.Render) {
+
+	})
+
+
+	/**
+	景点新增界面
+	 */
+	m.Get("/admin/spots/create/",func(r render.Render){
+		r.HTML(200, "view_spot_create","",render.HTMLOptions{
+			Layout: "admin_layout",
+		})
+	})
+
+	/**
+	景点新增
+	 */
+	m.Post("/admin/spots/create", binding.Bind(Ph_spot{}), func(spot Ph_spot, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
 		err := r.ParseMultipartForm(100000)
 		if err != nil {
 			return http.StatusInternalServerError, err.Error()
@@ -191,61 +221,15 @@ func main() {
 			checkErr(err, "Insert iamge failed")
 		}
 
-
 		return 200, "ok"
 
 	})
 
-
-	m.Post("/update", binding.Bind(Ph_spot{}), func(spot Ph_spot, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
-		err := r.ParseMultipartForm(100000)
-		if err != nil {
-			return http.StatusInternalServerError, err.Error()
-		}
-
-		p1 := newPost(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.GRADE, spot.HIGHLIGHTS1, spot.HIGHLIGHTS2, spot.HIGHLIGHTS3, spot.LABEL, spot.PRICE, spot.STATUS)
-		log.Println(p1)
-		err = dbmap.Insert(&p1)
-		checkErr(err, "Update Spot failed")
-
-		files := r.MultipartForm.File["IMAGE"]
-		//newSpotImages := []Ph_spot_with_image
-		for i, _ := range files {
-			file, err := files[i].Open()
-			defer file.Close()
-			if err != nil {
-				return http.StatusInternalServerError, err.Error()
-			}
-
-			//获取扩展名
-			sourceImageNameArr := strings.SplitAfter(files[i].Filename, ".")
-			sourceImageNameExt := sourceImageNameArr[len(sourceImageNameArr)-1]
-			u1 := uuid.NewV4().String()
-			dstSource, err := os.Create("./uploads/source/" + u1+"_s."+sourceImageNameExt)
-			dstAlbum, err := os.Create("./uploads/album/" + u1+"_a."+sourceImageNameExt)
-			defer dstSource.Close()
-			defer dstAlbum.Close()
-			if err != nil {
-				return http.StatusInternalServerError, err.Error()
-			}
-
-			if _, err := io.Copy(dstSource, file); err != nil {
-				return http.StatusInternalServerError, err.Error()
-			}
-			if _, err := io.Copy(dstAlbum, file); err != nil {
-				return http.StatusInternalServerError, err.Error()
-			}
-
-			image1 := newSpotImage(uuid.NewV4().String(), u1, p1.ID, files[i].Filename, sourceImageNameExt,"uploads")
-			log.Println(image1)
-			//保存图片信息到图片数据库
-			err = dbmap.Insert(&image1)
-			checkErr(err, "Insert iamge failed")
-		}
-
-
-		return 200, "ok"
-
+	//jump to login page
+	m.Get("/user/login/",func(r render.Render){
+		r.HTML(200, "login","",render.HTMLOptions{
+			Layout: "admin_layout",
+		})
 	})
 
 	m.Run()

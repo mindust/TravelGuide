@@ -103,13 +103,14 @@ func main() {
 
 		err:= dbmap.SelectOne(&post, "select * from ph_view_spots where id=?", args["id"])
 
+
 		//simple error check
 		if err != nil {
 			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
 			r.HTML(404, "error", newmap)
 		} else {
 			newmap := map[string]interface{}{"metatitle": post.NAME + " more custom", "post": post}
-			r.HTML(200, "post", newmap, render.HTMLOptions{
+			r.HTML(200, "modify", newmap, render.HTMLOptions{
 				Layout: "admin_layout",
 			})
 		}
@@ -137,12 +138,12 @@ func main() {
 			Layout: "admin_layout",
 		})
 	})
-
-	m.Get("/admin/upload",func(r render.Render){
-		r.HTML(200, "upload","",render.HTMLOptions{
-			Layout: "admin_layout",
-		})
-	})
+//
+//	m.Get("/admin/upload",func(r render.Render){
+//		r.HTML(200, "upload","",render.HTMLOptions{
+//			Layout: "admin_layout",
+//		})
+//	})
 
 	m.Post("/upload", binding.Bind(Ph_spot{}), func(spot Ph_spot, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
 		err := r.ParseMultipartForm(100000)
@@ -194,6 +195,59 @@ func main() {
 		return 200, "ok"
 
 	})
+
+
+	m.Post("/update", binding.Bind(Ph_spot{}), func(spot Ph_spot, args martini.Params, w http.ResponseWriter, r *http.Request) (int, string){
+		err := r.ParseMultipartForm(100000)
+		if err != nil {
+			return http.StatusInternalServerError, err.Error()
+		}
+
+		p1 := newPost(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.GRADE, spot.HIGHLIGHTS1, spot.HIGHLIGHTS2, spot.HIGHLIGHTS3, spot.LABEL, spot.PRICE, spot.STATUS)
+		log.Println(p1)
+		err = dbmap.Insert(&p1)
+		checkErr(err, "Update Spot failed")
+
+		files := r.MultipartForm.File["IMAGE"]
+		//newSpotImages := []Ph_spot_with_image
+		for i, _ := range files {
+			file, err := files[i].Open()
+			defer file.Close()
+			if err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+
+			//获取扩展名
+			sourceImageNameArr := strings.SplitAfter(files[i].Filename, ".")
+			sourceImageNameExt := sourceImageNameArr[len(sourceImageNameArr)-1]
+			u1 := uuid.NewV4().String()
+			dstSource, err := os.Create("./uploads/source/" + u1+"_s."+sourceImageNameExt)
+			dstAlbum, err := os.Create("./uploads/album/" + u1+"_a."+sourceImageNameExt)
+			defer dstSource.Close()
+			defer dstAlbum.Close()
+			if err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+
+			if _, err := io.Copy(dstSource, file); err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+			if _, err := io.Copy(dstAlbum, file); err != nil {
+				return http.StatusInternalServerError, err.Error()
+			}
+
+			image1 := newSpotImage(uuid.NewV4().String(), u1, p1.ID, files[i].Filename, sourceImageNameExt,"uploads")
+			log.Println(image1)
+			//保存图片信息到图片数据库
+			err = dbmap.Insert(&image1)
+			checkErr(err, "Insert iamge failed")
+		}
+
+
+		return 200, "ok"
+
+	})
+
 	m.Run()
 }
 
@@ -227,6 +281,7 @@ func newSpotImage(UUID, NAME, VIEW_SPOT_ID, SOURCE_NAME, FORMAT, PATH string) Ph
 		PATH: PATH,
 	}
 }
+
 
 func initDb() *gorp.DbMap {
 	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/kanghui")

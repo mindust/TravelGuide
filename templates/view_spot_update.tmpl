@@ -1,40 +1,41 @@
 <header></header>
 <br>
 <br>
-<h2>Modify post</h2>
-<form action="/update" method="POST" enctype="multipart/form-data">
+<h2>View_Spot_Update</h2>
+<form action="/admin/spots/:id/update" method="POST" enctype="multipart/form-data">
     <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
         <tr>
-            <td >Spot ID</td><td colspan="4"><input type="type" style="width: 100%" name="ID" value={{ .post.ID }} ></td>
+            <td>district</td><td><input type="text" style="width: 100%" name="COUNTRY" value={{ .post.COUNTRY }} />Country</td><td><input type="text" style="width: 100%" name="PROVINCE" value={{ .post.PROVINCE }}/>Province</td><td><input type="text" style="width: 100%" name="CITY" value={{ .post.CITY }} />City</td>
+            <td><input type="text" style="width: 100%" name="COUNTY" value={{ .post.COUNTY }} />County</td>
         </tr>
         <tr>
-            <td>district</td><td><input type="text" style="width: 100%" name="COUNTRY" value={{ .post.COUNTRY }} />Country</td><td><input type="text" style="width: 100%" name="PROVINCE" value={{ .post.PROVINCE }}  />Province</td><td><input type="text" style="width: 100%" name="CITY" VALUE={{ .post.CITY }} />City</td>
-            <td><input type="text" style="width: 100%" name="COUNTY" VALUE={{ .post.COUNTY }} />County</td>
-        </tr>
-        <tr>
-            <td>Spot Name</td><td><input type="text" style="width: 100%" name="NAME" value={{ .post.NAME }} /></td><td colspan="3"> Picture <input type="file" style="width: 100%" name="IMAGE" id="IMAGE" onchange="PreviewImage('preview',this,220,220);" multiple="multiple"/></td>
+            <td>Spot Name</td><td><input type="text" style="width: 100%" name="NAME" value={{ .post.NAME }} /></td><td colspan="3"> Picture <input type="file" name="IMAGE" id="IMAGE" onchange="PreviewImage('preview',this,220,220);" multiple="multiple"/></td>
         </tr>
         <tr>
             <td>Level</td><td><input type="radio" name="LEVEL" value="First" {{if eq .post.LEVEL "First"}}checked{{end}}>First Level</td><td><input type="radio" name="LEVEL" value="Second" {{if eq .post.LEVEL "Second"}}checked{{end}}>Second Level</td><td><input type="radio" name="LEVEL" value="Third" {{if eq .post.LEVEL "Third"}}checked{{end}}>Third Level</td><td  rowspan="6"><img id="img_name" style="height:300px;width:300px;" /></td>
         </tr>
         <tr>
-            <td>Grade</td><td><input type="radio" name="GRADE" value="Hot" {{if eq .post.GRADE "Hot"}}checked{{end}}>Hot</td><td><input type="radio" name="GRADE" value="Economic" {{if eq .post.GRADE "Economic"}}checked{{end}}>Economic</td><td><input type="radio" name="GRADE" value="Luxury" {{if eq .post.GRADE "Luxury"}}checked{{end}}>Luxury</td>
+            <td>Status</td><td><input type="radio" name="STATUS" value="enable" {{if eq .post.STATUS "enable"}}checked{{end}}>Enable</td><td><input type="radio" name="STATUS" value="disable" {{if eq .post.STATUS "disable"}}checked{{end}}>Disable</td><td><input type="radio" name="STATUS" value="nostatus" {{if eq .post.STATUS "nostatus"}}checked{{end}}>No Status</td>
         </tr>
         <tr>
-            <td rowspan="3">highlights</td>
-            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS1" VALUE={{ .post.HIGHLIGHTS1 }} /></td>
+            <td >Spot ID</td><td colspan="3"><input type="type" style="width: 100%" name="ID" value={{ .post.ID }} readonly></td>
         </tr>
         <tr>
-            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS2" VALUE={{ .post.HIGHLIGHTS2 }} /></td>
+            <td>Price</td><td><input type="text" style="width: 100%" name="PRICE" value={{ .post.PRICE }}/></td>
+        </tr>
+        <td rowspan="3">Label</td><td rowspan="3" colspan="3"><textarea style="height: 100%;width: 100%" name="LABEL" placeholder="please write comments">{{ .post.LABEL }}</textarea></td>
         </tr>
         <tr>
-            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS3" VALUE={{ .post.HIGHLIGHTS3 }} /></td>
+
         </tr>
         <tr>
-            <td>Label</td><td colspan="3"><textarea name="LABEL" style="width: 100%" placeholder="please write comments">{{ .post.LABEL }}</textarea></td>
+
         </tr>
         <tr>
-            <td>Status</td><td ><input type="checkbox" name="STATUS" value="enable" {{if eq .post.STATUS "enable"}}checked{{end}}>Enable</td><td><input type="text" style="width: 100%" name="PRICE" value={{ .post.PRICE }} />Price</td><td align="center"> <input type="submit" value="Submit"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="Create()"/>   </td>
+
+        </tr>
+        <tr>
+            <td></td><td align="center"> <input type="submit" value="Submit" /></td><td align="center"><input type="button" value="Cancel" onclick="Create()"/></td></td><td align="center"><input type="button" value="SpotsList" onclick="spot_list()"/></td><td align="center"><input type="button" value="Home" onclick="home()"/></td>
         </tr>
     </table>
 </form>

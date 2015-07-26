@@ -2,7 +2,7 @@
 <br>
 <br>
 <h2>Create a Post</h2>
-<form action="/upload" method="POST" enctype="multipart/form-data">
+<form action="/admin/spots/create/" method="POST" enctype="multipart/form-data">
     <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
         <tr>
             <td>district</td><td><input type="text" style="width: 100%" name="COUNTRY" PLACEHOLDER="COUNTRY">Country</td><td><input type="text" style="width: 100%" name="PROVINCE" PLACEHOLDER="PROVINCE"/>Province</td><td><input type="text" style="width: 100%" name="CITY" placeholder="CITY" />City</td>
@@ -15,24 +15,29 @@
             <td>Level</td><td><input type="radio" name="LEVEL" value="First" checked>First Level</td><td><input type="radio" name="LEVEL" value="Second">Second Level</td><td><input type="radio" name="LEVEL" value="Third" >Third Level</td><td  rowspan="6"><img id="img_name" style="height:300px;width:300px;" /></td>
         </tr>
         <tr>
-            <td>Grade</td><td><input type="radio" name="GRADE" value="Hot" checked>Hot</td><td><input type="radio" name="GRADE" value="Economic">Economic</td><td><input type="radio" name="GRADE" value="Luxury" >Luxury</td>
+            <td>Status</td><td><input type="radio" name="STATUS" value="enable">Enable</td><td><input type="radio" name="STATUS" value="disable">Disable</td><td><input type="radio" name="STATUS" value="nostatus" >No Status</td>
         </tr>
         <tr>
-            <td rowspan="3">highlights</td>
-            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS1" placeholder="HIGHLIGHTS1" /></td>
+            <td>Grade</td><td><input type="radio" name="GRADE" value="Hot" readonly>Hot</td><td><input type="radio" name="GRADE" value="Economic" readonly>Economic</td><td><input type="radio" name="GRADE" value="Luxury" readonly>Luxury</td>
         </tr>
         <tr>
-            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS2" placeholder="HIGHIGHTS2" /></td>
+            <td>Price</td><td><input type="text" style="width: 100%" name="PRICE" placeholder=" " /></td>
+        </tr>
+            <td rowspan="3">Label</td><td rowspan="3" colspan="3"><textarea style="height: 100%;width: 100%" name="LABEL" placeholder="please write comments"></textarea></td>
         </tr>
         <tr>
-            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS3" placeholder="HIGHLIGHTS3" /></td>
+
         </tr>
         <tr>
-            <td>Label</td><td colspan="3"><textarea style="width: 100%" name="LABEL" placeholder="please write comments"></textarea></td>
+
         </tr>
         <tr>
-            <td>Status</td><td ><input type="checkbox" name="STATUS" value="enable" >Enable</td><td><input type="text" style="width: 100%" name="PRICE" placeholder=" " />Price</td><td align="center"> <input type="submit" value="Submit"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="Create()"/>   </td>
+
         </tr>
+        <tr>
+            <td></td><td align="center"> <input type="submit" value="Submit" /></td><td align="center"><input type="button" value="Cancel" onclick="Create()"/></td></td><td align="center"><input type="button" value="SpotsList" onclick="spot_list()"/></td><td align="center"><input type="button" value="Home" onclick="home()"/></td>
+        </tr>
+
     </table>
 </form>
 <br>
@@ -40,7 +45,13 @@
 
 <script>
     function Create(){
-        window.location.replace("/admin/create/")
+        window.location.replace("/admin/spots/create/")
+    }
+    function home(){
+        window.location.replace("/")
+    }
+    function spot_list(){
+        window.location.replace("/admin/viewSpots")
     }
 </script>
 

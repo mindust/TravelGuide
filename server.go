@@ -37,11 +37,7 @@ type Ph_spot struct {
 	COUNTY   string `form:"COUNTY" binding:"required"`
 	NAME    string `form:"NAME" binding:"required"`
 	LEVEL   string `form:"LEVEL" binding:"required"`
-	GRADE  string  `form:"GRADE" binding:"required"`
     LABEL    string `form:"LABEL" binding:"required"`
-	HIGHLIGHTS1    string `form:"HIGHLIGHTS1"`
-	HIGHLIGHTS2    string `form:"HIGHLIGHTS2"`
-	HIGHLIGHTS3    string `form:"HIGHLIGHTS3"`
 	PRICE   string `form:"PRICE" binding:"required"`
 	STATUS    string `form:"STATUS"`
 }
@@ -181,7 +177,7 @@ func main() {
 			return http.StatusInternalServerError, err.Error()
 		}
 
-		p1 := newPost(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.GRADE, spot.HIGHLIGHTS1, spot.HIGHLIGHTS2, spot.HIGHLIGHTS3, spot.LABEL, spot.PRICE, spot.STATUS)
+		p1 := newPost(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.LABEL, spot.PRICE, spot.STATUS)
 		log.Println(p1)
 		err = dbmap.Insert(&p1)
 		checkErr(err, "Insert Spot failed")
@@ -236,7 +232,7 @@ func main() {
 }
 
 
-func newPost(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,GRADE,HIGHLIGHTS1,HIGHLIGHTS2,HIGHLIGHTS3,LABEL,PRICE,STATUS string ) Ph_spot {
+func newPost(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,STATUS string ) Ph_spot {
 	return Ph_spot{
 		ID: UUID,
 		COUNTRY:  COUNTRY,
@@ -245,10 +241,6 @@ func newPost(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,GRADE,HIGHLIGHTS1,
 		COUNTY:COUNTY,
 		NAME:NAME,
 		LEVEL:LEVEL,
-		GRADE:GRADE,
-		HIGHLIGHTS1:HIGHLIGHTS1,
-		HIGHLIGHTS2:HIGHLIGHTS2,
-		HIGHLIGHTS3:HIGHLIGHTS3,
 		LABEL:LABEL,
 		PRICE:PRICE,
 		STATUS:STATUS,

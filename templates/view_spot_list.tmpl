@@ -16,19 +16,18 @@
 <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
     <thead bgcolor="#ffffcc">
     <tr>
-        <th>Number</th><th>Name</th><th>Country</th><th>Province</th><th>City</th><th>County</th><th>Level</th><th>Label</th><th>Price</th><th>Status</th>
+        <th>Number</th><th>Name</th><th>Country</th><th>Province</th><th>City</th><th>Level</th><th>Label</th><th>Price</th><th>Status</th>
     </tr>
     </thead>
     {{range .posts}}
     <tr>
 
         <td><div align="center">{{ .ID }}</div> </td>
-        <td><div align="center"><a href="/{{ .ID }}">{{ .NAME }} </a></div></td>
+        <td><div align="center"><a href="/admin/viewSpots/{{ .ID }}">{{ .NAME }} </a></div></td>
         <td><div align="center">{{ .COUNTRY }}</div></td>
         <td><div align="center">{{ .PROVINCE }}</div></td>
         <td><div align="center">{{ .CITY }}</div></td>
         <td><div align="center">{{ .LEVEL }}</div></td>
-        <td><div align="center">{{ .GRADE }}</div></td>
         <td><div align="center">{{ .LABEL }}</div></td>
         <td><div align="center">{{ .PRICE }}</div></td>
         <td><div align="center">{{ .STATUS }}</div></td>
@@ -59,6 +58,6 @@ function Delete(){
     window.location.replace("/delete")
 }
 function Create(){
-    window.location.replace("/admin/create/")
+    window.location.replace("/admin/spots/create/")
 }
 </script>

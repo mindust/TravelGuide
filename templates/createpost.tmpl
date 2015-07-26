@@ -1,0 +1,89 @@
+<header></header>
+<br>
+<br>
+<h2>Create a Post</h2>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
+        <tr>
+            <td>district</td><td><input type="text" style="width: 100%" name="COUNTRY" PLACEHOLDER="COUNTRY">Country</td><td><input type="text" style="width: 100%" name="PROVINCE" PLACEHOLDER="PROVINCE"/>Province</td><td><input type="text" style="width: 100%" name="CITY" placeholder="CITY" />City</td>
+            <td><input type="text" style="width: 100%" name="COUNTY" placeholder="COUNTY" />County</td>
+        </tr>
+        <tr>
+            <td>Spot Name</td><td><input type="text" style="width: 100%" name="NAME" placeholder="NAME" /></td><td colspan="3"> Picture <input type="file" name="IMAGE" id="IMAGE" onchange="PreviewImage('preview',this,220,220);" multiple="multiple"/></td>
+        </tr>
+        <tr>
+            <td>Level</td><td><input type="radio" name="LEVEL" value="First" checked>First Level</td><td><input type="radio" name="LEVEL" value="Second">Second Level</td><td><input type="radio" name="LEVEL" value="Third" >Third Level</td><td  rowspan="6"><img id="img_name" style="height:300px;width:300px;" /></td>
+        </tr>
+        <tr>
+            <td>Grade</td><td><input type="radio" name="GRADE" value="Hot" checked>Hot</td><td><input type="radio" name="GRADE" value="Economic">Economic</td><td><input type="radio" name="GRADE" value="Luxury" >Luxury</td>
+        </tr>
+        <tr>
+            <td rowspan="3">highlights</td>
+            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS1" placeholder="HIGHLIGHTS1" /></td>
+        </tr>
+        <tr>
+            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS2" placeholder="HIGHIGHTS2" /></td>
+        </tr>
+        <tr>
+            <td colspan="3"><input type="text" style="width: 100%" name="HIGHLIGHTS3" placeholder="HIGHLIGHTS3" /></td>
+        </tr>
+        <tr>
+            <td>Label</td><td colspan="3"><textarea style="width: 100%" name="LABEL" placeholder="please write comments"></textarea></td>
+        </tr>
+        <tr>
+            <td>Status</td><td ><input type="checkbox" name="STATUS" value="enable" >Enable</td><td><input type="text" style="width: 100%" name="PRICE" placeholder=" " />Price</td><td align="center"> <input type="submit" value="Submit"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="Cancel" onclick="Create()"/>   </td>
+        </tr>
+    </table>
+</form>
+<br>
+<br>
+
+<script>
+    function Create(){
+        window.location.replace("/admin/create/")
+    }
+</script>
+
+
+<script>
+window.onload=function()
+{
+document.getElementById('IMAGE').onchange = function(evt) {
+
+// 如果浏览器不支持FileReader，则不处�?
+
+if (!window.FileReader) return;
+
+var files = evt.target.files;
+
+for (var i = 0, f; f = files[i]; i++) {
+
+if (!f.type.match('image.*')) {
+
+continue;
+
+}
+
+
+var reader = new FileReader();
+
+reader.onload = (function(theFile) {
+
+return function(e) {
+
+// img 元素
+
+document.getElementById('img_name').src = e.target.result;
+
+};
+
+})(f);
+
+
+reader.readAsDataURL(f);
+
+}
+
+}
+}
+</script>

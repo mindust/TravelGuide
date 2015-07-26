@@ -21,10 +21,9 @@
 <div id="fb-root"></div>
 <div class="viewport viewport-offset--closed" id="top">
 	<div class="notifications-container--top notification-container--closed">
-		<script id="tpl_notifications" type="text/html"><div class="notification"><div><p class="<%= status %>"><span><%= message %></span></p></div><a class="close-btn <%= status %>" href="#">关闭</a></div></script>
 	</div>
 	<div>
-		<noscript><p class="notification--static notification--error">您已禁用 Javascript。请解除禁用，以便使用 GetYourGuide。</p></noscript>
+		<noscript><p class="notification--static notification--error">您已禁用 Javascript。请解除禁用，以便使用。</p></noscript>
 	</div>
 	<div class="spinner" style="display:none">
 		<div class="spinner-container">
@@ -40,32 +39,21 @@
 			<nav>
 				<ul class="header-navigation">
 					<li id="cart">
-						<a class="header-navigation-submenu cart-menu link icon icon-basket" href="shopping_cart.html" rel="nofollow"><span class="shopping-cart-amount">&nbsp;</span><span class="shopping-cart-text">购物车</span></a>
+						<a class="header-navigation-submenu cart-menu link icon icon-basket" href="shopping_cart.html" rel="nofollow"><span class="shopping-cart-amount">&nbsp;</span><span class="shopping-cart-text">用户管理</span></a>
 					</li>
 					<li id="help" class="header-navigation-submenu help-menu">
-						<a href="articles" class="header-navigation-submenu-title link icon icon-help"
-						   aria-haspopup="true">帮助</a>
-						<ul class="header-navigation-submenu-items">
-							<li class="header-navigation-submenu-item">
-								<a class="icon icon-users" href="contact.html">联系我们</a>
-							</li>
-							<li class="header-navigation-submenu-item">
-								<a class="icon icon-info-circled" href="articles">FAQ（常见问题解答）</a>
-							</li>
-							<li class="header-navigation-submenu-item">
-								<a class="icon icon-phone"
-								   href="tel:+493054445944">+49 (0)30 544 459 44</a>
-							</li>
-						</ul>
+						<a href="/admin/viewSpots" class="header-navigation-submenu-title link icon icon-help"
+						   aria-haspopup="true">景点管理</a>
+						<ul class="header-navigation-submenu-items"></ul>
 					</li>
 					<li id="admin" class="login-state-unknown">
 						<a class="header-navigation-submenu login-menu link icon icon-user"
-						   href="/user/login/">登录</a>
+						   href="/admin/travelPackage">套餐管理</a>
 					</li>
 
-					<li id="admin" class="login-state-unknown">
+					<li id="zhifu" class="login-state-unknown">
 						<a class="header-navigation-submenu login-menu link icon icon-user"
-						   href="/admin/viewSpots/">维护景点</a>
+						   href="/admin/payments/">支付管理</a>
 					</li>
 
 				</ul>

@@ -69,7 +69,7 @@ func main() {
 
 	m.Use(render.Renderer(render.Options{
 		Directory: "templates",
-		Layout:    "layout",
+		//Layout:    "layout",
 		Charset:   "UTF-8",
 		Funcs: []template.FuncMap{
 			{
@@ -84,24 +84,30 @@ func main() {
 		},
 	}))
 
+
+
 	/**
 	首页
 	 */
 	m.Get("/", func(r render.Render) {
-		//fetch all rows
-//		var posts []Ph_spot
-//		_, err:= dbmap.Select(&posts, "select * from PH_VIEW_SPOTS order by ID")
-//		checkErr(err, "Select failed")
-//		//log.Printf(phViewSpots)
-//		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": posts}
-		r.HTML(200, "posts", "")
+		r.HTML(200, "main","")
 	})
 
-	m.Get("/spot/:id", func(r render.Render) {
-		r.HTML(200, "posts", "")
+	m.Get("/main/hotSpots", func(r render.Render) {
+		r.HTML(200, "main_hot_spots","")
 	})
 
+	m.Get("/main/hotCities", func(r render.Render) {
+		r.HTML(200, "main_hot_cities","")
+	})
 
+	m.Get("/spot/:spotId", func(r render.Render) {
+		r.HTML(200, "spot_detail", "", render.HTMLOptions{
+			Layout: "layout",
+		})
+	})
+
+/***********************************************管理端功能************************************************/
 	/**
 	景点列表显示
 	 */
@@ -122,10 +128,15 @@ func main() {
 	m.Get("/admin/viewSpots/:id", func(args martini.Params, r render.Render) {
 		var spotDetail Ph_spot
 		err:= dbmap.SelectOne(&spotDetail, "select * from ph_view_spots where id=?", args["id"])
+
+
 		if err != nil {
 			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
 			r.HTML(404, "error", newmap)
 		} else {
+			//var spotDetailImages Ph_spot_with_image
+			//dbmap.Select(&spotDetailImages, "select * from ph_view_spot_iamges where view_spot_id=?", spotDetail.ID)
+			//newImageMap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "spotImages": spotDetailImages}
 			newmap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "post": spotDetail}
 			r.HTML(200, "view_spot_detail", newmap, render.HTMLOptions{
 				Layout: "admin_layout",
@@ -177,7 +188,7 @@ func main() {
 			return http.StatusInternalServerError, err.Error()
 		}
 
-		p1 := newPost(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.LABEL, spot.PRICE, spot.STATUS)
+		p1 := newViewSpot(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.LABEL, spot.PRICE, spot.STATUS)
 		log.Println(p1)
 		err = dbmap.Insert(&p1)
 		checkErr(err, "Insert Spot failed")
@@ -195,8 +206,8 @@ func main() {
 			sourceImageNameArr := strings.SplitAfter(files[i].Filename, ".")
 			sourceImageNameExt := sourceImageNameArr[len(sourceImageNameArr)-1]
 			u1 := uuid.NewV4().String()
-			dstSource, err := os.Create("./uploads/source/" + u1+"_s."+sourceImageNameExt)
-			dstAlbum, err := os.Create("./uploads/album/" + u1+"_a."+sourceImageNameExt)
+			dstSource, err := os.Create("./public/uploads/source/" + u1+"_s."+sourceImageNameExt)
+			dstAlbum, err := os.Create("./public/uploads/album/" + u1+"_a."+sourceImageNameExt)
 			defer dstSource.Close()
 			defer dstAlbum.Close()
 			if err != nil {
@@ -221,6 +232,29 @@ func main() {
 
 	})
 
+	/**
+	套餐管理首页
+	 */
+	m.Get("/admin/travelPackage", func(r render.Render) {
+		//fetch all packages....
+		r.HTML(200, "travel_package_list", "", render.HTMLOptions{
+			Layout: "admin_layout",
+		})
+	})
+
+	/**
+	支付管理首页
+ 	*/
+	m.Get("/admin/payments", func(r render.Render) {
+		//fetch all payment history....
+		r.HTML(200, "payment_list", "", render.HTMLOptions{
+			Layout: "admin_layout",
+		})
+	})
+
+
+	/*******************************************管理功能结束************************************************/
+
 	//jump to login page
 	m.Get("/user/login/",func(r render.Render){
 		r.HTML(200, "login","",render.HTMLOptions{
@@ -232,7 +266,7 @@ func main() {
 }
 
 
-func newPost(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,STATUS string ) Ph_spot {
+func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,STATUS string ) Ph_spot {
 	return Ph_spot{
 		ID: UUID,
 		COUNTRY:  COUNTRY,

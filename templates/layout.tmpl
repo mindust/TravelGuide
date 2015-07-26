@@ -19,15 +19,16 @@
 	<meta name="description" content="查找、对比然后预订世界各地的观光旅、景点游、远足、旅游活动及有趣活动。从当地服务商直接预订，可省钱哦。" />
 	<meta name="apple-mobile-web-app-title" content="GetYourGuide">
 	<script>dataLayer = []; 		</script>
+
 </head>
 <body>
 <div id="fb-root"></div>
 <div class="viewport viewport-offset--closed" id="top">
 	<div class="notifications-container--top notification-container--closed">
-		<script id="tpl_notifications" type="text/html"><div class="notification"><div><p class="<%= status %>"><span><%= message %></span></p></div><a class="close-btn <%= status %>" href="#">关闭</a></div></script>
+
 	</div>
 	<div>
-		<noscript><p class="notification--static notification--error">您已禁用 Javascript。请解除禁用，以便使用 GetYourGuide。</p></noscript>
+		<noscript><p class="notification--static notification--error">您已禁用 Javascript。请解除禁用，以便使用。</p></noscript>
 	</div>
 	<div class="spinner" style="display:none">
 		<div class="spinner-container">
@@ -37,7 +38,7 @@
 			</div>
 		</div>
 	</div>
-	<header class="page-header" role="banner">
+	<header class="page-header" role="banner" style="background-color: white">
 		<div class="container">
 			<span class="header-logo"><img src="/image/logokh.png" width="50" height="50" onerror="if(!window.fallback_logo)this.src=this.src.replace('.svg', '.png');window.fallback_logo=true" alt="KanghuiGuide"></span>
 			<nav>
@@ -77,968 +78,13 @@
 		</div>
 	</header>
 	<main role="main">
-		<section class="intro paris-header">
+		<section class="paris-header">
 			<div class="container intro-container">
-				<table class="intro-table">
-					<tr class="copy-content">
-						<td>
-							<div class="copy-container">
-								<h1 class="copy-headline">
-									世界之大<br />
-									任您探索
-								</h1>
-							</div>
-						</td>
-					</tr>
-					<tr class="search-content">
-						<td>
-							<div class="intro-boxes">
-								<div class="intro-box intro-box--dark search-box">
-									<form class="search-form search-form--date-select" role="search" action="/s/">
-										<input tabindex="1" class="search-form-input" type="text" name="q" autocomplete="off" placeholder="您要去哪儿？">
-										<div id="date" class="search-form-date-container">
-											<input tabindex="2" class="search-form-date" name="date_from" type="text" autocomplete="off" placeholder="何时？">
-											<span class="icon icon-calendar"></span>
-										</div>
-										<button tabindex="3" class="search-form-submit" type="submit">
-											<span class="icon icon-search">搜索</span>
-										</button>
-									</form>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</section>
-		<section class="services-banner" data-role="usp-banner-clickable">
-			<div class="container">
-				<div class="services-overview">
-					<div class="services-column-claim">
-						<h2 class="services-claim">闲游 康辉旅游专家 为您提供：</h2>
-					</div>
-					<div class="services-column-item">
-						<p class="services-item services-item--crown">最佳选择</p>
-						<p class="services-item-info">超过 25800 项旅游活动</p>
-					</div>
-					<div class="services-column-item">
-						<p class="services-item services-item--price">最低价格</p>
-						<p class="services-item-info">绝对保证！</p>
-					</div>
-					<div class="services-column-item">
-						<p class="services-item services-item--cart">快速轻松预订</p>
-						<p class="services-item-info">在线预订，锁定您的门票</p>
-					</div>
-				</div>
-			</div>
-		</section>
-		<div class="modal fade" id="usp-details-modal" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"></button>
-						<h4 class="modal-title">为什么要浏览我们网站？</h4>
-					</div>
-					<div class="modal-body">
-						<div class="modal-content-line">
-							<div class="media-content">
-								<h6 class="media-title media-icon icon-globe2">世界上最有实力的旅游方案大全</h6>
-								<p>此时此刻就有 2 万多项活动方案任您挑选。不论您想做什么 - 去西班牙尽享美食，或去昆士兰五彩的珊瑚间潜游 - 都能在这里找到。</p>
-							</div>
-						</div>
-						<hr/>
-						<div class="modal-content-line">
-							<div class="media-content">
-								<h6 class="media-title media-icon icon-crown">专业的当地导游</h6>
-								<p>GetYourGuide 当地服务商们都是旅游高手，带您看世界就是他们的专长。我们会对所有合作伙伴进行审查，让您能快乐出游、确保平安。</p>
-							</div>
-						</div>
-						<hr/>
-						<div class="modal-content-line">
-							<div class="media-content">
-								<h6 class="media-title media-icon icon-deal">最优惠价格保证</h6>
-								<p>一段难忘的旅行记忆确实无价，最优惠价格更能让旅程锦上添花。如果您在别处发现更低价格，即刻告诉我们，我们会二话不说退还差价。</p>
-							</div>
-						</div>
-						<hr/>
-						<div class="modal-content-line">
-							<div class="media-content">
-								<h6 class="media-title media-icon icon-phone">一流的客服，满足您任何时候的需求</h6>
-								<p>
-									我们在北美和欧洲都设有办事处，客服团队随时待命。不论您是已身在旅途还是在家上网，只要<a href='contact.html'>一个电话</a>、<a class='mail' href='#question_new' rel='gygindow'>一条短信</a>或<a href='contact.html'>在网上留个言</a>就能找到我们。我们乐意随时提供帮助！
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-small btn-primary" data-dismiss="modal">明白了！</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<section class="container instagram-promo">
-			<a data-role="promo-banner" target="_blank" href="/">	<h2>准备就绪，#getyoursnowguide</h2>
-				<h3>分享您的照片，赢取巴黎之旅！</h3>
-				<span rel="nofollow" class="btn btn-small btn-primary">开始吧</span>
-			</a></section>
-		<section id="top-attractions-container" class="container top-destinations-container">
-			<div class="top-destinations-row">
-				<div class="top-destination-col-sm-12">
-					<h1>热门景点</h1>
-				</div>
-			</div>
-			<div class="top-destinations-row">
-				<ul class="top-destinations">
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="eiffel-tower-l2600/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2600-482657002-87.jpg" alt="艾菲尔铁塔"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">艾菲尔铁塔</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="vatican-museums-l2738/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2738-76056559-87.jpg" alt="梵蒂冈博物馆"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">梵蒂冈博物馆</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="musee-du-louvre-l3224/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-3224-167783222-87.jpg" alt="卢浮宫"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">卢浮宫</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="sagrada-familia-l2699/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2699-2484238658-87.jpg" alt="圣家族大教堂"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">圣家族大教堂</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="burj-khalifa-l2703/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2703-2946705231-87.jpg" alt="哈利法塔"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">哈利法塔</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="empire-state-building-l2608/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2608-1408440906-87.jpg" alt="帝国大厦"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">帝国大厦</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="anne-frank-house-l2697/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2697-3153490397-87.jpg" alt="安妮弗兰克故居"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">安妮弗兰克故居</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination">
-						<a class="image-box attractions-image-box image-box-v2" href="colosseum-l2619/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2619-3881492833-87.jpg" alt="斗兽场"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">斗兽场</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination top-destination--hidden">
-						<a class="image-box attractions-image-box image-box-v2" href="santa-maria-delle-grazie-l3586/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-3586-2421728664-87.jpg" alt="圣玛丽亚感恩教堂"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">圣玛丽亚感恩教堂</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination top-destination--hidden">
-						<a class="image-box attractions-image-box image-box-v2" href="alhambra-l2772/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2772-2027463805-87.jpg" alt="阿罕布拉市"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">阿罕布拉市</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination top-destination--hidden">
-						<a class="image-box attractions-image-box image-box-v2" href="machu-picchu-l1570/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-1570-2696395330-87.jpg" alt="马丘比丘"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">马丘比丘</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination top-destination--hidden">
-						<a class="image-box attractions-image-box image-box-v2" href="alcatraz-l535/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-535-4153659323-87.jpg" alt="恶魔岛"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">恶魔岛</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination top-destination--hidden">
-						<a class="image-box attractions-image-box image-box-v2" href="leaning-tower-of-pisa-l2975/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-2975-3290552308-87.jpg" alt="比萨斜塔"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">比萨斜塔</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-3 top-destination top-destination--hidden">
-						<a class="image-box attractions-image-box image-box-v2" href="seaworld-orlando-l3849/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-3849-3791135426-87.jpg" alt="奥尔兰多海洋世界"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">奥尔兰多海洋世界</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="section-navigation">
-				<button class="btn js-showMoreAttractionsButton btn-primary btn-small attractions-show-more">
-					显示更多景点
-				</button>
-			</div>
-		</section>
-		<section id="top-destinations-container" class="container top-destinations-container">
-			<div class="top-destinations-row">
-				<div class="top-destination-col-sm-12">
-					<h1>最热门目的地</h1>
-				</div>
-			</div>
-			<div class="top-destinations-row">
-				<ul class="top-destinations">
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="beijing-l186/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-186-1133775957-87.jpg" alt="北京"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">北京</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 1
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="macau-l180/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-180-2529836383-87.jpg" alt="澳门"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">澳门</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 2
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="rome-l33/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-33-3199196009-87.jpg" alt="罗马"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">罗马</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 48
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="paris-l16/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-16-965832478-87.jpg" alt="巴黎"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">巴黎</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 26
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="dubai-l173/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-173-2972966563-87.jpg" alt="迪拜"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">迪拜</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 34
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="london-l57/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-57-521662982-87.jpg" alt="伦敦"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">伦敦</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 39
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="new-york-l59/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-59-1224772867-87.jpg" alt="纽约"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">纽约</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 7
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="berlin-l17/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-17-1493104629-87.jpg" alt="柏林"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">柏林</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 16
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination">
-						<a class="image-box cities-image-box image-box-v2" href="barcelona-l45/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-45-2108475876-87.jpg" alt="巴塞罗那"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">巴塞罗那</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 18
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="amsterdam-l36/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-36-2089851955-87.jpg" alt="阿姆斯特丹"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">阿姆斯特丹</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 18
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="hamburg-l23/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-23-511503285-87.jpg" alt="汉堡"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">汉堡</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 2
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="san-francisco-l61/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-61-3578036958-87.jpg" alt="旧金山"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">旧金山</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 8
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="las-vegas-l58/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-58-1213955743-87.jpg" alt="拉斯维加斯"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">拉斯维加斯</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 7
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="vienna-l7/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-7-2174447804-87.jpg" alt="维也纳"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">维也纳</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 5
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="istanbul-l56/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-56-2978111977-87.jpg" alt="伊斯坦布尔"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">伊斯坦布尔</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 7
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="miami-l176/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-176-190547823-87.jpg" alt="迈阿密"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">迈阿密</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 3
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="madrid-l46/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-46-3614091011-87.jpg" alt="马德里"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">马德里</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 10
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="edinburgh-l44/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-44-698940471-87.jpg" alt="爱丁堡"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">爱丁堡</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 12
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-					<li class="col-sm-6 col-md-4 top-destination top-destination--hidden">
-						<a class="image-box cities-image-box image-box-v2" href="florence-l32/index.html">
-							<figure class="image-box-figure">
-								<img class="image-box-picture" src="/img/location_img-32-894461052-87.jpg" alt="佛罗伦萨"
-									 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-								<figcaption class="image-box-caption">
-									<div class="image-box-label">
-										<div class="image-box-label-title">佛罗伦萨</div>
-									</div>
-									 
-									<div class="image-box-counter"> 
-										<div class="image-box-counter-title">
-											 1
-											 
-											旅游项目与活动 
-										</div>
-									</div>
-								</figcaption>
-							</figure>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="section-navigation">
-				<button class="btn js-showMoreCitiesButton btn-primary btn-small cities-show-more">
-					显示更多城市
-				</button>
-			</div>
-		</section>
-		<section class="container tabs-component">
-			<div class="row">
-				<header class="col-sm-12">
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="tab" class="active"><a href="#itinerariesAttractions">最受欢迎城市导览与景点</a></li>
-						<li role="tab" class=""><a href="#countries">10 大最受欢迎国家</a></li>
-					</ul>
-				</header>
-			</div>
-			<div class="tab-content">
-				<div class="row tab-pane active" id="itinerariesAttractions" role="tabpanel">
-					<div class="row col-sm-12">
-						<div class="col-sm-12">
-							<h2>最受欢迎景点</h2>
-							<div class="row">
-								<div class="col-sm-12">
-									<ol start="4" class="secondary-activities ">
-										<li class="secondary-activity" >
-											<a href="london-eye-l2711/index.html" class="label">
-<span class="label-number">
-1
-</span>
-												<span class="label-title">伦敦眼</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="statue-of-liberty-l2612/index.html" class="label">
-<span class="label-number">
-2
-</span>
-												<span class="label-title">自由女神像</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="eiffel-tower-l2600/index.html" class="label">
-<span class="label-number">
-3
-</span>
-												<span class="label-title">艾菲尔铁塔</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="empire-state-building-l2608/index.html" class="label">
-<span class="label-number">
-4
-</span>
-												<span class="label-title">帝国大厦</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="burj-khalifa-l2703/index.html" class="label">
-<span class="label-number">
-5
-</span>
-												<span class="label-title">哈利法塔</span>
-											</a>
-										</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row col-sm-12">
-						<div class="col-sm-12">
-							想看看我们还在其他哪些国家有旅游活动？
-							<a href="destinations/index.html">按目的地浏览所有旅游项目与活动。</a>
-						</div>
-					</div>
-				</div>
-				<div class="row tab-pane" id="countries" role="tabpanel">
-					<div class="top-countries-row">
-						<div class="row col-sm-12">
-							<div class="col-sm-12">
-								<h2>10 大最受欢迎国家</h2>
-							</div>
-						</div>
-						<div class="col-sm-12 image-box-v2">
-							<div class="row">
-								<ol class="primary-activities">
-									<li class="primary-activity col-sm-6 col-md-3" >
-										<a class="image-box countries-image-box" href="italy-n29/index.html">
-											<figure class="image-box-figure">
-												<img class="image-box-picture" src="/img/country_img-29-839211496-87.jpg" alt="意大利"
-													 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-												<figcaption class="image-box-caption">
-													<div class="image-box-label">
-														<div class="image-box-label-title">意大利</div>
-													</div>
-													 
-													<div class="image-box-counter"> 
-														<div class="image-box-counter-title">
-															 1
-															 
-															旅游项目与活动 
-														</div>
-													</div>
-												</figcaption>
-											</figure>
-										</a>
-									</li>
-									<li class="primary-activity col-sm-6 col-md-3" >
-										<a class="image-box countries-image-box" href="germany-n27/index.html">
-											<figure class="image-box-figure">
-												<img class="image-box-picture" src="/img/country_img-27-4146430853-87.jpg" alt="德国"
-													 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-												<figcaption class="image-box-caption">
-													<div class="image-box-label">
-														<div class="image-box-label-title">德国</div>
-													</div>
-													 
-													<div class="image-box-counter"> 
-														<div class="image-box-counter-title">
-															 1
-															 
-															旅游项目与活动 
-														</div>
-													</div>
-												</figcaption>
-											</figure>
-										</a>
-									</li>
-									<li class="primary-activity col-sm-6 col-md-3" >
-										<a class="image-box countries-image-box" href="united-kingdom-n35/index.html">
-											<figure class="image-box-figure">
-												<img class="image-box-picture" src="/img/country_img-35-543112754-87.jpg" alt="英国"
-													 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-												<figcaption class="image-box-caption">
-													<div class="image-box-label">
-														<div class="image-box-label-title">英国</div>
-													</div>
-													 
-													<div class="image-box-counter"> 
-														<div class="image-box-counter-title">
-															 1
-															 
-															旅游项目与活动 
-														</div>
-													</div>
-												</figcaption>
-											</figure>
-										</a>
-									</li>
-									<li class="primary-activity col-sm-6 col-md-3" >
-										<a class="image-box countries-image-box" href="france-n26/index.html">
-											<figure class="image-box-figure">
-												<img class="image-box-picture" src="/img/country_img-26-1846380914-87.jpg" alt="法国"
-													 onerror="this.parentNode.parentNode.className+=' missing-image'"/>
-												<figcaption class="image-box-caption">
-													<div class="image-box-label">
-														<div class="image-box-label-title">法国</div>
-													</div>
-													 
-													<div class="image-box-counter"> 
-														<div class="image-box-counter-title">
-															 1
-															 
-															旅游项目与活动 
-														</div>
-													</div>
-												</figcaption>
-											</figure>
-										</a>
-									</li>
-								</ol>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<ol start="4" class="secondary-activities with-primary">
-										<li class="secondary-activity" >
-											<a href="united-states-n8/index.html" class="label">
-<span class="label-number">
-5
-</span>
-												<span class="label-title">美国</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="spain-n21/index.html" class="label">
-<span class="label-number">
-6
-</span>
-												<span class="label-title">西班牙</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="uae-n56/index.html" class="label">
-<span class="label-number">
-7
-</span>
-												<span class="label-title">阿联酋</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="netherlands-n32/index.html" class="label">
-<span class="label-number">
-8
-</span>
-												<span class="label-title">荷兰</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="austria-n22/index.html" class="label">
-<span class="label-number">
-9
-</span>
-												<span class="label-title">奥地利</span>
-											</a>
-										</li>
-										<li class="secondary-activity" >
-											<a href="ireland-n34/index.html" class="label">
-<span class="label-number">
-10
-</span>
-												<span class="label-title">爱尔兰</span>
-											</a>
-										</li>
-									</ol>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{{yield}}
 			</div>
 		</section>
 	</main>
-	<section class="newsletter status-beginning" id="newsletter-signup">
-		<form action="#" method="post">
-			<div class="newsletter-content newsletter-content-text">
-				<h4 class="status-start">查看所有最新优惠！</h4>
-				<p class="status-start">在 GetYourGuide 发掘有趣的旅游攻略，城市指南和每星期的最佳优惠。</p>
-				<h4 class="status-end">谢谢！</h4>
-				<p class="status-end">订阅成功。我们已将您加到通信录，您将会收到我们的通信。</p>
-				<h4 class="status-error">发生未知错误！</h4>
-				<p class="status-error">请重新加载页面或稍后再试。敬请见谅。</p>
-			</div>
-			<div class="newsletter-content newsletter-content-input">
-				<input type="email" name="newsletter-email" id="newsletter-email" class="js-emailInput"
-					   placeholder="输入电邮地址"/>
-				<button type="submit" class="btn btn-primary js-submitButton"
-						data-loading="正在保全..."
-						data-action="订阅">订阅</button>
-				<span class="hide js-errorMessage">请填写有效电邮地址。</span>
-			</div>
-		</form>
-	</section>
+
 	<footer class="app-footer app-footer-full">
 		<ul class="footer-content footer-content-top">
 			<li class="footer-content-item footer-content-item-higher"><label for="language-selector">语言</label><div class="selector"><select id="language-selector"><option selected>中文</option><option value="http://www.getyourguide.dk/">Dansk</option><option value="http://www.getyourguide.de/">Deutsch</option><option value="http://www.getyourguide.at/">Deutsch (Österreich)</option><option value="http://www.getyourguide.ch/">Deutsch (Schweiz)</option><option value="http://www.getyourguide.com/">English</option><option value="http://www.getyourguide.co.uk/">English (United Kingdom)</option><option value="http://www.getyourguide.es/">Español</option><option value="http://www.getyourguide.fr/">Français</option><option value="http://www.getyourguide.it/">Italiano</option><option value="http://www.getyourguide.pl/">Język polski</option><option value="http://www.getyourguide.nl/">Nederlands</option><option value="http://www.getyourguide.no/">Norsk</option><option value="http://www.getyourguide.pt/">Português</option><option value="http://www.getyourguide.com.br/">Português do Brasil</option><option value="http://www.getyourguide.fi/">Suomen kieli</option><option value="http://www.getyourguide.se/">Svenska</option><option value="http://www.getyourguide.com.tr/">Türkçe</option></select></div><label for="currency-selector">货币</label><div class="selector"><select id="currency-selector"><option value="3" data-name="美元"data-symbol="$" selected>US$&nbsp;美元</option><option value="1" data-name="欧元"data-symbol="€">€&nbsp;欧元</option><option value="5" data-name="澳元"data-symbol="$">A$&nbsp;澳元</option><option value="4" data-name="巴西雷亚尔"data-symbol="$">BR$&nbsp;巴西雷亚尔</option><option value="2" data-name="英镑"data-symbol="£">£&nbsp;英镑</option><option value="6" data-name="加拿大元"data-symbol="$">C$&nbsp;加拿大元</option><option value="9" data-name="丹麦克朗"data-symbol="DKK">DKK&nbsp;丹麦克朗</option><option value="14" data-name="新西兰元"data-symbol="$">NZ$&nbsp;新西兰元</option><option value="18" data-name="挪威克朗"data-symbol="NOK">NOK&nbsp;挪威克朗</option><option value="25" data-name="波兰兹罗提"data-symbol="zł">zł&nbsp;波兰兹罗提</option><option value="31" data-name="新加坡元"data-symbol="$">S$&nbsp;新加坡元</option><option value="27" data-name="瑞典克朗"data-symbol="SEK">SEK&nbsp;瑞典克朗</option><option value="21" data-name="瑞士法郎"data-symbol="CHF">CHF&nbsp;瑞士法郎</option><option value="23" data-name="土耳其里拉"data-symbol="TL">TL&nbsp;土耳其里拉</option></select></div></li><li class="footer-content-item footer-content-item-text"><ul id="info-company" class="info-details"><li class="content-title"><a href="#info-company"data-action="collapse">公司简介</a></li><li><a href="about/index.html">关于我们</a></li><li><a href="http://careers.getyourguide.com/">人才招聘</a></li><li><a href="http://blog.getyourguide.com/">博客</a></li><li><a href="press/index.html">新闻发布</a></li></ul></li><li class="footer-content-item footer-content-item-text"><ul id="info-support" class="info-details"><li class="content-title"><a href="#info-support"data-action="collapse">支援中心</a></li><li><a href="contact.html">联系我们</a></li><li><a href="http://help.getyourguide.com/customer/en/portal/articles">FAQ（常见问题解答）</a></li><li><a href="impressum.html">法律声明</a></li><li><a href="privacy_policy.html">隐私政策</a></li><li><a href="terms_of_use.html">使用条款</a></li></ul></li><li class="footer-content-item footer-content-item-text"><ul id="info-work" class="info-details"><li class="content-title"><a href="#info-work"data-action="collapse">加入我们</a></li><li><a href="https://supplier.getyourguide.com/en/" target="_blank">服务商管理</a></li><li><a href="https://partner.getyourguide.com/en/" target="_blank">加盟我们</a></li></ul></li><li class="footer-content-item footer-content-item-text"><ul id="info-download" class="info-details on"><li class="content-title"><a href="#info-download"data-action="collapse">移动电话</a></li><li class="icon-apps icon-apps-first icon-apps-android"><a title="从谷歌电子市场下载" target="_blank"href="http://app.adjust.io/sqd560?fallback=https://play.google.com/store/apps/details?id=com.getyourguide.android&amp;hl=zh"><img alt="从谷歌电子市场下载"src='http://cdn1.getyourguide.com/static/d0e287f66346919a5dc7cc6aa10ac3491635a306/customer/desktop//static/images/footer/apps/zh_android.png'/></a></li>

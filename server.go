@@ -53,21 +53,21 @@ type Ph_spot_with_image struct {
 type ph_travel_packages struct {
 	ID string
 	NAME string `form:"NAME" binding:"required"`
-	DESCRIPTION string
-	FEE int64
-	START_DATE time.Time
-	END_DATE time.Time
-	DAYS int64
-	HOTELS string
-	TRANSPOT string
-	PERSON_NUM string
-	TAGS string
-	CONTENT string
-	ADVICE string
-	FEE_INCLUDE string
-	FEE_NOT_INCLUDE string
-	COLLECTION_ADDRESS string
-	HIGHLIGHTS string
+	DESCRIPTION string `form:"DESCRIPTION" binding:"required"`
+	FEE int64 `form:"FEE" binding:"required"`
+	START_DATE string `form:"START_DATE" binding:"required"`
+	END_DATE string `form:"END_DATE" binding:"required"`
+	DAYS int64 `form:"DAYS" binding:"required"`
+	HOTELS string `form:"HOTELS" binding:"required"`
+	TRANSPOT string `form:"TRANSPOT" binding:"required"`
+	PERSON_NUM string `form:"PERSON_NUM" binding:"required"`
+	TAGS string `form:"TAGS" binding:"required"`
+	CONTENT string `form:"CONTENT" binding:"required"`
+	ADVICE string `form:"ADVICE" binding:"required"`
+	FEE_INCLUDE string `form:"FEE_INCLUDE" binding:"required"`
+	FEE_NOT_INCLUDE string `form:"FEE_NOT_INCLUDE" binding:"required"`
+	COLLECTION_ADDRESS string `form:"COLLECTION_ADDRESS" binding:"required"`
+	HIGHLIGHTS string `form:"HIGHLIGHTS" binding:"required"`
 }
 
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
@@ -276,8 +276,8 @@ func main() {
 		checkErr(err, "Insert failed")
 //		return 200, "ok"
 
-		newmap := map[string]interface{}{"metatitle": "created post", "post": p2}
-		r.HTML(200, "post", newmap, render.HTMLOptions{
+//		newmap := map[string]interface{}{"metatitle": "created post", "travel_package_create": p2}
+		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
 			Layout: "admin_layout",
 		})
 	})
@@ -321,7 +321,7 @@ func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,ST
 	}
 }
 
-func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE time.Time, DAYS int64, HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS string ) ph_travel_packages{
+func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE string, DAYS int64, HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS string ) ph_travel_packages{
 	return ph_travel_packages{
 		ID:ID,
 		NAME:NAME,

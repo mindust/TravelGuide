@@ -68,6 +68,7 @@ type ph_travel_packages struct {
 	FEE_NOT_INCLUDE string `form:"FEE_NOT_INCLUDE" binding:"required"`
 	COLLECTION_ADDRESS string `form:"COLLECTION_ADDRESS" binding:"required"`
 	HIGHLIGHTS string `form:"HIGHLIGHTS" binding:"required"`
+	spot string `form:"VIEW_SPOT_ID" binding:"required"`
 }
 
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
@@ -256,15 +257,24 @@ func main() {
 	 */
 	m.Get("/admin/travelPackage/", func(r render.Render) {
 		//fetch all packages....
-		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
+//		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
+//			Layout: "admin_layout",
+//		})
+
+		var viewSpotList []Ph_spot
+		_, err:= dbmap.Select(&viewSpotList, "SELECT NAME FROM ph_view_spots")
+		checkErr(err, "Select failed")
+		newmap := map[string]interface{}{"metatitle": "this", "posts": viewSpotList}
+		r.HTML(200, "travel_package_create", newmap, render.HTMLOptions{
 			Layout: "admin_layout",
 		})
+
 	})
 
 
 	m.Post("/admin/travelPackage/", binding.Bind(ph_travel_packages{}), func(travel ph_travel_packages, r render.Render) {
 
-		p2 := travelpackage(uuid.NewV4().String(),travel.NAME, travel.DESCRIPTION,  travel.FEE,  travel.START_DATE, travel.END_DATE, travel.DAYS, travel.HOTELS, travel.TRANSPOT, travel.PERSON_NUM, travel.TAGS,travel.CONTENT, travel.ADVICE,travel.FEE_INCLUDE,travel.FEE_NOT_INCLUDE,travel.COLLECTION_ADDRESS,travel.HIGHLIGHTS)
+		p2 := travelpackage(uuid.NewV4().String(),travel.NAME, travel.DESCRIPTION,  travel.FEE,  travel.START_DATE, travel.END_DATE, travel.DAYS, travel.HOTELS, travel.TRANSPOT, travel.PERSON_NUM, travel.TAGS,travel.CONTENT, travel.ADVICE,travel.FEE_INCLUDE,travel.FEE_NOT_INCLUDE,travel.COLLECTION_ADDRESS,travel.HIGHLIGHTS,travel.spot)
 //		//		log.Println(p1.ID)
 //		//		log.Println(p1.COUNTRY)
 //		//		log.Println(p1.PROVINCE)
@@ -321,7 +331,7 @@ func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,ST
 	}
 }
 
-func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE string, DAYS int64, HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS string ) ph_travel_packages{
+func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE string, DAYS int64, HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS,spot string ) ph_travel_packages{
 	return ph_travel_packages{
 		ID:ID,
 		NAME:NAME,
@@ -340,6 +350,7 @@ func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE stri
 		FEE_NOT_INCLUDE:FEE_NOT_INCLUDE,
 		COLLECTION_ADDRESS:COLLECTION_ADDRESS,
 		HIGHLIGHTS:HIGHLIGHTS,
+		spot:spot,
 	}
 }
 

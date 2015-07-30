@@ -153,11 +153,11 @@
                 Select Spot
             </td>
             <td >
-                <select style="width: 100%" name="VIEW_SPOT_ID">
-                    <option value="1">shanghai</option>
-                    <option value="2">suzhou</option>
-                    <option value="3">beijing</option>
-                    <option value="4">nanjing</option>
+                <select style="width: 100%" name="VIEW_SPOT_ID" class="form-control input-sm" id="VIEW_SPOT_ID" >
+                    {{range .posts}}
+                    <option value={{.NAME}}>{{.NAME}}</option>
+
+                    {{end}}
                 </select>
             </td>
             <td align="center"> <input type="submit" value="Submit" /></td><td align="center"><input type="button" value="Cancel" onclick="Create()"/><td align="center"><input type="button" value="Home" onclick="home()"/></td>

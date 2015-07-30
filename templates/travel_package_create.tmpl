@@ -3,7 +3,7 @@
 <br>
 <h2>package</h2>
 
-<form action="/admin/spots/create/" method="POST" enctype="multipart/form-data">
+<form action="/admin/travelPackage/" method="POST" enctype="multipart/form-data">
     <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
         <tr>
             <td>
@@ -24,17 +24,17 @@
                 Tags
             </td>
             <td>
-                <input type="text" style="width: 100%" name="TAG1" placeholder="tags1">
+                <input type="text" style="width: 100%" name="TAGS" placeholder="tags1">
             </td>
-            <td>
-                <input type="text" style="width: 100%" name="TAG2" placeholder="tags2">
-            </td>
-            <td>
-                <input type="text" style="width: 100%" name="TAG3" placeholder="tags3">
-            </td>
-            <td>
-                <input type="text" style="width: 100%" name="TAG4" placeholder="tags4">
-            </td>
+            <!--<td>-->
+                <!--<input type="text" style="width: 100%" name="TAG2" placeholder="tags2">-->
+            <!--</td>-->
+            <!--<td>-->
+                <!--<input type="text" style="width: 100%" name="TAG3" placeholder="tags3">-->
+            <!--</td>-->
+            <!--<td>-->
+                <!--<input type="text" style="width: 100%" name="TAG4" placeholder="tags4">-->
+            <!--</td>-->
         </tr>
         <tr>
             <td rowspan="4">
@@ -42,16 +42,16 @@
             </td>
             <tr>
             <td colspan="4">
-                <input type="text" style="width: 100%" name="HIGHLIGHT" placeholder="HIGHLIGHT1">
+                <input type="text" style="width: 100%" name="HIGHLIGHTS" placeholder="HIGHLIGHT1">
             </td>
             </tr>
             <tr>
             <td colspan="4">
-                <input type="text" style="width: 100%" name="HIGHLIGHT2" placeholder="HIGHLIGHT2">
+                <!--<input type="text" style="width: 100%" name="HIGHLIGHT2" placeholder="HIGHLIGHT2">-->
             </td>
             </tr>
             <td colspan="4">
-                <input type="text" style="width: 100%" name="HIGHLIGHT3" placeholder="HIGHLIGHT3">
+                <!--<input type="text" style="width: 100%" name="HIGHLIGHT3" placeholder="HIGHLIGHT3">-->
             </td>
             </tr>
         </tr>
@@ -128,16 +128,16 @@
                 Transport
             </td>
             <td align="center" >
-                Air Plane<input type="checkbox" style="width:100%" name="TRANSPORT" value="Plane">
+                Air Plane<input type="radio" style="width:100%" name="TRANSPOT" value="Plane">
             </td>
             <td align="center" >
-                Shuttle Bus<input type="checkbox" style="width:100%" name="TRANSPORT" value="Bus">
+                Shuttle Bus<input type="radio" style="width:100%" name="TRANSPOT" value="Bus">
             </td>
             <td align="center" >
-                Ship<input type="checkbox" style="width:100%" name="TRANSPORT" value="Ship">
+                Ship<input type="radio" style="width:100%" name="TRANSPOT" value="Ship">
             </td>
             <td align="center" >
-                pedestrianism <input type="checkbox" style="width:100%" name="TRANSPORT" value="Walk">
+                pedestrianism <input type="radio" style="width:100%" name="TRANSPOT" value="Walk">
             </td>
         </tr>
         <tr>
@@ -159,7 +159,7 @@
 
 <script>
     function Create(){
-        window.location.replace("/admin/travelPackage")
+        window.location.replace("/admin/travelPackage/")
     }
     function home(){
         window.location.replace("/")

@@ -50,14 +50,14 @@ type Ph_spot_with_image struct {
 	FORMAT			string
 	PATH			string
 }
-type Ph_travel_package struct {
+type Ph_travel_packages struct {
 	ID string
 	NAME string
 	DESCRIPTION string
-	FEE string
+	FEE int64
 	START_DATE string
 	END_DATE string
-	DAYS int
+	DAYS int64
 	HOTELS string
 	TRANSPOT string
 	PERSON_NUM string
@@ -254,30 +254,33 @@ func main() {
 	/**
 	套餐管理首页
 	 */
-	m.Get("/admin/travelPackage", func(r render.Render) {
+	m.Get("/admin/travelPackage/", func(r render.Render) {
 		//fetch all packages....
 		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
 			Layout: "admin_layout",
 		})
 	})
 
-	m.Post("/admin/viewSpots", binding.Bind(Ph_travel_package{}), func(post Ph_travel_package, r render.Render) {
 
-		p1 := travelpackage(uuid.NewV4().String(),post.NAME, post.DESCRIPTION,  post.FEE,  post.START_DATE, post.END_DATE, post.DAYS, post.HOTELS, post.TRANSPOT, post.PERSON_NUM, post.TAGS,post.CONTENT, post.ADVICE,post.FEE_INCLUDE,post.FEE_NOT_INCLUDE,post.COLLECTION_ADDRESS,post.HIGHLIGHTS)
-		//		log.Println(p1.ID)
-		//		log.Println(p1.COUNTRY)
-		//		log.Println(p1.PROVINCE)
-		//		log.Println(p1.CITY)
-		//		log.Println(p1.NAME)
-		log.Println(p1)
-		err:= dbmap.Insert(&p1)
+	m.Post("/admin/travelPackage/", binding.Bind(Ph_travel_packages{}), func(travel Ph_travel_packages, r render.Render) {
+
+//		p2 := travelpackage(uuid.NewV4().String(),travel.NAME, travel.DESCRIPTION,  travel.FEE,  travel.START_DATE, travel.END_DATE, travel.DAYS, travel.HOTELS, travel.TRANSPOT, travel.PERSON_NUM, travel.TAGS,travel.CONTENT, travel.ADVICE,travel.FEE_INCLUDE,travel.FEE_NOT_INCLUDE,travel.COLLECTION_ADDRESS,travel.HIGHLIGHTS)
+//		//		log.Println(p1.ID)
+//		//		log.Println(p1.COUNTRY)
+//		//		log.Println(p1.PROVINCE)
+//		//		log.Println(p1.CITY)
+//		//		log.Println(p1.NAME)
+		p2:=Ph_travel_packages{"test","Name","Description",1000,"2015-08-01","2015-08-06",10,"Jinji","Shuttle","20","tags","content","advice","Yes","No","Chagejia","No highlights"}
+		log.Println(p2)
+//		err:= dbmap.Insert(&p2)
+		err:= dbmap.Insert(&p2)
 		checkErr(err, "Insert failed")
 //		return 200, "ok"
 
-//		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
-//		r.HTML(200, "post", newmap, render.HTMLOptions{
-//			Layout: "admin_layout",
-//		})
+		newmap := map[string]interface{}{"metatitle": "created post", "post": p2}
+		r.HTML(200, "post", newmap, render.HTMLOptions{
+			Layout: "admin_layout",
+		})
 	})
 
 	/**
@@ -319,8 +322,8 @@ func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,ST
 	}
 }
 
-func travelpackage(UUID,NAME,DESCRIPTION,FEE,HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS,START_DATE,END_DATE string,DAYS int ) Ph_travel_package{
-	return Ph_travel_package{
+func travelpackage(UUID,NAME,DESCRIPTION,HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS,START_DATE,END_DATE string,DAYS ,FEE int64 ) Ph_travel_packages{
+	return Ph_travel_packages{
 		ID:UUID,
 		NAME:NAME,
 		DESCRIPTION:DESCRIPTION,
@@ -360,7 +363,7 @@ func initDb() *gorp.DbMap {
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
 	dbmap.AddTableWithName(Ph_spot{}, "ph_view_spots")
 	dbmap.AddTableWithName(Ph_spot_with_image{}, "ph_view_spot_images")
-
+	dbmap.AddTableWithName(Ph_travel_packages{}, "Ph_travel_packages").SetKeys(true,"ID")
 	return dbmap
 }
 

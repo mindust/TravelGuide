@@ -50,6 +50,25 @@ type Ph_spot_with_image struct {
 	FORMAT			string
 	PATH			string
 }
+type Ph_travel_package struct {
+	ID string
+	NAME string
+	DESCRIPTION string
+	FEE string
+	START_DATE string
+	END_DATE string
+	DAYS int
+	HOTELS string
+	TRANSPOT string
+	PERSON_NUM string
+	TAGS string
+	CONTENT string
+	ADVICE string
+	FEE_INCLUDE string
+	FEE_NOT_INCLUDE string
+	COLLECTION_ADDRESS string
+	HIGHLIGHTS string
+}
 
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
 	//custom validation
@@ -138,7 +157,7 @@ func main() {
 			//dbmap.Select(&spotDetailImages, "select * from ph_view_spot_iamges where view_spot_id=?", spotDetail.ID)
 			//newImageMap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "spotImages": spotDetailImages}
 			newmap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "post": spotDetail}
-			r.HTML(200, "view_spot_detail", newmap, render.HTMLOptions{
+			r.HTML(200, "view_spot_update", newmap, render.HTMLOptions{
 				Layout: "admin_layout",
 			})
 		}
@@ -237,9 +256,28 @@ func main() {
 	 */
 	m.Get("/admin/travelPackage", func(r render.Render) {
 		//fetch all packages....
-		r.HTML(200, "travel_package_list", "", render.HTMLOptions{
+		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
 			Layout: "admin_layout",
 		})
+	})
+
+	m.Post("/admin/viewSpots", binding.Bind(Ph_travel_package{}), func(post Ph_travel_package, r render.Render) {
+
+		p1 := travelpackage(uuid.NewV4().String(),post.NAME, post.DESCRIPTION,  post.FEE,  post.START_DATE, post.END_DATE, post.DAYS, post.HOTELS, post.TRANSPOT, post.PERSON_NUM, post.TAGS,post.CONTENT, post.ADVICE,post.FEE_INCLUDE,post.FEE_NOT_INCLUDE,post.COLLECTION_ADDRESS,post.HIGHLIGHTS)
+		//		log.Println(p1.ID)
+		//		log.Println(p1.COUNTRY)
+		//		log.Println(p1.PROVINCE)
+		//		log.Println(p1.CITY)
+		//		log.Println(p1.NAME)
+		log.Println(p1)
+		err:= dbmap.Insert(&p1)
+		checkErr(err, "Insert failed")
+//		return 200, "ok"
+
+//		newmap := map[string]interface{}{"metatitle": "created post", "post": p1}
+//		r.HTML(200, "post", newmap, render.HTMLOptions{
+//			Layout: "admin_layout",
+//		})
 	})
 
 	/**
@@ -278,6 +316,28 @@ func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,ST
 		LABEL:LABEL,
 		PRICE:PRICE,
 		STATUS:STATUS,
+	}
+}
+
+func travelpackage(UUID,NAME,DESCRIPTION,FEE,HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS,START_DATE,END_DATE string,DAYS int ) Ph_travel_package{
+	return Ph_travel_package{
+		ID:UUID,
+		NAME:NAME,
+		DESCRIPTION:DESCRIPTION,
+		FEE:FEE,
+		START_DATE:START_DATE,
+		END_DATE:END_DATE,
+		DAYS:DAYS,
+		HOTELS:HOTELS,
+		TRANSPOT:TRANSPOT,
+		PERSON_NUM:PERSON_NUM,
+		TAGS:TAGS,
+		CONTENT:CONTENT,
+		ADVICE:ADVICE,
+		FEE_INCLUDE:FEE_INCLUDE,
+		FEE_NOT_INCLUDE:FEE_NOT_INCLUDE,
+		COLLECTION_ADDRESS:COLLECTION_ADDRESS,
+		HIGHLIGHTS:HIGHLIGHTS,
 	}
 }
 

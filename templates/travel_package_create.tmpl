@@ -1,0 +1,167 @@
+<header></header>
+<br>
+<br>
+<h2>package</h2>
+
+<form action="/admin/spots/create/" method="POST" enctype="multipart/form-data">
+    <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
+        <tr>
+            <td>
+                package_name
+            </td>
+            <td colspan="2">
+                <input type="text" style="width: 100%" name="NAME" PLACEHOLDER="name">
+            </td>
+            <td >
+                Fee
+            </td>
+            <td>
+                <input type="text" style="width: 100%" name="FEE" PLACEHOLDER="fee">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tags
+            </td>
+            <td>
+                <input type="text" style="width: 100%" name="TAG1" placeholder="tags1">
+            </td>
+            <td>
+                <input type="text" style="width: 100%" name="TAG2" placeholder="tags2">
+            </td>
+            <td>
+                <input type="text" style="width: 100%" name="TAG3" placeholder="tags3">
+            </td>
+            <td>
+                <input type="text" style="width: 100%" name="TAG4" placeholder="tags4">
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="4">
+                Highlights
+            </td>
+            <tr>
+            <td colspan="4">
+                <input type="text" style="width: 100%" name="HIGHLIGHT" placeholder="HIGHLIGHT1">
+            </td>
+            </tr>
+            <tr>
+            <td colspan="4">
+                <input type="text" style="width: 100%" name="HIGHLIGHT2" placeholder="HIGHLIGHT2">
+            </td>
+            </tr>
+            <td colspan="4">
+                <input type="text" style="width: 100%" name="HIGHLIGHT3" placeholder="HIGHLIGHT3">
+            </td>
+            </tr>
+        </tr>
+        <tr>
+            <td>
+                date
+            </td>
+            <td colspan="2">
+                <input type="date"  name="START_DATE" >~<input type="date"  name="END_DATE">
+            </td>
+            <td>
+                <input type="text" name="DAYS">
+            </td>
+            <td>
+                Days
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Gathering Place
+            </td>
+            <td colspan="4">
+                <input type="text" style="width:100%" name="COLLECTION_ADDRESS">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fee Include
+            </td>
+            <td colspan="4">
+                <input type="text" style="width:100%" name="FEE_INCLUDE">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fee Not Include
+            </td>
+            <td colspan="4">
+                <input type="text" style="width:100%" name="FEE_NOT_INCLUDE">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Content
+            </td>
+            <td colspan="4">
+                <textarea rows="3" style="height: 100%;width: 100%" name="CONTENT" placeholder="please write comments"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Advice
+            </td>
+            <td colspan="4">
+                <textarea rows="4" style="height: 100%;width: 100%" name="ADVICE" placeholder="please write advice"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td >
+                Person Number
+            </td>
+            <td align="center" >
+                <input type="text" style="width:100%" name="PERSON_NUM">Persons
+            </td>
+            <td align="center" >
+                Hotel
+            </td>
+            <td colspan="2">
+                <input type="text" style="width:100%" name="HOTELS">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Transport
+            </td>
+            <td align="center" >
+                Air Plane<input type="checkbox" style="width:100%" name="TRANSPORT" value="Plane">
+            </td>
+            <td align="center" >
+                Shuttle Bus<input type="checkbox" style="width:100%" name="TRANSPORT" value="Bus">
+            </td>
+            <td align="center" >
+                Ship<input type="checkbox" style="width:100%" name="TRANSPORT" value="Ship">
+            </td>
+            <td align="center" >
+                pedestrianism <input type="checkbox" style="width:100%" name="TRANSPORT" value="Walk">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Select Spot
+            </td>
+            <td >
+                <select style="width: 100%" name="VIEW_SPOT_ID">
+                    <option value="1">shanghai</option>
+                    <option value="2">suzhou</option>
+                    <option value="3">beijing</option>
+                    <option value="4">nanjing</option>
+                </select>
+            </td>
+            <td align="center"> <input type="submit" value="Submit" /></td><td align="center"><input type="button" value="Cancel" onclick="Create()"/><td align="center"><input type="button" value="Home" onclick="home()"/></td>
+        </tr>
+    </table>
+</form>
+
+<script>
+    function Create(){
+        window.location.replace("/admin/travelPackage")
+    }
+    function home(){
+        window.location.replace("/")
+    }
+</script>

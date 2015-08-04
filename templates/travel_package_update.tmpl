@@ -9,13 +9,13 @@
                 旅游套餐
             </td>
             <td colspan="2">
-                <input type="text" style="width: 100%" name="NAME" PLACEHOLDER="套餐名称">
+                <input type="text" style="width: 100%" name="NAME" PLACEHOLDER="套餐名称" value={{ .post.NAME }}>
             </td>
             <td >
                 费用
             </td>
             <td>
-                <input type="text" style="width: 100%" name="FEE" PLACEHOLDER="套餐费用">
+                <input type="text" style="width: 100%" name="FEE" PLACEHOLDER="套餐费用" value={{ .post.FEE }}>
             </td>
         </tr>
         <tr>
@@ -23,7 +23,7 @@
                 标签
             </td>
             <td>
-                <input type="text" style="width: 100%" name="TAGS" placeholder="标签1">
+                <input type="text" style="width: 100%" name="TAGS" placeholder="标签1" value={{ .post.TAGS }}>
             </td>
             <!--<td>-->
                 <!--<input type="text" style="width: 100%" name="TAG2" placeholder="tags2">-->
@@ -59,10 +59,10 @@
                 日期
             </td>
             <td colspan="2">
-                <input type="date"  name="START_DATE">~<input type="date"  name="END_DATE">
+                <input type="date"  name="START_DATE" value={{ .post.START_DATE }}>~<input type="date"  name="END_DATE" value={{ .post.END_DATE }}>
             </td>
             <td>
-                <input type="text" name="DAYS">
+                <input type="text" name="DAYS" value={{ .post.DAYS }}>
             </td>
             <td>
                 天数
@@ -73,7 +73,7 @@
                 集合地点
             </td>
             <td colspan="4">
-                <input type="text" style="width:100%" name="COLLECTION_ADDRESS">
+                <input type="text" style="width:100%" name="COLLECTION_ADDRESS" value={{ .post.COLLECTION_ADDRESS }}>
             </td>
         </tr>
         <tr>
@@ -81,7 +81,7 @@
                 包含费用
             </td>
             <td colspan="4">
-                <input type="text" style="width:100%" name="FEE_INCLUDE">
+                <input type="text" style="width:100%" name="FEE_INCLUDE" value={{ .post.FEE_INCLUDE}}>
             </td>
         </tr>
         <tr>
@@ -89,7 +89,7 @@
                 包含不费用
             </td>
             <td colspan="4">
-                <input type="text" style="width:100%" name="FEE_NOT_INCLUDE">
+                <input type="text" style="width:100%" name="FEE_NOT_INCLUDE" value={{ .post.FEE_NOT_INCLUDE}}>
             </td>
         </tr>
         <tr>
@@ -97,7 +97,7 @@
                 套餐描述
             </td>
             <td colspan="4">
-                <textarea rows="3" style="height: 100%;width: 100%" name="DESCRIPTION" placeholder="请输入套餐描述"></textarea>
+                <textarea rows="3" style="height: 100%;width: 100%" name="DESCRIPTION" placeholder="请输入套餐描述">{{ .post.DESCRIPTION }}</textarea>
             </td>
         </tr>
         <tr>
@@ -105,7 +105,7 @@
                 套餐内容
             </td>
             <td colspan="4">
-                <textarea rows="3" style="height: 100%;width: 100%" name="CONTENT" placeholder="请输入套餐的详情"></textarea>
+                <textarea rows="3" style="height: 100%;width: 100%" name="CONTENT" placeholder="请输入套餐的详情">{{ .post.CONTENT }}</textarea>
             </td>
         </tr>
         <tr>
@@ -113,7 +113,7 @@
                 旅行建议
             </td>
             <td colspan="4">
-                <textarea rows="4" style="height: 100%;width: 100%" name="ADVICE" placeholder="关于此套餐的建议"></textarea>
+                <textarea rows="4" style="height: 100%;width: 100%" name="ADVICE" placeholder="关于此套餐的建议">{{ .post.ADVICE }}</textarea>
             </td>
         </tr>
         <tr>
@@ -121,13 +121,13 @@
                 参团人数
             </td>
             <td align="center" >
-                <input type="text" style="width:100%" name="PERSON_NUM">
+                <input type="text" style="width:100%" name="PERSON_NUM" value={{ .post.PERSON_NUM }}>
             </td>
             <td align="center" >
                 酒店
             </td>
             <td colspan="2">
-                <input type="text" style="width:100%" name="HOTELS">
+                <input type="text" style="width:100%" name="HOTELS" value={{ .post.HOTELS }}>
             </td>
         </tr>
         <tr>
@@ -135,16 +135,16 @@
                 交通
             </td>
             <td align="center" >
-                飞机<input type="radio" style="width:100%" name="TRANSPOT" value="Plane">
+                飞机<input type="radio" style="width:100%" name="TRANSPOT" value="Plane" {{if eq .post.TRANSPOT "Plane"}}checked{{end}}>
             </td>
             <td align="center" >
-                大巴<input type="radio" style="width:100%" name="TRANSPOT" value="Bus">
+                大巴<input type="radio" style="width:100%" name="TRANSPOT" value="Bus" {{if eq .post.TRANSPOT "Bus"}}checked{{end}}>
             </td>
             <td align="center" >
-                坐船<input type="radio" style="width:100%" name="TRANSPOT" value="Ship">
+                坐船<input type="radio" style="width:100%" name="TRANSPOT" value="Ship" {{if eq .post.TRANSPOT "Ship"}}checked{{end}}>
             </td>
             <td align="center" >
-                徒步 <input type="radio" style="width:100%" name="TRANSPOT" value="Walk">
+                徒步 <input type="radio" style="width:100%" name="TRANSPOT" value="Walk" {{if eq .post.TRANSPOT "Walk"}}checked{{end}}>
             </td>
         </tr>
         <tr>

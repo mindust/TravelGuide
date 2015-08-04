@@ -5,28 +5,25 @@
 <form action="/admin/spots/create/" method="POST" enctype="multipart/form-data">
     <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
         <tr>
-            <td>district</td><td><input type="text" style="width: 100%" name="COUNTRY" PLACEHOLDER="COUNTRY">Country</td><td><input type="text" style="width: 100%" name="PROVINCE" PLACEHOLDER="PROVINCE"/>Province</td><td><input type="text" style="width: 100%" name="CITY" placeholder="CITY" />City</td>
-            <td><input type="text" style="width: 100%" name="COUNTY" placeholder="COUNTY" />County</td>
+            <td>地区</td><td><input type="text" style="width: 100%" name="COUNTRY" PLACEHOLDER="国家">国家</td><td><input type="text" style="width: 100%" name="PROVINCE" PLACEHOLDER="省(直辖市)"/>省(直辖市)</td><td><input type="text" style="width: 100%" name="CITY" placeholder="市" />市</td>
+            <td><input type="text" style="width: 100%" name="COUNTY" placeholder="县" />县</td>
         </tr>
         <tr>
-            <td>Spot Name</td><td><input type="text" style="width: 100%" name="NAME" placeholder="NAME" /></td><td colspan="3"> Picture <input type="file" name="IMAGE" id="IMAGE" onchange="PreviewImage('preview',this,220,220);" multiple="multiple"/></td>
+            <td>景点名称</td><td><input type="text" style="width: 100%" name="NAME" placeholder="景点名称" /></td><td> 景点图片</td> <td colspan="2"><input type="file" name="IMAGE" id="IMAGE" onchange="PreviewImage('preview',this,220,220);" multiple="multiple"/></td>
         </tr>
         <tr>
-            <td>Level</td><td><input type="radio" name="LEVEL" value="First" checked>First Level</td><td><input type="radio" name="LEVEL" value="Second">Second Level</td><td><input type="radio" name="LEVEL" value="Third" >Third Level</td><td  rowspan="6"><img id="img_name" style="height:300px;width:300px;" /></td>
+            <td>景点等级</td><td><input type="radio" name="LEVEL" value="First" checked>1星级</td><td><input type="radio" name="LEVEL" value="Second">2星级</td><td><input type="radio" name="LEVEL" value="Third" >3星级</td><td  rowspan="6"><img id="img_name" style="height:300px;width:300px;" /></td>
         </tr>
         <tr>
-            <td>Status</td><td><input type="radio" name="STATUS" value="enable">Enable</td><td><input type="radio" name="STATUS" value="disable">Disable</td><td><input type="radio" name="STATUS" value="nostatus" >No Status</td>
+            <td>景点状态</td><td><input type="radio" name="STATUS" value="enable">可用</td><td><input type="radio" name="STATUS" value="disable">不可用</td><td><input type="radio" name="STATUS" value="nostatus" >未设置</td>
         </tr>
         <tr>
-            <td>Grade</td><td><input type="radio" name="GRADE" value="Hot" readonly>Hot</td><td><input type="radio" name="GRADE" value="Economic" readonly>Economic</td><td><input type="radio" name="GRADE" value="Luxury" readonly>Luxury</td>
+            <td>景点分类</td><td><input type="radio" name="GRADE" value="Hot" readonly>热门景点</td><td><input type="radio" name="GRADE" value="Economic" readonly>经济型景点</td><td><input type="radio" name="GRADE" value="Luxury" readonly>奢华型景点</td>
         </tr>
         <tr>
-            <td>Price</td><td><input type="text" style="width: 100%" name="PRICE" placeholder=" " /></td>
+            <td>景点价格</td><td><input type="text" style="width: 100%" name="PRICE" placeholder=" " /></td>
         </tr>
-            <td rowspan="3">Label</td><td rowspan="3" colspan="3"><textarea style="height: 100%;width: 100%" name="LABEL" placeholder="please write comments"></textarea></td>
-        </tr>
-        <tr>
-
+            <td rowspan="3">景点描述</td><td rowspan="3" colspan="3"><textarea style="height: 100%;width: 100%" name="LABEL" placeholder="景点描述"></textarea></td>
         </tr>
         <tr>
 
@@ -35,7 +32,10 @@
 
         </tr>
         <tr>
-            <td></td><td align="center"> <input type="submit" value="Submit" /></td><td align="center"><input type="button" value="Cancel" onclick="Create()"/></td></td><td align="center"><input type="button" value="SpotsList" onclick="spot_list()"/></td><td align="center"><input type="button" value="Home" onclick="home()"/></td>
+
+        </tr>
+        <tr>
+            <td></td><td align="center"> <input type="submit" value="保存" /></td><td align="center"><input type="button" value="取消" onclick="Create()"/></td></td><td align="center"><input type="button" value="返回列表" onclick="spot_list()"/></td><td align="center"><input type="button" value="返回首页" onclick="home()"/></td>
         </tr>
 
     </table>

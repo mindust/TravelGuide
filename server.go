@@ -259,11 +259,23 @@ func main() {
 	/**
 	套餐管理首页
 	 */
-	m.Get("/admin/travelPackage/", func(r render.Render) {
+	m.Get("/admin/travelPackagelist/", func(r render.Render) {
 		//fetch all packages....
-//		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
-//			Layout: "admin_layout",
-//		})
+		var travelpackagelist []ph_travel_packages
+		_, err:= dbmap.Select(&travelpackagelist, "SELECT * FROM ph_travel_packages")
+		checkErr(err, "Select failed")
+		newmap := map[string]interface{}{"metatitle": "this", "posts": travelpackagelist}
+		r.HTML(200, "travel_package_list", newmap, render.HTMLOptions{
+			Layout: "admin_layout",
+		})
+
+	})
+
+	m.Get("/admin/travelPackagecreate/", func(r render.Render) {
+		//fetch all packages....
+		//		r.HTML(200, "travel_package_create", "", render.HTMLOptions{
+		//			Layout: "admin_layout",
+		//		})
 
 		var viewSpotList []Ph_spot
 		_, err:= dbmap.Select(&viewSpotList, "SELECT NAME FROM ph_view_spots")
@@ -275,8 +287,7 @@ func main() {
 
 	})
 
-
-	m.Post("/admin/travelPackage/", binding.Bind(ph_travel_packages{}), func(travel ph_travel_packages, r render.Render) {
+	m.Post("/admin/travelPackagecreate/", binding.Bind(ph_travel_packages{}), func(travel ph_travel_packages, r render.Render) {
 
 		P1 := travelpackage(uuid.NewV4().String(),travel.NAME, travel.DESCRIPTION,  travel.FEE,  travel.START_DATE, travel.END_DATE, travel.DAYS, travel.HOTELS, travel.TRANSPOT, travel.PERSON_NUM, travel.TAGS,travel.CONTENT, travel.ADVICE,travel.FEE_INCLUDE,travel.FEE_NOT_INCLUDE,travel.COLLECTION_ADDRESS,travel.VIEW_SPOT_ID)
 //		//		log.Println(p1.ID)
@@ -290,17 +301,40 @@ func main() {
 		checkErr(err, "Insert failed")
 //		return 200, "ok"
 
-		p2 := travelpackagehighlights(uuid.NewV4().String(), P1.ID,,p2.h)
-		log.Println(p2)
-		//保存图片信息到图片数据库
-		err = dbmap.Insert(&p2)
-		checkErr(err, "Insert iamge failed")
+//		p2 := travelpackagehighlights(uuid.NewV4().String(), P1.ID,,p2.h)
+//		log.Println(p2)
+//		//保存图片信息到图片数据库
+//		err = dbmap.Insert(&p2)
+//		checkErr(err, "Insert iamge failed")
 
 //		newmap := map[string]interface{}{"metatitle": "created post", "travel_package_create": p2}
 		r.HTML(200, "main", "", render.HTMLOptions{
 			Layout: "admin_layout",
 		})
 	})
+
+	/**
+	套餐详情显示
+ 	*/
+	m.Get("/admin/travelPackagecreate/:id", func(args martini.Params, r render.Render) {
+		var travelpackagedetail ph_travel_packages
+		err:= dbmap.SelectOne(&travelpackagedetail, "select * from ph_travel_packages where id=?", args["id"])
+
+
+		if err != nil {
+			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
+			r.HTML(404, "error", newmap)
+		} else {
+			//var spotDetailImages Ph_spot_with_image
+			//dbmap.Select(&spotDetailImages, "select * from ph_view_spot_iamges where view_spot_id=?", spotDetail.ID)
+			//newImageMap := map[string]interface{}{"metatitle": spotDetail.NAME + " more custom", "spotImages": spotDetailImages}
+			newmap := map[string]interface{}{"metatitle": travelpackagedetail.NAME + " more custom", "post": travelpackagedetail}
+			r.HTML(200, "travel_package_update", newmap, render.HTMLOptions{
+				Layout: "admin_layout",
+			})
+		}
+	})
+
 
 	/**
 	支付管理首页

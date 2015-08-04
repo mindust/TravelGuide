@@ -1,11 +1,6 @@
 <header></header>
 <br>
 
-	<!--{{range .posts}}-->
-	<!--<h3><a href="/{{ .ID }}">{{ .ID }} {{ .NAME }}</a></h3>-->
-	<!--<div>{{ .COUNTRY }}</div>-->
-	<!--{{end}}-->
-
 
 <br>
 <br>
@@ -14,24 +9,16 @@
 
 
 <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
-    <thead bgcolor="#ffffcc">
-    <tr>
-        <th>Number</th><th>Name</th><th>Country</th><th>Province</th><th>City</th><th>Level</th><th>Label</th><th>Price</th><th>Status</th>
-    </tr>
-    </thead>
     {{range .posts}}
     <tr>
 
-        <td><div align="center">{{ .ID }}</div> </td>
-        <td><div align="center"><a href="/admin/viewSpots/{{ .ID }}">{{ .NAME }} </a></div></td>
-        <td><div align="center">{{ .COUNTRY }}</div></td>
-        <td><div align="center">{{ .PROVINCE }}</div></td>
-        <td><div align="center">{{ .CITY }}</div></td>
-        <td><div align="center">{{ .LEVEL }}</div></td>
-        <td><div align="center">{{ .LABEL }}</div></td>
-        <td><div align="center">{{ .PRICE }}</div></td>
-        <td><div align="center">{{ .STATUS }}</div></td>
-
+        <td><div align="center"><a href="/admin/travelPackagecreate/{{ .ID }}">{{ .NAME }} </a></div></td>
+        <td><div align="center">{{ .FEE }}</div></td>
+        <td><div align="center">{{ .DAYS }}</div></td>
+        <td><div align="center">{{ .VIEW_SPOT_ID }}</div></td>
+        <td><div align="center">{{ .TRANSPOT }}</div></td>
+        <td><div align="center">{{ .HOTELS }}</div></td>
+        <td><div align="center">{{ .DESCRIPTION }}</div></td>
     </tr>
     {{end}}
 </table>
@@ -39,25 +26,17 @@
 <br>
 <br>
 <br>
-<h2>Create a Post</h2>
+<h2>´´½¨ÂÃÓÎÌ×²Í</h2>
 <form >
-    <input type="button" value="Active" onclick="Active()"/>
-    <input type="button" value="Disable" onclick="Disable()"/>
     <input type="button" value="Delete" onclick="Delete()"/>
     <input type="button" value="Create" onclick="Create()"/>
 </form>
 
 <script>
-function Active(){
-    window.location.replace("/active")
-}
-function Disable(){
-    window.location.replace("/disable")
-}
 function Delete(){
     window.location.replace("/delete")
 }
 function Create(){
-    window.location.replace("/admin/spots/create/")
+    window.location.replace("/admin/travelPackagecreate/")
 }
 </script>

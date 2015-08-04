@@ -15,22 +15,20 @@
 
 <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
     <thead bgcolor="#ffffcc">
-    <tr>
-        <th>Number</th><th>Name</th><th>Country</th><th>Province</th><th>City</th><th>Level</th><th>Label</th><th>Price</th><th>Status</th>
+    <tr align="center">
+       <th>景点名称</th><th>国家</th><th>省(直辖市)</th><th>市</th><th>景点等级</th><th>景点分类</th><th>价格</th><th>景点状态</th>
     </tr>
     </thead>
     {{range .posts}}
     <tr>
-
-        <td><div align="center">{{ .ID }}</div> </td>
-        <td><div align="center"><a href="/admin/viewSpots/{{ .ID }}">{{ .NAME }} </a></div></td>
-        <td><div align="center">{{ .COUNTRY }}</div></td>
-        <td><div align="center">{{ .PROVINCE }}</div></td>
-        <td><div align="center">{{ .CITY }}</div></td>
-        <td><div align="center">{{ .LEVEL }}</div></td>
-        <td><div align="center">{{ .LABEL }}</div></td>
-        <td><div align="center">{{ .PRICE }}</div></td>
-        <td><div align="center">{{ .STATUS }}</div></td>
+        <td><div align="left"><a href="/admin/viewSpots/{{ .ID }}">{{ .NAME }} </a></div></td>
+        <td><div align="left">{{ .COUNTRY }}</div></td>
+        <td><div align="left">{{ .PROVINCE }}</div></td>
+        <td><div align="left">{{ .CITY }}</div></td>
+        <td><div align="left">{{ .LEVEL }}</div></td>
+        <td><div align="left">{{ .LABEL }}</div></td>
+        <td><div align="left">{{ .PRICE }}</div></td>
+        <td><div align="left">{{ .STATUS }}</div></td>
 
     </tr>
     {{end}}

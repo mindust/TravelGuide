@@ -308,15 +308,15 @@ func main() {
 		checkErr(err, "Insert failed")
 //		return 200, "ok"
 
-		iarray := strings.Split(P1.TAGS,",")
+		iarray := strings.Split(P1.TAGS,"，")
 		log.Println(iarray)
 
 		for i:=1;i < len(iarray);i++ {
 
-			p2 := travelpackagetags(uuid.NewV4().String(), P1.ID,iarray)
+			p2 := travelpackagetags(uuid.NewV4().String(), P1.ID,iarray[i])
 			log.Println(p2)
-//			err = dbmap.Insert(&p2)
-//			checkErr(err, "Insert iamge failed")
+			err = dbmap.Insert(&p2)
+			checkErr(err, "Insert iamge failed")
 
 	    }
 

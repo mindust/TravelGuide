@@ -50,6 +50,7 @@ type Ph_spot_with_image struct {
 	FORMAT			string
 	PATH			string
 }
+
 type ph_travel_packages struct {
 	ID string
 	NAME string `form:"NAME" binding:"required"`
@@ -73,6 +74,12 @@ type ph_travel_package_highlights struct  {
 	ID string
 	TRAVEL_PACKAGE_ID string
 	CONTENT string `form:"HIGHLIGHTS" binding:"required"`
+}
+
+type ph_travel_package_tags struct  {
+	ID string
+	TRAVEL_PACKAGE_ID string
+    CONTENT string
 }
 
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
@@ -301,11 +308,19 @@ func main() {
 		checkErr(err, "Insert failed")
 //		return 200, "ok"
 
-//		p2 := travelpackagehighlights(uuid.NewV4().String(), P1.ID,,p2.h)
-//		log.Println(p2)
-//		//保存图片信息到图片数据库
-//		err = dbmap.Insert(&p2)
-//		checkErr(err, "Insert iamge failed")
+		iarray := strings.Split(P1.TAGS,",")
+		log.Println(iarray)
+
+		for i:=1;i < len(iarray);i++ {
+
+			p2 := travelpackagetags(uuid.NewV4().String(), P1.ID,iarray)
+			log.Println(p2)
+//			err = dbmap.Insert(&p2)
+//			checkErr(err, "Insert iamge failed")
+
+	    }
+
+
 
 //		newmap := map[string]interface{}{"metatitle": "created post", "travel_package_create": p2}
 		r.HTML(200, "main", "", render.HTMLOptions{
@@ -353,6 +368,7 @@ func main() {
 	m.Get("/user/login/",func(r render.Render){
 		r.HTML(200, "login","",render.HTMLOptions{
 			Layout: "admin_layout",
+
 		})
 	})
 
@@ -404,6 +420,13 @@ func travelpackagehighlights(ID,TRAVEL_PACKAGE_ID,CONTENT string) ph_travel_pack
 	}
 
 }
+func travelpackagetags(ID, CONTENT, TRAVEL_PACKAGE_ID string) ph_travel_package_tags {
+	return ph_travel_package_tags{
+		ID:ID,
+		CONTENT:CONTENT,
+		TRAVEL_PACKAGE_ID:TRAVEL_PACKAGE_ID,
+	}
+}
 
 func newSpotImage(UUID, NAME, VIEW_SPOT_ID, SOURCE_NAME, FORMAT, PATH string) Ph_spot_with_image{
 	return Ph_spot_with_image{
@@ -426,6 +449,7 @@ func initDb() *gorp.DbMap {
 	dbmap.AddTableWithName(Ph_spot_with_image{}, "ph_view_spot_images")
 	dbmap.AddTableWithName(ph_travel_packages{}, "ph_travel_packages")
 	dbmap.AddTableWithName(ph_travel_package_highlights{}, "ph_travel_package_highlights")
+	dbmap.AddTableWithName(ph_travel_package_tags{}, "ph_travel_package_tags")
 	return dbmap
 }
 

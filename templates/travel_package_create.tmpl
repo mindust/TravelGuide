@@ -22,7 +22,7 @@
             <td>
                 标签
             </td>
-            <td>
+            <td colspan="4">
                 <input type="text" style="width: 100%" name="TAGS" placeholder="标签1">
             </td>
             <!--<td>-->
@@ -151,13 +151,15 @@
             <td>
                选择景点
             </td>
-            <td >
-                <select style="width: 100%" name="VIEW_SPOT_ID" class="form-control input-sm" id="VIEW_SPOT_ID" >
+            <td>
+                <select name="VIEW_SPOT_ID" class="form-control input-sm" id="VIEW_SPOT_ID">
                     {{range .posts}}
                     <option value={{.NAME}}>{{.NAME}}</option>
 
                     {{end}}
                 </select>
+
+
             </td>
             <td align="center"> <input type="submit" value="保存" /></td><td align="center"><input type="button" value="取消" onclick="Create()"/><td align="center"><input type="button" value="返回" onclick="home()"/></td>
         </tr>
@@ -171,4 +173,7 @@
     function home(){
         window.location.replace("/")
     }
+
 </script>
+
+

@@ -1,47 +1,92 @@
-<html>
-<head>
-    <title>login
-    </title>
-</head>
-<body>
-<br>
-
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<form action="/login" method="post">
-    用户名：<input type="text" name="username">
-    密码：<input type="password" name="password">
-    <input type="submit" value="登录">
-</form>
-</body>
-</html>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<!--<!DOCTYPE html>-->
-<!--<html lang="zh" class="no-js capped-width">-->
+<!--<html>-->
+<!--<head>-->
+<!--<title>login-->
+<!--</title>-->
 <!--</head>-->
 <!--<body>-->
-<!--<h2> {{ . }}</h2>-->
-<!--<input type="text" name="Title" placeholder="Title" /><br>-->
-<!--<textarea name="Body"></textarea><br>-->
-<!--<input type="submit" value="submit"/>-->
-<!--<li id="admin" class="login-state-unknown">-->
-    <!--<a class="header-navigation-submenu login-menu link icon icon-user"-->
-       <!--href="/">维护景点</a>-->
-<!--</li>-->
+<!--<br>-->
+
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+
+<!--<br>-->
+<!--<br>-->
+<!--<form action="/login" method="post">-->
+<!--用户名：<input type="text" name="username">-->
+<!--密码：<input type="password" name="password">-->
+<!--<input type="submit" value="登录">-->
+<!--</form>-->
 <!--</body>-->
 <!--</html>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="main">
+    <div class="example">
+        <!--<select id="example-getting-started" multiple="multiple">-->
+            <!--<option value="cheese">Cheese</option>-->
+            <!--<option value="tomatoes">Tomatoes</option>-->
+            <!--<option value="Mozzarella">Mozzarella</option>-->
+            <!--<option value="Mushrooms">Mushrooms</option>-->
+            <!--<option value="Pepperoni">Pepperoni</option>-->
+            <!--<option value="Onions">Onions</option>-->
+        <!--</select>-->
+
+            <select id="currency-selector">
+                <option value="3" data-name="美元"data-symbol="$" selected>US$&nbsp;美元</option>
+                <option value="1" data-name="欧元"data-symbol="€">€&nbsp;欧元</option>
+                <option value="5" data-name="澳元"data-symbol="$">A$&nbsp;澳元</option>
+                <option value="4" data-name="巴西雷亚尔"data-symbol="$">BR$&nbsp;巴西雷亚尔</option>
+                <option value="2" data-name="英镑"data-symbol="£">£&nbsp;英镑</option>
+                <option value="6" data-name="加拿大元"data-symbol="$">C$&nbsp;加拿大元</option>
+                <option value="9" data-name="丹麦克朗"data-symbol="DKK">DKK&nbsp;丹麦克朗</option>
+                <option value="14" data-name="新西兰元"data-symbol="$">NZ$&nbsp;新西兰元</option>
+                <option value="18" data-name="挪威克朗"data-symbol="NOK">NOK&nbsp;挪威克朗</option>
+                <option value="25" data-name="波兰兹罗提"data-symbol="zł">zł&nbsp;波兰兹罗提</option>
+                <option value="31" data-name="新加坡元"data-symbol="$">S$&nbsp;新加坡元</option>
+                <option value="27" data-name="瑞典克朗"data-symbol="SEK">SEK&nbsp;瑞典克朗</option>
+                <option value="21" data-name="瑞士法郎"data-symbol="CHF">CHF&nbsp;瑞士法郎</option>
+                <option value="23" data-name="土耳其里拉"data-symbol="TL">TL&nbsp;土耳其里拉</option>
+            </select>
+
+    </div>
+    <div class="highlight">
+
+</body>
+</html>
+
+<script type="text/javascript" src="jquery.multiselect2side.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $("#liOption").multiselect2side({
+            selectedPosition: 'right',
+            moveOptions: false,
+            labelsx: '',
+            labeldx: ''
+        });
+    });
+</script>
+
+

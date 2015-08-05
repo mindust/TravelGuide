@@ -68,12 +68,8 @@ type ph_travel_packages struct {
 	FEE_INCLUDE string `form:"FEE_INCLUDE" binding:"required"`
 	FEE_NOT_INCLUDE string `form:"FEE_NOT_INCLUDE" binding:"required"`
 	COLLECTION_ADDRESS string `form:"COLLECTION_ADDRESS" binding:"required"`
+	HIGHLIGHTS string `form:"HIGHLIGHTS" binding:"required"`
 	VIEW_SPOT_ID string `form:"VIEW_SPOT_ID" binding:"required"`
-}
-type ph_travel_package_highlights struct  {
-	ID string
-	TRAVEL_PACKAGE_ID string
-	CONTENT string `form:"HIGHLIGHTS" binding:"required"`
 }
 
 type ph_travel_package_tags struct  {
@@ -82,6 +78,12 @@ type ph_travel_package_tags struct  {
     CONTENT string
 }
 
+type ph_travel_package_highlights struct  {
+	ID string
+	TRAVEL_PACKAGE_ID string
+	CONTENT string
+
+}
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
 	//custom validation
 	if len(bp.NAME) == 0 {
@@ -296,22 +298,17 @@ func main() {
 
 	m.Post("/admin/travelPackagecreate/", binding.Bind(ph_travel_packages{}), func(travel ph_travel_packages, r render.Render) {
 
-		P1 := travelpackage(uuid.NewV4().String(),travel.NAME, travel.DESCRIPTION,  travel.FEE,  travel.START_DATE, travel.END_DATE, travel.DAYS, travel.HOTELS, travel.TRANSPOT, travel.PERSON_NUM, travel.TAGS,travel.CONTENT, travel.ADVICE,travel.FEE_INCLUDE,travel.FEE_NOT_INCLUDE,travel.COLLECTION_ADDRESS,travel.VIEW_SPOT_ID)
-//		//		log.Println(p1.ID)
-//		//		log.Println(p1.COUNTRY)
-//		//		log.Println(p1.PROVINCE)
-//		//		log.Println(p1.CITY)
-//		//		log.Println(p1.NAME)
-//		p2:=ph_travel_packages{uuid.NewV4().String(),"Name","Description",1000,2015-08-01,2015-08-06,10,"Jinji","Shuttle","20","tags","content","advice","Yes","No","Chagejia","No highlights"}
+		P1 := travelpackage(uuid.NewV4().String(),travel.NAME, travel.DESCRIPTION,  travel.FEE,  travel.START_DATE, travel.END_DATE, travel.DAYS, travel.HOTELS, travel.TRANSPOT, travel.PERSON_NUM, travel.TAGS,travel.CONTENT, travel.ADVICE,travel.FEE_INCLUDE,travel.FEE_NOT_INCLUDE,travel.COLLECTION_ADDRESS,travel.HIGHLIGHTS,travel.VIEW_SPOT_ID)
 		log.Println(P1)
 		err:= dbmap.Insert(&P1)
 		checkErr(err, "Insert failed")
 //		return 200, "ok"
 
+//      保存标签
 		iarray := strings.Split(P1.TAGS,"，")
 		log.Println(iarray)
 
-		for i:=1;i < len(iarray);i++ {
+		for i:=0;i < len(iarray);i++ {
 
 			p2 := travelpackagetags(uuid.NewV4().String(), P1.ID,iarray[i])
 			log.Println(p2)
@@ -319,6 +316,18 @@ func main() {
 			checkErr(err, "Insert iamge failed")
 
 	    }
+//      保存亮点
+		highlights := strings.Split(P1.HIGHLIGHTS,",")
+		log.Println(highlights)
+
+		for i:=0;i < len(highlights);i++ {
+
+			p2 := travelpackagehighlights(uuid.NewV4().String(), P1.ID,highlights[i])
+			log.Println(p2)
+			err = dbmap.Insert(&p2)
+			checkErr(err, "Insert iamge failed")
+
+		}
 
 
 
@@ -391,7 +400,7 @@ func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,ST
 	}
 }
 
-func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE string, DAYS int64, HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,VIEW_SPOT_ID string ) ph_travel_packages{
+func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE string, DAYS int64, HOTELS,TRANSPOT,PERSON_NUM,TAGS,CONTENT,ADVICE,FEE_INCLUDE,FEE_NOT_INCLUDE,COLLECTION_ADDRESS,HIGHLIGHTS,VIEW_SPOT_ID string ) ph_travel_packages{
 	return ph_travel_packages{
 		ID:ID,
 		NAME:NAME,
@@ -409,6 +418,7 @@ func travelpackage(ID,NAME,DESCRIPTION string,FEE int64,START_DATE,END_DATE stri
 		FEE_INCLUDE:FEE_INCLUDE,
 		FEE_NOT_INCLUDE:FEE_NOT_INCLUDE,
 		COLLECTION_ADDRESS:COLLECTION_ADDRESS,
+		HIGHLIGHTS:HIGHLIGHTS,
 		VIEW_SPOT_ID:VIEW_SPOT_ID,
 	}
 }

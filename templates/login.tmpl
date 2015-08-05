@@ -39,54 +39,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 </head>
 
 <body>
-<div id="main">
-    <div class="example">
-        <!--<select id="example-getting-started" multiple="multiple">-->
-            <!--<option value="cheese">Cheese</option>-->
-            <!--<option value="tomatoes">Tomatoes</option>-->
-            <!--<option value="Mozzarella">Mozzarella</option>-->
-            <!--<option value="Mushrooms">Mushrooms</option>-->
-            <!--<option value="Pepperoni">Pepperoni</option>-->
-            <!--<option value="Onions">Onions</option>-->
-        <!--</select>-->
+<input name="HIGHLIGHTS" id="text1" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
+<input name="HIGHLIGHTS" id="text2" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
+<input name="HIGHLIGHTS" id="text3" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
+<input name="HIGHLIGHTS" id="text4" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
+<input name="HIGHLIGHTS" id="text5" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
 
-            <select id="currency-selector">
-                <option value="3" data-name="美元"data-symbol="$" selected>US$&nbsp;美元</option>
-                <option value="1" data-name="欧元"data-symbol="€">€&nbsp;欧元</option>
-                <option value="5" data-name="澳元"data-symbol="$">A$&nbsp;澳元</option>
-                <option value="4" data-name="巴西雷亚尔"data-symbol="$">BR$&nbsp;巴西雷亚尔</option>
-                <option value="2" data-name="英镑"data-symbol="£">£&nbsp;英镑</option>
-                <option value="6" data-name="加拿大元"data-symbol="$">C$&nbsp;加拿大元</option>
-                <option value="9" data-name="丹麦克朗"data-symbol="DKK">DKK&nbsp;丹麦克朗</option>
-                <option value="14" data-name="新西兰元"data-symbol="$">NZ$&nbsp;新西兰元</option>
-                <option value="18" data-name="挪威克朗"data-symbol="NOK">NOK&nbsp;挪威克朗</option>
-                <option value="25" data-name="波兰兹罗提"data-symbol="zł">zł&nbsp;波兰兹罗提</option>
-                <option value="31" data-name="新加坡元"data-symbol="$">S$&nbsp;新加坡元</option>
-                <option value="27" data-name="瑞典克朗"data-symbol="SEK">SEK&nbsp;瑞典克朗</option>
-                <option value="21" data-name="瑞士法郎"data-symbol="CHF">CHF&nbsp;瑞士法郎</option>
-                <option value="23" data-name="土耳其里拉"data-symbol="TL">TL&nbsp;土耳其里拉</option>
-            </select>
-
-    </div>
-    <div class="highlight">
-
+<input name="text" type="text" id="hidden">
 </body>
-</html>
 
-<script type="text/javascript" src="jquery.multiselect2side.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $("#liOption").multiselect2side({
-            selectedPosition: 'right',
-            moveOptions: false,
-            labelsx: '',
-            labeldx: ''
-        });
-    });
+<script>
+    function text() {
+        var a = document.getElementById("text1").value;
+        var b = document.getElementById("text2").value;
+        var c = document.getElementById("text3").value;
+        var d = document.getElementById("text4").value;
+        var e = document.getElementById("text5").value;
+        var hidden = document.getElementById("hidden").value;
+        var s = hidden.split(",");
+            if (s[0] == a) {
+                a = s[0];
+            }
+            else {
+                a = document.getElementById("text1").value;
+            }
+            if (s[1] == b) {
+                b = s[1];
+            }
+            else {
+                b = document.getElementById("text2").value;
+            }
+            if (s[2] == c) {
+                c = s[2];
+            }
+            else {
+                c = document.getElementById("text3").value;
+            }
+            if (s[3] == d) {
+                d = s[3];
+            }
+            else {
+                d = document.getElementById("text4").value;
+            }
+            if (s[4] == e) {
+                e = s[4];
+            }
+            else {
+                e = document.getElementById("text5").value;
+            }
+        document.getElementById("hidden").value = a + "," + b + "," + c + "," + d + "," + e;
+    }
 </script>
 
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50544
 File Encoding         : 65001
 
-Date: 2015-08-03 10:30:54
+Date: 2015-08-05 15:02:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -162,6 +162,7 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 -- Records of ph_travel_package_highlights
 -- ----------------------------
 BEGIN;
+INSERT INTO `ph_travel_package_highlights` VALUES ('423bd4ad-24fe-4ad4-87ee-1d27f5c47a54', '1d594f50-6326-4d9d-91c5-e03bf56efe1f', 'See side'), ('73e3b5e1-ecf2-4743-9a78-3d73fe3d713d', '1d594f50-6326-4d9d-91c5-e03bf56efe1f', '瘸子的学生'), ('82db5083-5c76-40fc-b0a9-dc3423d5522d', '1d594f50-6326-4d9d-91c5-e03bf56efe1f', '微微的小妹'), ('a12c7fd1-6d2e-4212-9107-e36a966fd2aa', '1d594f50-6326-4d9d-91c5-e03bf56efe1f', '叉哥的前台'), ('fe576e9d-61ee-4382-8eda-fd84559b3c50', '1d594f50-6326-4d9d-91c5-e03bf56efe1f', 'Few people');
 COMMIT;
 
 -- ----------------------------
@@ -170,8 +171,8 @@ COMMIT;
 DROP TABLE IF EXISTS `ph_travel_package_tags`;
 CREATE TABLE `ph_travel_package_tags` (
 `ID`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
-`CONTENT`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `TRAVEL_PACKAGE_ID`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`CONTENT`  varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 PRIMARY KEY (`ID`)
 )
 ENGINE=InnoDB
@@ -183,6 +184,7 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 -- Records of ph_travel_package_tags
 -- ----------------------------
 BEGIN;
+INSERT INTO `ph_travel_package_tags` VALUES ('3acfba8f-40e2-474d-aecc-7dab620bfb42', '叉哥家', '1d594f50-6326-4d9d-91c5-e03bf56efe1f'), ('4fb7b2fc-01f9-445e-9bc8-32392db444cc', '试试看', '1d594f50-6326-4d9d-91c5-e03bf56efe1f'), ('8d8053ee-7684-433f-b1d4-f0042160c57c', '随便玩玩', '1d594f50-6326-4d9d-91c5-e03bf56efe1f'), ('ddc23314-05a7-4278-bffd-3dda53462d8f', '没有美女', '1d594f50-6326-4d9d-91c5-e03bf56efe1f');
 COMMIT;
 
 -- ----------------------------
@@ -215,7 +217,7 @@ COMMIT;
 DROP TABLE IF EXISTS `ph_travel_packages`;
 CREATE TABLE `ph_travel_packages` (
 `ID`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
-`NAME`  varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`NAME`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
 `DESCRIPTION`  varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '概述' ,
 `FEE`  int(50) NULL DEFAULT NULL COMMENT '费用' ,
 `START_DATE`  varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
@@ -242,7 +244,7 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 -- Records of ph_travel_packages
 -- ----------------------------
 BEGIN;
-INSERT INTO `ph_travel_packages` VALUES ('c88a5a85-5bb2-4990-8130-d3bb19cf7e2f', 'safd', 'adsfasf', '12', '2015-08-19', '2015-08-28', '11', 'asdf', 'Walk', 'asdf', 'Good', 'asdf', 'asdfasfd', 'sdf', 'asfsaf', 'adsf', 'ASDFAS', 'Ohope Beach'), ('b78de0ea-87e2-43b0-a382-2ca2d15d8d41', 'safd', 'adsfasf', '12', '2015-08-19', '2015-08-28', '11', 'asdf', 'Walk', 'asdf', 'Good', 'asdf', 'asdfasfd', 'sdf', 'asfsaf', 'adsf', 'ASDFAS', 'Ohope Beach'), ('4dc879fd-4c2f-44de-b79c-c3d3d43038a6', 'Pan', 'asdf', '1', '2015-08-11', '2015-08-28', '1', 'sadfasfd', 'Plane', 'asfd', 'Good', 'asdf', 'asdf', 'sdf', 'assdf', 'asdf', 'asdfasfsaf', 'Changqi'), ('6109cb0d-7ffb-4d47-aad5-1a34ac5cddae', 'Chage', 'sadf', '121', '2015-08-04', '2015-09-12', '11', 'asdf', 'Bus', 'asdf', '1', 'asdf', 'asfd', 'ASDFasd', 'fasdf', 'saf', 'asd', 'Name'), ('a1dcd6e8-797b-41f7-84fa-50104b2a752b', 'ASDF', '11111111111111', '21', '2015-08-04', '2015-08-13', '11111', '11111111111111', 'Plane', '111111', '1', '11111111111111', '11111111111111111', '111111111', '1111111111111111', '111111', null, 'TaiLake'), ('9a5d8a1e-1fa5-44ed-b958-173466595774', '2', '2222222222222222', '222222', '2015-08-11', '2015-08-12', '22222', '222222222222222222', 'Bus', '222222222222', '2222222222222', '22222222222', '2', '222222222', '2222222222222222', '2', null, 'TaiLake');
+INSERT INTO `ph_travel_packages` VALUES ('1d594f50-6326-4d9d-91c5-e03bf56efe1f', '宿迁2日游', 'highlights', '300', '2015-08-06', '2015-08-07', '12', 'highlights', 'Plane', '12', '叉哥家，没有美女，随便玩玩，试试看', 'highlights', 'highlights', '测试', '啊搜房', '撒的', 'See side,Few people,瘸子的学生,叉哥的前台,微微的小妹', 'TaiLake');
 COMMIT;
 
 -- ----------------------------
@@ -296,7 +298,7 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 -- Records of ph_view_spot_images
 -- ----------------------------
 BEGIN;
-INSERT INTO `ph_view_spot_images` VALUES ('1ea41857-cf31-4135-bb66-534fb6259e63', 'fa107dc7-d5ac-4296-b845-e4776fe9bd60', 'uploads', '8005ee13-a35c-40a1-acb5-07e92568a956', 'png', '1]2XUVOCARJ(H%N7VU~G7IJ.png'), ('1eb87dad-bda5-4401-b153-1c9adc40c7bd', '38167018-0b6b-41db-923c-c67b23cda90d', 'uploads', 'd4b54c72-1d6d-403b-bcb6-4504337b77de', 'jpg', '8ZU$_~CEHB$8_I)U3ZBL}HU.jpg'), ('30375d0c-3c8d-4d29-9b22-ed9b925966bd', '75db7c06-bbee-46a5-8153-81d9c659486f', 'uploads', 'c718a66b-611d-4606-a8b5-8d820ab170fa', 'jpg', '圆融星座.jpg'), ('8a0df19e-dcc2-4890-bd81-4f27f391e74d', '75db7c06-bbee-46a5-8153-81d9c659486f', 'uploads', 'e171262c-725b-4cbe-8971-9db61190dd88', 'png', '1ED7909F5095C9C0D0F43A138D9401E6.png');
+INSERT INTO `ph_view_spot_images` VALUES ('1ea41857-cf31-4135-bb66-534fb6259e63', 'fa107dc7-d5ac-4296-b845-e4776fe9bd60', 'uploads', '8005ee13-a35c-40a1-acb5-07e92568a956', 'png', '1]2XUVOCARJ(H%N7VU~G7IJ.png'), ('1eb87dad-bda5-4401-b153-1c9adc40c7bd', '38167018-0b6b-41db-923c-c67b23cda90d', 'uploads', 'd4b54c72-1d6d-403b-bcb6-4504337b77de', 'jpg', '8ZU$_~CEHB$8_I)U3ZBL}HU.jpg'), ('30375d0c-3c8d-4d29-9b22-ed9b925966bd', '75db7c06-bbee-46a5-8153-81d9c659486f', 'uploads', 'c718a66b-611d-4606-a8b5-8d820ab170fa', 'jpg', '圆融星座.jpg'), ('6232085b-3225-4b94-a6a0-47003f31c65b', 'f679d98c-6761-4e4b-9f41-cd0def443d23', 'uploads', 'c05c845c-c672-4d01-976b-6ced8646b44f', 'png', 'C:Userscn10659DocumentsTencent Files52486846ImageC2C5E784B4E2AAF44EEF4C0718E1F5C2970.png'), ('8a0df19e-dcc2-4890-bd81-4f27f391e74d', '75db7c06-bbee-46a5-8153-81d9c659486f', 'uploads', 'e171262c-725b-4cbe-8971-9db61190dd88', 'png', '1ED7909F5095C9C0D0F43A138D9401E6.png');
 COMMIT;
 
 -- ----------------------------
@@ -325,7 +327,7 @@ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
 -- Records of ph_view_spots
 -- ----------------------------
 BEGIN;
-INSERT INTO `ph_view_spots` VALUES ('1', 'China ', 'JiangSu', 'Suzhou', '1', 'TaiLake', 'First', 'nutual view', '2000', 'enable'), ('2', 'Japan', 'Fuga', 'Fuga', 'Fuga', 'Changqi', 'First', 'Fuga ChangQi', '11111', 'disable'), ('3', 'Japan', 'Tokyo', 'Tokyo', 'Tokyo', 'Name', 'Second', 'adsf', '121', 'nostatus'), ('38167018-0b6b-41db-923c-c67b23cda90d', 'China', 'Northen Island', 'Wahakatane', 'Tokyo', 'Ohope Beach', 'First', '12fadsfasf', '1212', 'nostatus'), ('4', 'Japan', 'Tokyo2', 'Tokyo2', 'Tokyo', 'Name', 'Third', '12', '112', 'enable'), ('5', 'Japan', 'Tokyo22', 'Tokyo22', 'Tokyo2', 'Changqi2', 'Second', '22', '222', 'disable'), ('75db7c06-bbee-46a5-8153-81d9c659486f', '1', '2', '3', '4', '5', 'Third', '8', '9', 'disable'), ('fa107dc7-d5ac-4296-b845-e4776fe9bd60', 'New Zealand11111111', 'sdad', 'sad', 'Tokyo', 'Changqi', 'First', 'asdfasdf', '1212', 'enable');
+INSERT INTO `ph_view_spots` VALUES ('1', 'China ', 'JiangSu', 'Suzhou', '1', 'TaiLake', 'First', 'nutual view', '2000', 'enable'), ('2', 'Japan', 'Fuga', 'Fuga', 'Fuga', 'Changqi', 'First', 'Fuga ChangQi', '11111', 'disable'), ('3', 'Japan', 'Tokyo', 'Tokyo', 'Tokyo', 'Name', 'Second', 'adsf', '121', 'nostatus'), ('38167018-0b6b-41db-923c-c67b23cda90d', 'China', 'Northen Island', 'Wahakatane', 'Tokyo', 'Ohope Beach', 'First', '12fadsfasf', '1212', 'nostatus'), ('4', 'Japan', 'Tokyo2', 'Tokyo2', 'Tokyo', 'Name', 'Third', '12', '112', 'enable'), ('5', 'Japan', 'Tokyo22', 'Tokyo22', 'Tokyo2', 'Changqi2', 'Second', '22', '222', 'disable'), ('75db7c06-bbee-46a5-8153-81d9c659486f', '1', '2', '3', '4', '5', 'Third', '8', '9', 'disable'), ('f679d98c-6761-4e4b-9f41-cd0def443d23', '中国', '江苏', '苏州', '太湖', '太湖游艇俱乐部', 'Third', '太湖风景区', '2344', 'disable'), ('fa107dc7-d5ac-4296-b845-e4776fe9bd60', 'New Zealand11111111', 'sdad', 'sad', 'Tokyo', 'Changqi', 'First', 'asdfasdf', '1212', 'enable');
 COMMIT;
 
 -- ----------------------------

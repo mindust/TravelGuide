@@ -11,12 +11,12 @@
             <td colspan="2">
                 <input type="text" style="width: 100%" name="NAME" PLACEHOLDER="套餐名称">
             </td>
-            <td >
-                费用
+            <td colspan="2">
+                费用 <input type="text"  name="FEE" PLACEHOLDER="套餐费用">
             </td>
-            <td>
-                <input type="text" style="width: 100%" name="FEE" PLACEHOLDER="套餐费用">
-            </td>
+            <!--<td>-->
+                <!--<input type="text" style="width: 100%" name="FEE" PLACEHOLDER="套餐费用">-->
+            <!--</td>-->
         </tr>
         <tr>
             <td>
@@ -25,33 +25,35 @@
             <td colspan="4">
                 <input type="text" style="width: 100%" name="TAGS" placeholder="标签1">
             </td>
-            <!--<td>-->
-                <!--<input type="text" style="width: 100%" name="TAG2" placeholder="tags2">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input type="text" style="width: 100%" name="TAG3" placeholder="tags3">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input type="text" style="width: 100%" name="TAG4" placeholder="tags4">-->
-            <!--</td>-->
         </tr>
         <tr>
-            <td rowspan="4">
+            <td rowspan="6">
                 亮点
             </td>
             <tr>
-            <td colspan="4">
-                <input type="text" style="width: 100%" name="HIGHLIGHTS" placeholder="亮点1">
-            </td>
+                <td colspan="4">
+                     <input name="HIGHLIGHTS1" id="text1" type="text" onblur="text()" size="30"  placeholder="亮点1" style="width: 100%" >
+                </td>
             </tr>
             <tr>
-            <td colspan="4">
-                <!--<input type="text" style="width: 100%" name="HIGHLIGHT2" placeholder="HIGHLIGHT2">-->
-            </td>
+                <td colspan="4">
+                     <input name="HIGHLIGHTS2" id="text2" type="text" onblur="text()" size="30"  placeholder="亮点2" style="width: 100%" >
+                 </td>
             </tr>
-            <td colspan="4">
-                <!--<input type="text" style="width: 100%" name="HIGHLIGHT3" placeholder="HIGHLIGHT3">-->
-            </td>
+            <tr>
+                <td colspan="4">
+                    <input name="HIGHLIGHTS3" id="text3" type="text" onblur="text()" size="30"  placeholder="亮点3" style="width: 100%"  >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input name="HIGHLIGHTS4" id="text4" type="text" onblur="text()" size="30"  placeholder="亮点4" style="width: 100%"  >
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input name="HIGHLIGHTS5" id="text5" type="text" onblur="text()" size="30"  placeholder="亮点5" style="width: 100%" >
+                </td>
             </tr>
         </tr>
         <tr>
@@ -62,10 +64,10 @@
                 <input type="date"  name="START_DATE">~<input type="date"  name="END_DATE">
             </td>
             <td>
-                <input type="text" name="DAYS">
+                天数 <input type="text" name="DAYS">
             </td>
             <td>
-                天数
+                <input name="HIGHLIGHTS" type="text" id="hidden" hidden>
             </td>
         </tr>
         <tr>
@@ -149,7 +151,7 @@
         </tr>
         <tr>
             <td>
-               选择景点
+                选择景点
             </td>
             <td>
                 <select name="VIEW_SPOT_ID" class="form-control input-sm" id="VIEW_SPOT_ID">
@@ -163,6 +165,7 @@
             </td>
             <td align="center"> <input type="submit" value="保存" /></td><td align="center"><input type="button" value="取消" onclick="Create()"/><td align="center"><input type="button" value="返回" onclick="home()"/></td>
         </tr>
+
     </table>
 </form>
 
@@ -173,7 +176,46 @@
     function home(){
         window.location.replace("/")
     }
-
+    function text() {
+        var a = document.getElementById("text1").value;
+        var b = document.getElementById("text2").value;
+        var c = document.getElementById("text3").value;
+        var d = document.getElementById("text4").value;
+        var e = document.getElementById("text5").value;
+        var hidden = document.getElementById("hidden").value;
+        var s = hidden.split(",");
+        if (s[0] == a) {
+            a = s[0];
+        }
+        else {
+            a = document.getElementById("text1").value;
+        }
+        if (s[1] == b) {
+            b = s[1];
+        }
+        else {
+            b = document.getElementById("text2").value;
+        }
+        if (s[2] == c) {
+            c = s[2];
+        }
+        else {
+            c = document.getElementById("text3").value;
+        }
+        if (s[3] == d) {
+            d = s[3];
+        }
+        else {
+            d = document.getElementById("text4").value;
+        }
+        if (s[4] == e) {
+            e = s[4];
+        }
+        else {
+            e = document.getElementById("text5").value;
+        }
+        document.getElementById("hidden").value = a + "," + b + "," + c + "," + d + "," + e;
+    }
 </script>
 
 

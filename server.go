@@ -40,6 +40,8 @@ type Ph_spot struct {
     LABEL    string `form:"LABEL" binding:"required"`
 	PRICE   string `form:"PRICE" binding:"required"`
 	STATUS    string `form:"STATUS"`
+	SPOT_DEFAULT_IMAGE string
+
 }
 
 type Ph_spot_with_image struct {
@@ -127,7 +129,19 @@ func main() {
 	})
 
 	m.Get("/main/hotSpots", func(r render.Render) {
-		r.HTML(200, "main_hot_spots","")
+		//fetch all spots
+		//spot_image_path: /{PATH}/album/{name}.{format}
+		var viewSpotList []Ph_spot
+		var viewSpotImageList []Ph_spot_with_image
+		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots")
+		checkErr(err, "Select failed")
+		for spotOne, _ := range viewSpotList {
+			_, err:= dbmap.Select(&viewSpotImageList, "select * from ph_view_spot_iamge where spot_id=?", spotOne.ID)
+			checkErr(err, "Select failed")
+			spotOne.SPOT_DEFAULT_IMAGE = &viewSpotImageList[0].PATH+"/source/"+&viewSpotImageList[0].NAME+&viewSpotImageList[0].FORMAT
+		}
+
+		r.HTML(200, "main_hot_spots",viewSpotList)
 	})
 
 	m.Get("/main/hotCities", func(r render.Render) {

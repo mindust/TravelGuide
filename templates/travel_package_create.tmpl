@@ -2,6 +2,26 @@
 <br>
 <br>
 <h2>创建旅游套餐</h2>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>创建旅游套餐</title>
+
+    <link rel="stylesheet" href="/css/bootstrap-3.3.2.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-example.css" type="text/css">
+    <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-3.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/prettify.js"></script>
+
+    <link rel="stylesheet" href="/css/bootstrap-multiselect.css" type="text/css">
+    <script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>
+
+
+
+</head>
+
 <form action="/admin/travelPackagecreate/" method="POST" enctype="multipart/form-data">
     <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
         <tr>
@@ -154,20 +174,39 @@
                 选择景点
             </td>
             <td>
-                <select name="VIEW_SPOT_ID" class="form-control input-sm" id="VIEW_SPOT_ID">
+                <select name="VIEW_SPOT_ID" class="form-control input-sm" id="example-confirmation" multiple="multiple">
                     {{range .posts}}
                     <option value={{.NAME}}>{{.NAME}}</option>
-
                     {{end}}
                 </select>
-
-
             </td>
             <td align="center"> <input type="submit" value="保存" /></td><td align="center"><input type="button" value="取消" onclick="Create()"/><td align="center"><input type="button" value="返回" onclick="home()"/></td>
         </tr>
 
     </table>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example-confirmation').multiselect({
+            onChange: function(element, checked) {
+                if(checked === true) {
+                    alert($("select[@name=VIEW_SPOT_ID] option[@selected]").val());
+                    //action taken here if true
+                }
+                else if(checked === false) {
+                    if(confirm('Do you wish to deselect the element?')) {
+                        //action taken here
+                    }
+                    else {
+                        $("#example-confirmation").multiselect('select', element.val());
+                    }
+                }
+            }
+        });
+
+    });
+</script>
 
 <script>
     function Create(){
@@ -216,6 +255,10 @@
         }
         document.getElementById("hidden").value = a + "," + b + "," + c + "," + d + "," + e;
     }
+
+
 </script>
+
+
 
 

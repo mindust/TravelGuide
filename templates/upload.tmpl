@@ -1,27 +1,33 @@
+<!--<ul class="top-destinations">-->
+<!--<li class="col-sm-6 col-md-3 top-destination">-->
+<!--<a class="image-box attractions-image-box image-box-v2" href="/spot/1111">-->
+<!--<figure class="image-box-figure">-->
+<!--<img class="image-box-picture" src="/uploads/source/c05c845c-c672-4d01-976b-6ced8646b44f_s.png" alt="艾菲尔铁塔"-->
+<!--onerror="this.parentNode.parentNode.className+=' missing-image'"/>-->
+<!--<figcaption class="image-box-caption">-->
+<!--<div class="image-box-label">-->
+<!--<div class="image-box-label-title">艾菲尔铁塔</div>-->
+<!--</div>-->
+<!--</figcaption>-->
+<!--</figure>-->
+<!--</a>-->
+<!--</li>-->
+<!--</ul>-->
 
-      <!--<header><a href="/admin/viewSpots">Back</a></header>-->
-      <br>
-      <br>
-      <br>
-      <br>
-      <header></header>
-      <h2>Upload</h2>
+<!--<table border="1"  cellpadding="5" width="100%" bordercolor="#000000">-->
+    <!--<thead bgcolor="#ffffcc">-->
+    <!--<tr align="center">-->
+        <!--<th>景点名称</th><th>国家</th><th>省(直辖市)</th><th>市</th><th>景点等级</th><th>景点分类</th><th>价格</th><th>景点状态</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--{{range .posts}}-->
+    <!--<tr>-->
 
-      <form action="/upload" method="POST" enctype="multipart/form-data">
-            COUNTRY:<input type="text" name="COUNTRY" id="COUNTRY" value="1"><br><br>
-            PROVINCE:<input type="text" name="PROVINCE" id="PROVINCE" value="2"><br><br>
-            CITY:<input type="text" name="CITY" id="CITY" value="3"><br><br>
-            COUNTY:<input type="text" name="COUNTY" id="COUNTY" value="4"><br><br>
-            NAME:<input type="text" name="NAME" id="NAME" value="5"><br><br>
-            LEVEL:<input type="text" name="LEVEL" id="LEVEL" value="6"><br><br>
-            GRADE:<input type="text" name="GRADE" id="GRADE" value="6"><br><br>
-            LABEL:<input type="text" name="LABEL" id="LABEL" value="8"><br><br>
-            PRICE:<input type="text" name="PRICE" id="PRICE" value="9"><br><br>
-            STATUS:<input type="text" name="STATUS" id="STATUS" value="10"><br><br>
-            IMAGE_NAME:<input type="file" name="IMAGE" id="IMAGE" multiple="multiple"><br><br>
-            <input type="submit" value="Upload"/>
-      </form>
-      <br>
-      <br>
-      <br>
-      <br>
+        <!--<td><div align="left">{{ .imagename }}</div></td>-->
+        <!--<td><div align="left">{{ .imagepath }}</div></td>-->
+        <!--<td><div align="left">{{ .imageformat }}</div></td>-->
+        <!--<td><div align="left">{{ .name }}</div></td>-->
+
+    <!--</tr>-->
+    <!--{{end}}-->
+<!--</table>-->

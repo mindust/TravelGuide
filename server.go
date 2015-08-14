@@ -40,8 +40,17 @@ type Ph_spot struct {
     LABEL    string `form:"LABEL" binding:"required"`
 	PRICE   string `form:"PRICE" binding:"required"`
 	STATUS    string `form:"STATUS"`
-	SPOT_DEFAULT_IMAGE string
+	IMAGEPATH string
+	IMAGENAME string
+	IMAGEFORMAT string
 
+}
+
+type Spots_image struct  {
+	imagepath string
+	imagename string
+	imageformat string
+	name string
 }
 
 type Ph_spot_with_image struct {
@@ -130,18 +139,12 @@ func main() {
 
 	m.Get("/main/hotSpots", func(r render.Render) {
 		//fetch all spots
-		//spot_image_path: /{PATH}/album/{name}.{format}
 		var viewSpotList []Ph_spot
-		var viewSpotImageList []Ph_spot_with_image
 		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots")
 		checkErr(err, "Select failed")
-		for spotOne, _ := range viewSpotList {
-			_, err:= dbmap.Select(&viewSpotImageList, "select * from ph_view_spot_iamge where spot_id=?", spotOne.ID)
-			checkErr(err, "Select failed")
-			spotOne.SPOT_DEFAULT_IMAGE = &viewSpotImageList[0].PATH+"/source/"+&viewSpotImageList[0].NAME+&viewSpotImageList[0].FORMAT
-		}
+		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": viewSpotList}
+		r.HTML(200, "main_hot_spots", newmap)
 
-		r.HTML(200, "main_hot_spots",viewSpotList)
 	})
 
 	m.Get("/main/hotCities", func(r render.Render) {
@@ -235,10 +238,7 @@ func main() {
 			return http.StatusInternalServerError, err.Error()
 		}
 
-		p1 := newViewSpot(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.LABEL, spot.PRICE, spot.STATUS)
-		log.Println(p1)
-		err = dbmap.Insert(&p1)
-		checkErr(err, "Insert Spot failed")
+
 
 		files := r.MultipartForm.File["IMAGE"]
 		//newSpotImages := []Ph_spot_with_image
@@ -267,6 +267,11 @@ func main() {
 			if _, err := io.Copy(dstAlbum, file); err != nil {
 				return http.StatusInternalServerError, err.Error()
 			}
+
+			p1 := newViewSpot(uuid.NewV4().String(), spot.COUNTRY, spot.PROVINCE,  spot.CITY,  spot.COUNTY, spot.NAME, spot.LEVEL, spot.LABEL, spot.PRICE, spot.STATUS,"uploads",u1, sourceImageNameExt)
+			log.Println(p1)
+			err = dbmap.Insert(&p1)
+			checkErr(err, "Insert Spot failed")
 
 			image1 := newSpotImage(uuid.NewV4().String(), u1, p1.ID, files[i].Filename, sourceImageNameExt,"uploads")
 			log.Println(image1)
@@ -389,17 +394,18 @@ func main() {
 
 	//jump to login page
 	m.Get("/user/login/",func(r render.Render){
-		r.HTML(200, "login","",render.HTMLOptions{
-			Layout: "admin_layout",
-
-		})
+		r.HTML(200, "login","")
+//		r.HTML(200, "login","",render.HTMLOptions{
+//			Layout: "admin_layout",
+//
+//		})
 	})
 
 	m.Run()
 }
 
 
-func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,STATUS string ) Ph_spot {
+func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,STATUS ,IMAGEPATH,IMAGENAME,IMAGEFORMAT string ) Ph_spot {
 	return Ph_spot{
 		ID: UUID,
 		COUNTRY:  COUNTRY,
@@ -411,6 +417,9 @@ func newViewSpot(UUID, COUNTRY, PROVINCE, CITY, COUNTY,NAME,LEVEL,LABEL,PRICE,ST
 		LABEL:LABEL,
 		PRICE:PRICE,
 		STATUS:STATUS,
+		IMAGEPATH:IMAGEPATH,
+		IMAGENAME:IMAGENAME,
+		IMAGEFORMAT:IMAGEFORMAT,
 	}
 }
 
@@ -444,11 +453,12 @@ func travelpackagehighlights(ID,TRAVEL_PACKAGE_ID,CONTENT string) ph_travel_pack
 	}
 
 }
-func travelpackagetags(ID, CONTENT, TRAVEL_PACKAGE_ID string) ph_travel_package_tags {
+func travelpackagetags(ID, TRAVEL_PACKAGE_ID, CONTENT string) ph_travel_package_tags {
 	return ph_travel_package_tags{
 		ID:ID,
-		CONTENT:CONTENT,
 		TRAVEL_PACKAGE_ID:TRAVEL_PACKAGE_ID,
+		CONTENT:CONTENT,
+
 	}
 }
 

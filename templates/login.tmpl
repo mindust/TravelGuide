@@ -1,97 +1,74 @@
-<!--<html>-->
-<!--<head>-->
-<!--<title>login-->
-<!--</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<br>-->
-
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-
-<!--<br>-->
-<!--<br>-->
-<!--<form action="/login" method="post">-->
-<!--用户名：<input type="text" name="username">-->
-<!--密码：<input type="password" name="password">-->
-<!--<input type="submit" value="登录">-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>jQuery UI Example Page</title>
+
+    <!--<link type="text/css" href="/css/bootstrap-multiselect.css" rel="stylesheet" />-->
+    <!--<link type="text/css" href="/css/bootstrap-example.css" rel="stylesheet" />-->
+    <!--<link type="text/css" href="/css/prettify.css" rel="stylesheet" />-->
+
+    <!--<script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>-->
+    <!--<script type="text/javascript" src="/js/bootstrap-3.3.2.min.js"></script>-->
+    <!--<script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>-->
+
+
+    <link rel="stylesheet" href="/css/bootstrap-3.3.2.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-example.css" type="text/css">
+    <link rel="stylesheet" href="/css/prettify.css" type="text/css">
+
+    <script type="text/javascript" src="/js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-3.3.2.min.js"></script>
+    <script type="text/javascript" src="/js/prettify.js"></script>
+
+    <link rel="stylesheet" href="/css/bootstrap-multiselect.css" type="text/css">
+    <script type="text/javascript" src="/js/bootstrap-multiselect.js"></script>
+
+
+
 </head>
-
 <body>
-<input name="HIGHLIGHTS" id="text1" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
-<input name="HIGHLIGHTS" id="text2" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
-<input name="HIGHLIGHTS" id="text3" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
-<input name="HIGHLIGHTS" id="text4" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
-<input name="HIGHLIGHTS" id="text5" type="text" onblur="text()" size="30"  placeholder="亮点" style="width: 100%" >
 
-<input name="text" type="text" id="hidden">
+
+<br>
+<!-- Select -->
+<h2>Select</h2>
+<br>
+
+<!--<div class="example">-->
+
+    <select id="example-confirmation" multiple="multiple">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+        <option value="6">Option 6</option>
+    </select>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example-confirmation').multiselect({
+                onChange: function(element, checked) {
+                    if(checked === true) {
+                        //action taken here if true
+                    }
+                    else if(checked === false) {
+                        if(confirm('Do you wish to deselect the element?')) {
+                            //action taken here
+                        }
+                        else {
+                            $("#example-confirmation").multiselect('select', element.val());
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+<!--</div>-->
+
+
+   <!--<img src=" /uploads/source/5cad9d35-abb7-4f4f-a717-7b5508f2a7b4_s.jpg" />-->
+
 </body>
-
-<script>
-    function text() {
-        var a = document.getElementById("text1").value;
-        var b = document.getElementById("text2").value;
-        var c = document.getElementById("text3").value;
-        var d = document.getElementById("text4").value;
-        var e = document.getElementById("text5").value;
-        var hidden = document.getElementById("hidden").value;
-        var s = hidden.split(",");
-            if (s[0] == a) {
-                a = s[0];
-            }
-            else {
-                a = document.getElementById("text1").value;
-            }
-            if (s[1] == b) {
-                b = s[1];
-            }
-            else {
-                b = document.getElementById("text2").value;
-            }
-            if (s[2] == c) {
-                c = s[2];
-            }
-            else {
-                c = document.getElementById("text3").value;
-            }
-            if (s[3] == d) {
-                d = s[3];
-            }
-            else {
-                d = document.getElementById("text4").value;
-            }
-            if (s[4] == e) {
-                e = s[4];
-            }
-            else {
-                e = document.getElementById("text5").value;
-            }
-        document.getElementById("hidden").value = a + "," + b + "," + c + "," + d + "," + e;
-    }
-</script>
-
+</html>
 

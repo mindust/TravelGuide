@@ -191,7 +191,8 @@
         $('#example-confirmation').multiselect({
             onChange: function(element, checked) {
                 if(checked === true) {
-                    alert($("select[@name=VIEW_SPOT_ID] option[@selected]").val());
+                    alert($("select[name=VIEW_SPOT_ID] option:selected").text());
+
                     //action taken here if true
                 }
                 else if(checked === false) {

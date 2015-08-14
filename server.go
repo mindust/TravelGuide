@@ -475,8 +475,11 @@ func newSpotImage(UUID, NAME, VIEW_SPOT_ID, SOURCE_NAME, FORMAT, PATH string) Ph
 
 
 func initDb() *gorp.DbMap {
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/kanghui")
+//	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/kanghui")
+	db, err := sql.Open("mysql", "cdb_outerroot:cems@2015#@tcp(127.0.0.1:3306)/kanghui")
+
 	checkErr(err, "sql.Open failed")
+
 
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{"InnoDB", "UTF8"}}
 	dbmap.AddTableWithName(Ph_spot{}, "ph_view_spots")

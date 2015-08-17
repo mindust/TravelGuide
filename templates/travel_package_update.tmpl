@@ -1,7 +1,7 @@
 <header></header>
 <br>
 <br>
-<h2>创建旅游套餐</h2>
+<h2>更新旅游套餐</h2>
 <form action="/admin/travelPackagecreate/" method="POST" enctype="multipart/form-data">
     <table border="1"  cellpadding="5" width="100%" bordercolor="#000000">
         <tr>
@@ -25,15 +25,7 @@
             <td colspan="4">
                 <input type="text" style="width: 100%" name="TAGS" placeholder="标签1" value={{ .post.TAGS }}>
             </td>
-            <!--<td>-->
-                <!--<input type="text" style="width: 100%" name="TAG2" placeholder="tags2">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input type="text" style="width: 100%" name="TAG3" placeholder="tags3">-->
-            <!--</td>-->
-            <!--<td>-->
-                <!--<input type="text" style="width: 100%" name="TAG4" placeholder="tags4">-->
-            <!--</td>-->
+
         </tr>
         <tr>
             <td rowspan="4">
@@ -41,7 +33,7 @@
             </td>
             <tr>
             <td colspan="4">
-                <input type="text" style="width: 100%" name="HIGHLIGHTS" placeholder="亮点1">
+                <input type="text" style="width: 100%" name="HIGHLIGHTS" placeholder="亮点1" value={{ .post.HIGHLIGHTS }}>
             </td>
             </tr>
             <tr>

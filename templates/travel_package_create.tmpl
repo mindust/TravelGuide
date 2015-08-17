@@ -29,7 +29,7 @@
                 �����ײ�
             </td>
             <td colspan="2">
-                <input type="text" style="width: 100%" name="NAME" PLACEHOLDER="�ײ����">
+                <input type="text" style="width: 100%" name="NAME" PLACEHOLDER="�ײ����?">
             </td>
             <td colspan="2">
                 ���� <input type="text"  name="FEE" PLACEHOLDER="�ײͷ���">
@@ -100,7 +100,7 @@
         </tr>
         <tr>
             <td>
-                �����
+                �����?
             </td>
             <td colspan="4">
                 <input type="text" style="width:100%" name="FEE_INCLUDE">
@@ -108,7 +108,7 @@
         </tr>
         <tr>
             <td>
-                �����
+                �����?
             </td>
             <td colspan="4">
                 <input type="text" style="width:100%" name="FEE_NOT_INCLUDE">
@@ -160,7 +160,7 @@
                 �ɻ�<input type="radio" style="width:100%" name="TRANSPOT" value="Plane">
             </td>
             <td align="center" >
-                ���<input type="radio" style="width:100%" name="TRANSPOT" value="Bus">
+                ���?<input type="radio" style="width:100%" name="TRANSPOT" value="Bus">
             </td>
             <td align="center" >
                 ��<input type="radio" style="width:100%" name="TRANSPOT" value="Ship">
@@ -174,11 +174,12 @@
                 ѡ�񾰵�
             </td>
             <td>
-                <select name="VIEW_SPOT_ID" class="form-control input-sm" id="example-confirmation" multiple="multiple">
+                <select name="Spot" class="form-control input-sm" id="example-confirmation" multiple="multiple">
                     {{range .posts}}
-                    <option value={{.NAME}}>{{.NAME}}</option>
+                    <option value={{.ID}}>{{.NAME}}</option>
                     {{end}}
                 </select>
+                <input name="VIEW_SPOT_ID" type="text" id="hiddenspot" >
             </td>
             <td align="center"> <input type="submit" value="����" /></td><td align="center"><input type="button" value="ȡ��" onclick="Create()"/><td align="center"><input type="button" value="����" onclick="home()"/></td>
         </tr>
@@ -190,13 +191,10 @@
     $(document).ready(function() {
         $('#example-confirmation').multiselect({
             onChange: function(element, checked) {
+
                 if(checked === true) {
 //                    alert($("select[name=VIEW_SPOT_ID] option:selected").val());
-                    var selectedValues = '';
-                    $("select[name=VIEW_SPOT_ID] option:selected").each(function(i){
-                        selectedValues = selectedValues +$(this).val()+",";
-                    });
-                    alert(selectedValues);
+
 
                     //action taken here if true
                 }
@@ -208,6 +206,12 @@
                         $("#example-confirmation").multiselect('select', element.val());
                     }
                 }
+                document.getElementById("hiddenspot").value ="";
+                var selectedValues = '';
+                $("select[name=Spot] option:selected").each(function(i){
+                    selectedValues = selectedValues +$(this).val()+",";
+                });
+                document.getElementById("hiddenspot").value =selectedValues;
             }
         });
 

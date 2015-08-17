@@ -176,7 +176,7 @@
 			</div>
 		</div>
 		<section class="container instagram-promo">
-			<a data-role="promo-banner" target="_blank" href="/">	<h2>准备就绪，#getyoursnowguide</h2>
+			<a data-role="promo-banner" target="_blank" href="/">	<h2>准备就绪</h2>
 				<h3>分享您的照片，赢取巴黎之旅！</h3>
 				<span rel="nofollow" class="btn btn-small btn-primary">开始吧</span>
 			</a></section>
@@ -201,7 +201,7 @@
 					<h1>最热门目的地</h1>
 				</div>
 			</div>
-			<div class="top-destinations-row">
+			<div class="top-destinations-row" id="hot-cities">
 				<!-- 放热门地址-->
 			</div>
 			<div class="section-navigation">
@@ -476,7 +476,7 @@
             $('#hot-spots').empty().load('/main/hotSpots?date='+new Date().getTime());
 //			$('#hot-spots').empty();
 //			alert(2);
-            //$('.app-content-body').empty().load('/main/hotCities?date='+new Date().getTime());
+            $('#hot-cities').empty().load('/main/hotCities?date='+new Date().getTime());
         })}(jQuery);
 </script>
 

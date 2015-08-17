@@ -83,6 +83,7 @@ type ph_travel_packages struct {
 	VIEW_SPOT_ID string `form:"VIEW_SPOT_ID" binding:"required"`
 }
 
+
 type ph_travel_package_tags struct  {
 	ID string
 	TRAVEL_PACKAGE_ID string
@@ -95,6 +96,15 @@ type ph_travel_package_highlights struct  {
 	CONTENT string
 
 }
+type ph_travel_package_view_spots struct {
+	ID string
+	TRAVEL_PACKAGES_ID string
+	VIEW_SPOT_ID string
+	DESCRIPTION string
+	DAYS int64
+	PLAY_ITEMS string
+}
+
 func (bp Ph_spot) Validate1(errors *binding.Errors, req *http.Request) {
 	//custom validation
 	if len(bp.NAME) == 0 {
@@ -148,15 +158,34 @@ func main() {
 	})
 
 	m.Get("/main/hotCities", func(r render.Render) {
-		r.HTML(200, "main_hot_cities","")
+		var viewSpotList []Ph_spot
+		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots")
+		checkErr(err, "Select failed")
+		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": viewSpotList}
+		r.HTML(200, "main_hot_cities",newmap)
 	})
 
-	m.Get("/spot/:spotId", func(r render.Render) {
-		r.HTML(200, "spot_detail", "", render.HTMLOptions{
-			Layout: "layout",
-		})
+	m.Get("/spot/:id",func(args martini.Params, r render.Render) {
+		var viewSpotList []Ph_spot
+		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots where id=?", args["id"])
+		checkErr(err, "Select failed")
+		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": viewSpotList}
+		r.HTML(200, "spot_detail", newmap)
 	})
 
+	m.Get("/main/package/:id",func(args martini.Params, r render.Render) {
+		var travelpackagedetail ph_travel_packages
+		err:= dbmap.SelectOne(&travelpackagedetail, "select * from ph_travel_packages where id=?", args["id"])
+
+
+		if err != nil {
+			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
+			r.HTML(404, "error", newmap)
+		} else {
+			newmap := map[string]interface{}{"metatitle": travelpackagedetail.NAME + " more custom", "post": travelpackagedetail}
+			r.HTML(200, "spot_detail", newmap)
+		}
+	})
 /***********************************************管理端功能************************************************/
 	/**
 	景点列表显示
@@ -306,7 +335,7 @@ func main() {
 		//		})
 
 		var viewSpotList []Ph_spot
-		_, err:= dbmap.Select(&viewSpotList, "SELECT NAME FROM ph_view_spots")
+		_, err:= dbmap.Select(&viewSpotList, "SELECT * FROM ph_view_spots")
 		checkErr(err, "Select failed")
 		newmap := map[string]interface{}{"metatitle": "this", "posts": viewSpotList}
 		r.HTML(200, "travel_package_create", newmap, render.HTMLOptions{
@@ -347,7 +376,19 @@ func main() {
 			checkErr(err, "Insert iamge failed")
 
 		}
+		//      保存景点
+		package_spot_id := strings.Split(P1.VIEW_SPOT_ID,",")
+		log.Println(package_spot_id)
 
+		for i:=0;i < len(package_spot_id);i++ {
+  			if package_spot_id[i]!=""{
+				p2 := travelpackageviewspot(uuid.NewV4().String(), P1.ID, package_spot_id[i], P1.DESCRIPTION, P1.DAYS, "")
+				log.Println(p2)
+				err = dbmap.Insert(&p2)
+				checkErr(err, "Insert iamge failed")
+			}
+
+		}
 
 
 //		newmap := map[string]interface{}{"metatitle": "created post", "travel_package_create": p2}
@@ -453,6 +494,17 @@ func travelpackagehighlights(ID,TRAVEL_PACKAGE_ID,CONTENT string) ph_travel_pack
 	}
 
 }
+
+func travelpackageviewspot(ID,TRAVEL_PACKAGE_ID,VIEW_SPOT_ID,DESCRIPTION string ,DAYS int64,PLAY_ITEMS string) ph_travel_package_view_spots{
+	return ph_travel_package_view_spots{
+		ID:ID,
+		TRAVEL_PACKAGES_ID:TRAVEL_PACKAGE_ID,
+		VIEW_SPOT_ID:VIEW_SPOT_ID,
+		DESCRIPTION:DESCRIPTION,
+		DAYS:DAYS,
+		PLAY_ITEMS:PLAY_ITEMS,
+	}
+}
 func travelpackagetags(ID, TRAVEL_PACKAGE_ID, CONTENT string) ph_travel_package_tags {
 	return ph_travel_package_tags{
 		ID:ID,
@@ -476,7 +528,7 @@ func newSpotImage(UUID, NAME, VIEW_SPOT_ID, SOURCE_NAME, FORMAT, PATH string) Ph
 
 func initDb() *gorp.DbMap {
 //	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/kanghui")
-	db, err := sql.Open("mysql", "cdb_outerroot:cems@2015#@tcp(127.0.0.1:3306)/kanghui")
+	db, err := sql.Open("mysql", "cdb_outerroot:cems@2015#@tcp(55c9b23419e13.sh.cdb.myqcloud.com:4592)/kanghui")
 
 	checkErr(err, "sql.Open failed")
 
@@ -487,6 +539,8 @@ func initDb() *gorp.DbMap {
 	dbmap.AddTableWithName(ph_travel_packages{}, "ph_travel_packages")
 	dbmap.AddTableWithName(ph_travel_package_highlights{}, "ph_travel_package_highlights")
 	dbmap.AddTableWithName(ph_travel_package_tags{}, "ph_travel_package_tags")
+	dbmap.AddTableWithName(ph_travel_package_view_spots{}, "ph_travel_package_view_spots")
+
 	return dbmap
 }
 

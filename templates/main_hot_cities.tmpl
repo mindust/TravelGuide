@@ -1,7 +1,17 @@
-
-<br>
-<br>
-热点城市
-<br>
-<br>
-
+{{range .posts}}
+<ul class="top-destinations">
+    <li class="col-sm-6 col-md-3 top-destination">
+        <a class="image-box attractions-image-box image-box-v2" href="/spot/{{ .ID }}">
+            <figure class="image-box-figure">
+                <img class="image-box-picture" src="/{{ .IMAGEPATH }}/source/{{ .IMAGENAME }}_s.{{ .IMAGEFORMAT }}" alt="{{ .NAME }}"
+                     onerror="this.parentNode.parentNode.className+=' missing-image'"/>
+                <figcaption class="image-box-caption">
+                    <div class="image-box-label">
+                        <div class="image-box-label-title">{{ .CITY }}</div>
+                    </div>
+                </figcaption>
+            </figure>
+        </a>
+    </li>
+</ul>
+{{end}}

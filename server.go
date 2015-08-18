@@ -186,21 +186,26 @@ func main() {
 		第二部返回套餐详情
 		 */
 
-//		var travelpackageArr []ph_travel_packages
-//		_, err = dbmap.Select(&travelpackageArr, "SELECT * FROM ph_travel_package where ID in ?", travelPackageIds)
-//		checkErr(err, "Select failed")
-//		log.Println(travelpackageArr)
+		var inSql = "";
+		inSql = strings.Join(travelPackageIds,"','")
+		inSql = "'"+inSql+"'"
+
+		var travelpackageArr []ph_travel_packages
+		log.Println("SELECT * FROM ph_travel_packages where ID in ("+inSql+")")
+		_, err = dbmap.Select(&travelpackageArr, "SELECT * FROM ph_travel_packages where ID in ("+inSql+")")
+		checkErr(err, "Select failed")
+		log.Println(travelpackageArr)
 
 
 //		var travelpackageArrAll []ph_travel_packages
-		for i:=0;i < len(travelPackageIds);i++ {
-					var travelpackage ph_travel_packages
-					_, err = dbmap.Select(&travelpackage, "SELECT * FROM ph_travel_packages where ID = ?", travelPackageIds[i])
-					checkErr(err, "Select failed")
-					log.Println(travelpackage.NAME)
-//					travelpackageArrAll[i] = travelpackageArr
-
-		}
+//		for i:=0;i < len(travelPackageIds);i++ {
+//					var travelpackage ph_travel_packages
+//					_, err = dbmap.Select(&travelpackage, "SELECT * FROM ph_travel_packages where ID = ?", travelPackageIds[i])
+//					checkErr(err, "Select failed")
+//					log.Println(travelPackageIds[i]+"="+travelpackage.ID)
+////					travelpackageArrAll[i] = travelpackageArr
+//
+//		}
 //		log.Println(travelpackageArrAll)
 
 ////		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": travelpackageviewspot}

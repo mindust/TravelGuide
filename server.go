@@ -173,6 +173,25 @@ func main() {
 		r.HTML(200, "spot_detail", newmap)
 	})
 
+	/**
+	景点详情:测试
+	 */
+	m.Get("/spotDetail/:id", func(r render.Render) {
+		r.HTML(200, "spot_detail_test", "", render.HTMLOptions{
+			Layout: "spot_layout",
+		})
+	})
+
+	/**
+	套餐详情：测试
+	 */
+	m.Get("/packageDetail/:id", func(r render.Render) {
+
+		r.HTML(200, "travel_package_detail_test", "", render.HTMLOptions{
+			Layout: "package_layout",
+		})
+	})
+
 	m.Get("/main/package/:id",func(args martini.Params, r render.Render) {
 		/*
 		第一步查出套餐ID
@@ -187,12 +206,12 @@ func main() {
 		 */
 
 		var inSql = "";
-		inSql = strings.Join(travelPackageIds,"','")
+		inSql = strings.Join(travelPackageIds,",")
 		inSql = "'"+inSql+"'"
 
 		var travelpackageArr []ph_travel_packages
 		log.Println("SELECT * FROM ph_travel_packages where ID in ("+inSql+")")
-		_, err = dbmap.Select(&travelpackageArr, "SELECT * FROM ph_travel_packages where ID in ("+inSql+")")
+		_, err = dbmap.Select(&travelpackageArr, "SELECT * FROM ph_travel_packages where ID in ('11','11')")
 		checkErr(err, "Select failed")
 		log.Println(travelpackageArr)
 

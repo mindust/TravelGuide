@@ -22,6 +22,7 @@ has-banner
                                 <img src="/{{ .IMAGEPATH }}/source/{{ .IMAGENAME }}_s.{{ .IMAGEFORMAT }}" data-role="cover" alt="" />
                             </div>
                             <div class="activity-card-details">
+                                <input type="hidden" value="{{.ID}}" id="spotId">
                                 <header class="activity-card-header">
                                     <h3 class="activity-card-title">
                                         {{ .NAME }}免排队门票（含顶层）
@@ -150,7 +151,8 @@ RMB¥&nbsp; {{ .PRICE }}
 <script type="application/javascript">
     +function ($) {
         $(function () {
-			alert(1);
-//            $('#hot-package').empty().load('/main/package?date='+new Date().getTime());
+//			alert($('#spotId').val());
+            var spotId=$('#spotId').val();
+            $('#hot-package').empty().load('/main/package/'+spotId+'?date='+new Date().getTime());
         })}(jQuery);
 </script>

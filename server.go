@@ -174,23 +174,37 @@ func main() {
 	})
 
 	m.Get("/main/package/:id",func(args martini.Params, r render.Render) {
-		var viewSpotList []Ph_spot
-		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots where id=?", args["id"])
+		/*
+		第一步查出套餐ID
+		 */
+		var travelPackageIds []string
+		_, err:= dbmap.Select(&travelPackageIds, "SELECT TRAVEL_PACKAGES_ID FROM ph_travel_package_view_spots where VIEW_SPOT_ID=?", args["id"])
 		checkErr(err, "Select failed")
-		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": viewSpotList}
+		log.Println(travelPackageIds)
+
+		/*
+		第二部返回套餐详情
+		 */
+
+//		var travelpackageArr []ph_travel_packages
+//		_, err = dbmap.Select(&travelpackageArr, "SELECT * FROM ph_travel_package where ID in ?", travelPackageIds)
+//		checkErr(err, "Select failed")
+//		log.Println(travelpackageArr)
 
 
-////////////////////////////////////////
-//		for i:=0;i < len(iarray);i++ {
-//
-//			p2 := travelpackagetags(uuid.NewV4().String(), P1.ID,iarray[i])
-//			log.Println(p2)
-//			err = dbmap.Insert(&p2)
-//			checkErr(err, "Insert iamge failed")
-//
-//		}
+//		var travelpackageArrAll []ph_travel_packages
+		for i:=0;i < len(travelPackageIds);i++ {
+					var travelpackage ph_travel_packages
+					_, err = dbmap.Select(&travelpackage, "SELECT * FROM ph_travel_packages where ID = ?", travelPackageIds[i])
+					checkErr(err, "Select failed")
+					log.Println(travelpackage.NAME)
+//					travelpackageArrAll[i] = travelpackageArr
 
-			r.HTML(200, "package_detail", newmap)
+		}
+//		log.Println(travelpackageArrAll)
+
+////		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": travelpackageviewspot}
+//			r.HTML(200, "package_detail", newmap)
 	})
 /***********************************************管理端功能************************************************/
 	/**

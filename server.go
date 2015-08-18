@@ -174,17 +174,23 @@ func main() {
 	})
 
 	m.Get("/main/package/:id",func(args martini.Params, r render.Render) {
-		var travelpackagedetail ph_travel_packages
-		err:= dbmap.SelectOne(&travelpackagedetail, "select * from ph_travel_packages where id=?", args["id"])
+		var viewSpotList []Ph_spot
+		_, err:= dbmap.Select(&viewSpotList, "select * from ph_view_spots where id=?", args["id"])
+		checkErr(err, "Select failed")
+		newmap := map[string]interface{}{"metatitle": "this is my custom title", "posts": viewSpotList}
 
 
-		if err != nil {
-			newmap := map[string]interface{}{"metatitle": "404 Error", "message": "This is not found"}
-			r.HTML(404, "error", newmap)
-		} else {
-			newmap := map[string]interface{}{"metatitle": travelpackagedetail.NAME + " more custom", "post": travelpackagedetail}
-			r.HTML(200, "spot_detail", newmap)
-		}
+////////////////////////////////////////
+//		for i:=0;i < len(iarray);i++ {
+//
+//			p2 := travelpackagetags(uuid.NewV4().String(), P1.ID,iarray[i])
+//			log.Println(p2)
+//			err = dbmap.Insert(&p2)
+//			checkErr(err, "Insert iamge failed")
+//
+//		}
+
+			r.HTML(200, "package_detail", newmap)
 	})
 /***********************************************管理端功能************************************************/
 	/**

@@ -1,19 +1,77 @@
 
 <!DOCTYPE html>
 <html lang="zh" class="no-js responsive capped-width">
+{{range .posts}}
 <head>
-    {{range .posts}}
+
     <meta charset="utf-8"/>
-    <title>{{ .NAME }}</title>
-    <script>dataLayer = []; dataLayer.push({"topActivities":[44575,51123,48670],"user":{"customer_id":"","is_logged_in":false,"is_staff":false,"gyg_office":false,"hashed_email":""}}); </script>
+    <title>{{.NAME}}</title>
+    <link rel="stylesheet" href="//cdn1.getyourguide.com/static/3125682a83ff/customer/desktop/compiled/site.css" />
+    <link rel="stylesheet" href="//cdn1.getyourguide.com/static/3125682a83ff/customer/desktop/compiled/poi.css">
+
 </head>
 <body>
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-3XTJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="viewport viewport-offset--closed" id="top">
+    <div class="notifications-container--top notification-container--closed">
+        <script id="tpl_notifications" type="text/html"><div class="notification"><div><p class="<%= status %>"><span><%= message %></span></p></div><a class="close-btn <%= status %>" href="#">关闭</a></div></script>
+    </div>
+    <div>
+        <noscript><p class="notification--static notification--error">您已禁用 Javascript。请解除禁用，以便使用 GetYourGuide。</p></noscript>
+    </div>
+    <main role="main">
+        <section class="intro intro-with-datepicker			"
+                 style="background-image:url(/{{ .IMAGEPATH }}/source/{{ .IMAGENAME }}_s.{{ .IMAGEFORMAT }});">
+            <div class="image-mask">
+                <div class="container">
+                    <div class="intro-header intro-header-has-datepicker">
+<span class="intro-header-location">
+{{.NAME}}
+</span>
+                    </div>
+                    <section
+                            class="datepicker-component"
+                            data-href="http://www.getyourguide.com/zh/s/?q=%E5%93%88%E5%88%A9%E6%B3%95%E5%A1%94&amp;lc=l2703">
+                        <div class="datepicker-instructions">
+                            输入您的日期并从超过 11 个活动中做出选择：
+                        </div>
+                        <div id="datepicker" class="datepicker datepicker-horizontal has-cta">
+                            <div class="input-group">
+                                <label class="input-label" for="datepicker-from-input">
+                                    <span class="label-txt">开始日期</span>
+                                    <div class="input-toggle icon icon-calendar"></div>
+                                    <input type="text" id="datepicker-from-input"
+                                           class="datepicker-input datepicker-from-input"
+                                           placeholder="开始日期" autocomplete="off" />
+                                </label>
+                            </div>
+                            <div class="input-separator">到</div>
+                            <div class="input-group">
+                                <label class="input-label" for="datepicker-to-input">
+                                    <span class="label-txt">结束日期</span>
+                                    <div class="input-toggle icon icon-calendar"></div>
+                                    <input type="text" id="datepicker-to-input"
+                                           class="datepicker-input datepicker-to-input"
+                                           placeholder="结束日期" autocomplete="off" />
+                                </label>
+                            </div>
+                            <div class="datepicker-cta">
+                                <button class="btn btn-primary btn-small btn-datepicker">查看供应有否</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <ul class="breadcrumbs hidden"><li class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="http://www.getyourguide.com/zh/" itemprop="url"><span itemprop="title">首页</span></a></li><li class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child"><a href="http://www.getyourguide.com/zh/uae-n56/" itemprop="url"><span itemprop="title">阿联酋</span></a></li><li class="breadcrumb" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child"><a href="http://www.getyourguide.com/zh/dubai-l173/" itemprop="url"><span itemprop="title">迪拜</span></a></li><li class="breadcrumb breadcrumb--current" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="child"><a href="http://www.getyourguide.com/zh/burj-khalifa-l2703/" itemprop="url"><span itemprop="title">哈利法塔</span></a></li></ul>
+
 
             <section class="highlighted-top-tour">
                 <div class="heading">
                     立刻取得门票
                 </div>
-                <article id="t44575" class="activity-card activity-card-horizontal
+                <article id="t49019" class="activity-card activity-card-horizontal
 has-banner
 ">
                     <div class="activity-card-content">
@@ -22,31 +80,30 @@ has-banner
                                 <img src="/{{ .IMAGEPATH }}/source/{{ .IMAGENAME }}_s.{{ .IMAGEFORMAT }}" data-role="cover" alt="" />
                             </div>
                             <div class="activity-card-details">
-                                <input type="hidden" value="{{.ID}}" id="spotId">
                                 <header class="activity-card-header">
                                     <h3 class="activity-card-title">
-                                        {{ .NAME }}免排队门票（含顶层）
+                                        {{.NAME}}门票
                                     </h3>
                                     <div class="activity-rating">
-<span class="rating" title="评分: 4,4 / 5">
+<span class="rating" title="评分: 4,6 / 5">
 <span class="rating-stars s40"></span>
-<span class="rating-total">2654评论</span>
+<span class="rating-total">1280评论</span>
 </span>
                                     </div>
                                 </header>
-                                <p class="activity-small-description"> {{ .LABEL }}</p>
+                                <p class="activity-small-description">{{.LABEL}}</p>
                                 <div class="activity-info activity-duration">
 <span class="activity-info-label activity-duration-label">
 时间:
 </span>
 <span class="activity-info-value activity-duration-value">
-2 小时
+1.5 小时
 </span>
                                 </div>
                             </div>
                             <div class="activity-card-actions">
-                                 
-                                <div class="wishlist-handler" data-role="wishlist-handler" data-id="44575">
+                                ?
+                                <div class="wishlist-handler" data-role="wishlist-handler" data-id="49019">
                                     <div data-action="add-to-wishlist" class="add-to-wishlist action-handler">
 <span class="action-label">
 <span class="action-label-text">加入心愿单</span>
@@ -61,12 +118,12 @@ has-banner
                                     </div>
                                 </div>
                                 <div class="activity-badge is-bestseller">
-                                    <span> {{ .LEVEL }}</span>
+                                    <span>{{.LEVEL}}</span>
                                 </div>
                                 <div class="activity-card-price-tag">
                                     <span class="from">起价</span>
 <span class="price">
-RMB¥&nbsp; {{ .PRICE }}
+US$&nbsp;{{.PRICE}}
 </span>
                                 </div>
                             </div>
@@ -79,48 +136,33 @@ RMB¥&nbsp; {{ .PRICE }}
 
             <div class="row">
                 <header class="col-sm-12">
-                    <h1>{{ .NAME }}：旅游项目及门票</h1>
+                    <h1>{{.NAME}}：旅游项目及门票</h1>
                 </header>
             </div>
-            {{end}}
-            <section class="top-activities">
-                <!--<div class="activities-list " data-role="activities-list" id="hot-package">-->
 
-                <!--</div>-->
+            <!-- 第二次请求导入相应景点的旅游套餐-->
+            <section class="top-activities" id="hot-package">
+                <div class="activities-list " data-role="activities-list" >
 
-
-
+                </div>
                 <div class="col-sm-12">
 <span class="btn btn-primary btn-small btn--view-all-tours view-all-tours-margin"
-      onclick="window.location='http://www.getyourguide.com/zh/s/?q=%E8%89%BE%E8%8F%B2%E5%B0%94%E9%93%81%E5%A1%94&amp;lc=l2600';">
-查看艾菲尔铁塔所有旅游项目与旅游活动
+      onclick="window.location='http://www.getyourguide.com/zh/s/?q=%E5%93%88%E5%88%A9%E6%B3%95%E5%A1%94&amp;lc=l2703';">
+查看{{.NAME}}所有旅游项目与旅游活动
 </span>
                 </div>
             </section>
 
-            <!--//copy from main.tmpl-->
-            <section id="top-destinations-container" class="container top-destinations-container">
-
-                <div class="top-destinations-row" id="hot-package">
-                    <!-- 放热门地址-->
-                </div>
-
+            <section class="location-banner-container parent-link" data-background="/{{ .IMAGEPATH }}/source/{{ .IMAGENAME }}_s.{{ .IMAGEFORMAT }}">
+                <p class="parent-link-title">{{.NAME}}</p>
+                <a class="btn btn-primary btn-small" href="http://www.getyourguide.com/zh/dubai-l173/">
+                    查看全部
+                </a>
             </section>
-
-
-            <a class="location-banner-container city-banner-link" href="http://www.getyourguide.com/zh/paris-l16/">
-<span class="parent-link" data-background="//cdn2.getyourguide.com/img/location_img-16-965832478-75.jpg">
-<span class="darken-background"></span>
-</span>
-                <p class="parent-link-title">巴黎</p>
-<span class="btn btn-primary btn-small">
-查看全部 133 项门票与旅游
-</span>
-            </a>
             <section data-role="poi-reviews-section" data-length="0" class="off">
                 <div data-role="poi-reviews">
                     <div class="title">
-                        <h2>有关 艾菲尔铁塔 的旅客建议</h2>
+                        <h2>有关 {{.NAME}} 的旅客建议</h2>
                     </div>
                     <div data-role="poi-reviews-container"></div>
                 </div>
@@ -143,8 +185,13 @@ RMB¥&nbsp; {{ .PRICE }}
                     </section>
                 </script>
             </section>
+
+
+ <input type="hidden" value="{{.ID}}" id="spotId">
 </body>
 </html>
+
+{{end}}
 
 <script src="/js/site.js"></script>
 

@@ -1,7 +1,6 @@
 
 {{range .posts}}
 
-{{ .TRAVEL_PACKAGES_ID }}//////////////////////////////////
 
 <article id="t51123" class="activity-card activity-card-horizontal
 ">
@@ -13,7 +12,7 @@
             <div class="activity-card-details">
                 <header class="activity-card-header">
                     <h3 class="activity-card-title">
-                        免排队埃菲尔铁塔门票与顶层入场
+                        {{.NAME}}
                     </h3>
                     <div class="activity-rating">
 <span class="rating" title="评分: 4,3 / 5">
@@ -22,7 +21,7 @@
 </span>
                     </div>
                 </header>
-                <p class="activity-small-description">埃菲尔铁塔免排队门票为您带来快乐满足的旅程。您将跳过臭名远播的长队，直接进入第一与第二层，节省宝贵的旅游时间。好好鸟瞰巴黎圣母院、圣心大教堂以及其他地标性建筑。</p>
+                <p class="activity-small-description">{{.DESCRIPTION}}</p>
                 <div class="activity-info activity-duration">
 <span class="activity-info-label activity-duration-label">
 时间:

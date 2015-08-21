@@ -1,0 +1,61 @@
+
+{{range .posts}}
+
+
+<article id="t51123" class="activity-card activity-card-horizontal
+">
+    <div class="activity-card-content">
+        <a class="activity-card-link" href="http://www.getyourguide.com/zh/paris-l16/skip-the-line-eiffel-tower-ticket-with-summit-access-t51123/">
+            <div class="activity-card-image-container">
+                <img src="//cdn2.getyourguide.com/img/tour_img-319226-70.jpg" data-role="cover" alt="" />
+            </div>
+            <div class="activity-card-details">
+                <header class="activity-card-header">
+                    <h3 class="activity-card-title">
+                        {{.NAME}}
+                    </h3>
+                    <div class="activity-rating">
+<span class="rating" title="评分: 4,3 / 5">
+<span class="rating-stars s40"></span>
+<span class="rating-total">624评论</span>
+</span>
+                    </div>
+                </header>
+                <p class="activity-small-description">{{.DESCRIPTION}}</p>
+                <div class="activity-info activity-duration">
+<span class="activity-info-label activity-duration-label">
+时间:
+</span>
+<span class="activity-info-value activity-duration-value">
+2 小时 – 1 天
+</span>
+                </div>
+            </div>
+            <div class="activity-card-actions">
+                 
+                <div class="wishlist-handler" data-role="wishlist-handler" data-id="51123">
+                    <div data-action="add-to-wishlist" class="add-to-wishlist action-handler">
+<span class="action-label">
+<span class="action-label-text">加入心愿单</span>
+</span>
+                        <span class="icon-heart"></span>
+                    </div>
+                    <div data-action="remove-from-wishlist" class="remove-from-wishlist action-handler hide">
+<span class="action-label">
+<span class="action-label-text">从心愿单删除</span>
+</span>
+                        <span class="icon-heart"></span>
+                    </div>
+                </div>
+                <div class="activity-card-price-tag">
+                    <span class="from">起价</span>
+<span class="price">
+US$&nbsp;{{.FEE}}
+</span>
+                </div>
+            </div>
+        </a>
+    </div>
+</article>
+
+{{end}}
